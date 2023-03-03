@@ -98,6 +98,11 @@
   width: 30px;
 
 }
+
+.quantity p {
+  margin: 0;
+  text-align: center;
+}
 .totalAmount{
   display: flex;
   width: 60%;

@@ -4,15 +4,23 @@
 }
 
 .informations {
+  display: flex;
+  align-items: center;
   color: green;
   font-weight: bold;
   margin-left: 10px;
   cursor: pointer;
 }
 
+.opening{
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+}
 .Modal {
-  width: 550px;
-  height: fit-content;
+  width: fit-content;
+  max-height: 87vh;
+  overflow-y: scroll;
   background-color: white;
   margin: 0 auto;
   border-radius: 10px;
@@ -20,9 +28,33 @@
   padding-bottom: 20px;
 }
 
+.Modal h1 {
+  padding-left: 10px;
+}
+
+.Modal::-webkit-scrollbar {
+  width: 14px;
+}
+
+.Modal::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+
+}
+
+.Modal::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+.Modal::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
 .container {
   position: relative;
   border-radius: 10px;
+
 }
 
 .closeModalBtn {
@@ -34,4 +66,9 @@
   font-size: 25px;
   font-weight: 600;
   cursor: pointer;
+}
+
+.iframe{
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
 }

@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 const Pasta = ({ modal }) => {
   const [pastaList, setPastaList] = useState([]);
 
-
   useEffect(() => {
     fetch("http://localhost:5000/api/pasta")
       .then((response) => response.json())
@@ -23,9 +22,8 @@ const Pasta = ({ modal }) => {
             <div className={classes.info}>
               <h3>{pasta.title}</h3>
               <p>{pasta.description}</p>
-              <p>{pasta.price},00</p>
+              <p className={classes.price}>RSD {pasta.price}.00</p>
             </div>
-
 
             <img
               className={classes.img}

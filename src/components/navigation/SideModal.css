@@ -1,0 +1,179 @@
+.modal-container {
+  position: fixed;
+  top: 0;
+  right: -600px;
+  width: 550px;
+  height: 100%;
+  background-color: #fff;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease-in-out;
+  z-index: 10;
+  overflow-y: scroll;
+  padding: 20px;
+}
+
+.modal-container::-webkit-scrollbar {
+  width: 14px;
+}
+
+.modal-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.modal-container::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+.modal-container::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+.modal-container.open {
+  transform: translateX(-600px);
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 1.5rem;
+  color: #000;
+}
+
+.modal-container h2 {
+  font-size: 2rem;
+  margin-top: 2rem;
+}
+
+p {
+  margin-left: 1rem;
+}
+
+.order-ul {
+  max-height: calc(100% - 220px);
+  overflow: auto;
+  padding: 0;
+  margin-bottom: 120px;
+}
+
+.order-ul::-webkit-scrollbar {
+  width: 11px;
+}
+
+.order-ul::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.order-ul::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+.order-ul::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+ul {
+  padding: 0;
+}
+li {
+  list-style: none;
+}
+
+.side-modal-img {
+  width: 100px;
+  height: 70px;
+  border-radius: 10px;
+}
+
+.li-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.li-box_description {
+  display: flex;
+  align-items: center;
+}
+.li-box_description p {
+  margin: 10px;
+}
+
+.cart {
+  position: absolute;
+  bottom: 60px;
+  left: 10px;
+  width: 90%;
+  height: 15px;
+  background-color: green;
+  color: white;
+  padding: 20px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.cart div {
+  display: flex;
+  align-items: center;
+}
+
+.number {
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 500;
+  font-size: 21px;
+  color: green;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+}
+
+
+
+
+.quantity{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(230, 248, 230);
+  padding: 20px;
+  border-radius: 7px;
+  width: 25%;
+  height: 20px;
+  font-weight: 500;
+  font-size: 21px;
+  color: green;
+}
+
+.quantity div{
+  cursor: pointer;
+}
+
+.quantity button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  background-color: white;
+  color: green;
+  font-size: 25px;
+  padding:7px;
+  margin: 0 20px;
+  border-radius: 50%;
+  cursor: pointer;
+  height: 30px;
+  width: 30px;
+
+}

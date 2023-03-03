@@ -1,12 +1,14 @@
 .nav {
-  height: 60px;
+  height: fit-content;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 10px;
 }
 
 .cart {
   width: fit-content;
+  height: 20px;
   background-color: green;
   color: white;
   padding: 20px;
@@ -31,4 +33,19 @@
 }
 .text {
   margin: 0 10px;
+}
+
+.headings {
+  display: flex;
+  align-items: center;
+}
+
+.headings h2,
+.headings h4 {
+  margin: 0;
+}
+.headings img {
+  width: 100px;
+  height: 100px;
+  margin-right: 15px;
 }

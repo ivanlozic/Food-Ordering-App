@@ -4,8 +4,12 @@ import classes from "./Main.module.css";
 import React, { useState } from "react";
 import Modal from "react-modal";
 import Info from "../Info/Info";
+import { useDispatch } from "react-redux";
+import { addPasta } from "../../store/pastaSlice.js";
 
 const Main = () => {
+  const dispatch = useDispatch();
+
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [selectedPasta, setSelectedPasta] = useState(null);
   const [totalPriceValue, setTotalPriceValue] = useState(0);
@@ -19,19 +23,34 @@ const Main = () => {
 
   function openModal(pasta) {
     setSelectedPasta(pasta);
+    setTotalPriceValue(pasta.price);
     setModalIsOpen(true);
   }
 
   function increaseQuantity() {
-    setCurrentQuantity(currentQuantity + 1);
-    setTotalPriceValue((currentQuantity + 1) * selectedPasta.price);
+    const newQuantity = currentQuantity + 1;
+    setCurrentQuantity(newQuantity);
+    setTotalPriceValue(newQuantity * selectedPasta.price);
   }
 
   function decreaseQuantity() {
-    setCurrentQuantity(currentQuantity - 1);
-    setTotalPriceValue((currentQuantity - 1) * selectedPasta.price);
+    const newQuantity = currentQuantity - 1;
+    setCurrentQuantity(newQuantity);
+    setTotalPriceValue(newQuantity * selectedPasta.price);
   }
 
+  function addToCart() {
+    const newPasta = {
+      id: selectedPasta.id,
+      name: selectedPasta.title,
+      quantity: currentQuantity,
+      totalAmount: totalPriceValue,
+    };
+    dispatch(addPasta(newPasta));
+    setSelectedPasta(null);
+    setModalIsOpen(false);
+    setCurrentQuantity(1);
+  }
   return (
     <div className={classes.Main}>
       <Info />
@@ -39,10 +58,9 @@ const Main = () => {
         <li className={classes.li}>Pasta meat</li>
         <li className={classes.li}>Popcorn</li>
         <li className={classes.li}>Fries meat</li>
-        <li className={classes.li}>Burgeri</li>
-        <li className={classes.li}>Dogs</li>
-        <li className={classes.li}>Ostalo</li>
-        <li className={classes.li}>Piće</li>
+        <li className={classes.li}>Burgers</li>
+        <li className={classes.li}>Other</li>
+        <li className={classes.li}>Drinks</li>
       </ul>
 
       <Pasta modal={openModal} />
@@ -84,7 +102,7 @@ const Main = () => {
             <div className={classes.info}>
               <h2>{selectedPasta.title}</h2>
               <p>{selectedPasta.description}</p>
-              <p>{selectedPasta.price},00</p>
+              <p>RSD {selectedPasta.price}.00</p>
             </div>
 
             <div className={classes.orderBox}>
@@ -94,11 +112,12 @@ const Main = () => {
                 <button onClick={increaseQuantity}>+</button>
               </div>
 
-              <div className={classes.totalAmount}>
-                <p>Dodaj u porudžbinu</p>
+              <div onClick={addToCart} className={classes.totalAmount}>
+                <p>Add to order</p>
                 <p>
+                  RSD &nbsp;
                   {currentQuantity === 1 && selectedPasta.price}
-                  {currentQuantity !== 1 && totalPriceValue},00
+                  {currentQuantity !== 1 && totalPriceValue}.00
                 </p>
               </div>
             </div>
