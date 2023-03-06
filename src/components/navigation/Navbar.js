@@ -6,7 +6,7 @@ import SideModal from "./SideModal";
 import logo from "../../assets/images/logo.jpg";
 
 const Navbar = () => {
-  const pastas = useSelector((state) => state.pastas);
+  const cart = useSelector((state) => state.cart);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleCartClick = () => {
@@ -27,7 +27,7 @@ const Navbar = () => {
         </div>
       </div>
 
-      {pastas.pastas.length > 0 && <Cart onClick={handleCartClick} />}
+      {cart.cartItems.length > 0 && <Cart onClick={handleCartClick} />}
 
       <SideModal isOpen={isModalOpen} onClose={handleCloseModal} />
     </div>

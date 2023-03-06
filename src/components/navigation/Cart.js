@@ -3,22 +3,22 @@ import { useSelector } from "react-redux";
 import classes from "./Navbar.module.css";
 
 function Cart({ onClick }) {
-  const pastas = useSelector((state) => state.pastas);
+  const cart = useSelector((state) => state.cart);
   const [quantity, setQuantity] = useState(0);
   const [totalAmount, setTotalAmount] = useState(0);
 
   useEffect(() => {
-    if (pastas.pastas.length > 0) {
+    if (cart.cartItems.length > 0) {
       setQuantity(
-        pastas.pastas.reduce((prev, next) => prev + next.quantity, 0)
+        cart.cartItems.reduce((prev, next) => prev + next.quantity, 0)
       );
       setTotalAmount(
-        pastas.pastas.reduce((prev, next) => prev + next.totalAmount, 0)
+        cart.cartItems.reduce((prev, next) => prev + next.totalAmount, 0)
       );
     } else {
       setQuantity(0);
     }
-  }, [pastas]);
+  }, [cart]);
 
   return (
     <div onClick={onClick} className={classes.cart}>

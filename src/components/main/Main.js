@@ -1,11 +1,10 @@
 import Pasta from "../menu/pasta/Pasta";
 import classes from "./Main.module.css";
-
 import React, { useState } from "react";
 import Modal from "react-modal";
 import Info from "../Info/Info";
 import { useDispatch } from "react-redux";
-import { addPasta } from "../../store/pastaSlice.js";
+import { addToCart } from "../../store/cart";
 
 const Main = () => {
   const dispatch = useDispatch();
@@ -34,19 +33,22 @@ const Main = () => {
   }
 
   function decreaseQuantity() {
-    const newQuantity = currentQuantity - 1;
-    setCurrentQuantity(newQuantity);
-    setTotalPriceValue(newQuantity * selectedPasta.price);
+    if (currentQuantity > 1) {
+      const newQuantity = currentQuantity - 1;
+      setCurrentQuantity(newQuantity);
+      setTotalPriceValue(newQuantity * selectedPasta.price);
+    }
   }
 
-  function addToCart() {
+  function addItemToCart() {
     const newPasta = {
       id: selectedPasta.id,
       name: selectedPasta.title,
       quantity: currentQuantity,
       totalAmount: totalPriceValue,
+      price: selectedPasta.price,
     };
-    dispatch(addPasta(newPasta));
+    dispatch(addToCart(newPasta));
     setSelectedPasta(null);
     setModalIsOpen(false);
     setCurrentQuantity(1);
@@ -75,7 +77,6 @@ const Main = () => {
         contentLabel="Example Modal"
         ariaHideApp={false}
         className={classes.Modal}
-        overlayClassName={classes.Overlay}
         style={customStyles}
       >
         {selectedPasta && (
@@ -107,12 +108,17 @@ const Main = () => {
 
             <div className={classes.orderBox}>
               <div className={classes.quantity}>
-                <button onClick={decreaseQuantity}>-</button>
+                <button
+                  disabled={currentQuantity === 1}
+                  onClick={decreaseQuantity}
+                >
+                  -
+                </button>
                 <p>{currentQuantity}</p>
                 <button onClick={increaseQuantity}>+</button>
               </div>
 
-              <div onClick={addToCart} className={classes.totalAmount}>
+              <div onClick={addItemToCart} className={classes.totalAmount}>
                 <p>Add to order</p>
                 <p>
                   RSD &nbsp;
