@@ -1,16 +1,21 @@
-import Pasta from "../menu/pasta/Pasta";
+import Pasta from "../menu/Pasta";
 import classes from "./Main.module.css";
 import React, { useState } from "react";
 import Modal from "react-modal";
-import Info from "../Info/Info";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../store/cart";
+import Popcorn from "../menu/Popcorn";
+import FriesMeat from "../menu/FriesMeat";
+import Burgers from "../menu/Burgers";
+import Dogs from "../menu/Dogs";
+import Other from "../menu/Other";
+import Drinks from "../menu/Drinks";
 
 const Main = () => {
   const dispatch = useDispatch();
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [selectedPasta, setSelectedPasta] = useState(null);
+  const [selectedItem, setSelectedItem] = useState(null);
   const [totalPriceValue, setTotalPriceValue] = useState(0);
   const [currentQuantity, setCurrentQuantity] = useState(1);
 
@@ -21,7 +26,7 @@ const Main = () => {
   };
 
   function openModal(pasta) {
-    setSelectedPasta(pasta);
+    setSelectedItem(pasta);
     setTotalPriceValue(pasta.price);
     setModalIsOpen(true);
   }
@@ -29,48 +34,46 @@ const Main = () => {
   function increaseQuantity() {
     const newQuantity = currentQuantity + 1;
     setCurrentQuantity(newQuantity);
-    setTotalPriceValue(newQuantity * selectedPasta.price);
+    setTotalPriceValue(newQuantity * selectedItem.price);
   }
 
   function decreaseQuantity() {
     if (currentQuantity > 1) {
       const newQuantity = currentQuantity - 1;
       setCurrentQuantity(newQuantity);
-      setTotalPriceValue(newQuantity * selectedPasta.price);
+      setTotalPriceValue(newQuantity * selectedItem.price);
     }
   }
 
   function addItemToCart() {
     const newPasta = {
-      id: selectedPasta.id,
-      name: selectedPasta.title,
+      id: selectedItem.id,
+      name: selectedItem.title,
       quantity: currentQuantity,
       totalAmount: totalPriceValue,
-      price: selectedPasta.price,
+      price: selectedItem.price,
+      type: selectedItem.type,
     };
     dispatch(addToCart(newPasta));
-    setSelectedPasta(null);
+    setSelectedItem(null);
     setModalIsOpen(false);
     setCurrentQuantity(1);
   }
+
   return (
     <div className={classes.Main}>
-      <Info />
-      <ul className={classes.ul}>
-        <li className={classes.li}>Pasta meat</li>
-        <li className={classes.li}>Popcorn</li>
-        <li className={classes.li}>Fries meat</li>
-        <li className={classes.li}>Burgers</li>
-        <li className={classes.li}>Other</li>
-        <li className={classes.li}>Drinks</li>
-      </ul>
-
       <Pasta modal={openModal} />
+      <Popcorn modal={openModal} />
+      <FriesMeat modal={openModal} />
+      <Burgers modal={openModal} />
+      <Dogs modal={openModal} />
+      <Other modal={openModal} />
+      <Drinks modal={openModal} />
 
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={() => {
-          setSelectedPasta(null);
+          setSelectedItem(null);
           setModalIsOpen(false);
           setCurrentQuantity(1);
         }}
@@ -79,19 +82,19 @@ const Main = () => {
         className={classes.Modal}
         style={customStyles}
       >
-        {selectedPasta && (
+        {selectedItem && (
           <div>
             <div className={classes.container}>
               <img
                 className={classes.imgModal}
-                src={`http://localhost:5000/image/pasta/${selectedPasta.id}.jpeg`}
-                alt={selectedPasta.title}
+                src={`http://localhost:5000/image/${selectedItem.type}/${selectedItem.id}.jpeg`}
+                alt={selectedItem.title}
               />
 
               <button
                 className={classes.closeModalBtn}
                 onClick={() => {
-                  setSelectedPasta(null);
+                  setSelectedItem(null);
                   setModalIsOpen(false);
                   setCurrentQuantity(1);
                 }}
@@ -101,9 +104,9 @@ const Main = () => {
             </div>
 
             <div className={classes.info}>
-              <h2>{selectedPasta.title}</h2>
-              <p>{selectedPasta.description}</p>
-              <p>RSD {selectedPasta.price}.00</p>
+              <h2>{selectedItem.title}</h2>
+              <p>{selectedItem.description}</p>
+              <p>RSD {selectedItem.price}.00</p>
             </div>
 
             <div className={classes.orderBox}>
@@ -122,7 +125,7 @@ const Main = () => {
                 <p>Add to order</p>
                 <p>
                   RSD &nbsp;
-                  {currentQuantity === 1 && selectedPasta.price}
+                  {currentQuantity === 1 && selectedItem.price}
                   {currentQuantity !== 1 && totalPriceValue}.00
                 </p>
               </div>

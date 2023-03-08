@@ -1,5 +1,5 @@
 .Main {
-  background-color: gainsboro;
+  background-color: rgb(247, 247, 247);
   padding: 10px;
 }
 
@@ -21,8 +21,6 @@
 .li:hover {
   color: red;
 }
-
-
 
 /*MODAL STYLING*/
 

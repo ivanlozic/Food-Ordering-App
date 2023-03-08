@@ -1,6 +1,5 @@
 .box {
   display: flex;
-  justify-content: space-around;
   flex-wrap: wrap;
   padding: 10px;
 }
@@ -11,12 +10,13 @@
   justify-content: space-around;
   width: 30%;
   height: 170px;
-  padding: 10px;
+  padding: 17px 10px;
   border-radius: 10px;
   box-shadow: 3px 3px 10px gray;
   cursor: pointer;
   transition: all 1s;
   margin-top: 20px;
+  margin: 10px;
 }
 
 .container:hover {

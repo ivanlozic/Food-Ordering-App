@@ -65,60 +65,62 @@ function SideModal(props) {
     }
   }
   return (
-    <div
-      className={props.isOpen ? "modal-container open" : "modal-container"}
-      ref={modalRef}
-    >
-      <button className="close-button" onClick={props.onClose}>
-        X
-      </button>
-      <h2>Your order</h2>
-      <ul className="order-ul">
-        {cart.cartItems.length > 0 &&
-          cart.cartItems.map((pasta) => (
-            <li key={pasta.name} className="li-box">
-              <div className="li-box_description">
-                <img
-                  className="side-modal-img"
-                  src={`http://localhost:5000/image/pasta/${pasta.id}.jpeg`}
-                  alt={pasta.title}
-                />
-                <div>
-                  <p>{pasta.name}</p>
-                  <p>RSD {pasta.totalAmount}.00</p>
-                </div>
-              </div>
-              <div className="quantity">
-                <button onClick={() => decreaseItemFromCart(pasta.id)}>
-                  {" "}
-                  -{" "}
-                </button>{" "}
-                {pasta.quantity}{" "}
-                <button onClick={() => increaseItemFromCart(pasta.id)}>
-                  {" "}
-                  +{" "}
-                </button>
-                <div>
-                  <FaTrashAlt
-                    style={{ color: "green" }}
-                    onClick={() => removeItemFromCart(pasta.id)}
+    <div className={props.isOpen ? "modal-overlay open" : "modal-container"}>
+      <div
+        className={props.isOpen ? "modal-container open" : "modal-container"}
+        ref={modalRef}
+      >
+        <button className="close-button" onClick={props.onClose}>
+          X
+        </button>
+        <h2>Your order</h2>
+        <ul className="order-ul">
+          {cart.cartItems.length > 0 &&
+            cart.cartItems.map((item) => (
+              <li key={item.name} className="li-box">
+                <div className="li-box_description">
+                  <img
+                    className="side-modal-img"
+                    src={`http://localhost:5000/image/${item.type}/${item.id}.jpeg`}
+                    alt={item.title}
                   />
+                  <div>
+                    <p>{item.name}</p>
+                    <p>RSD {item.totalAmount}.00</p>
+                  </div>
                 </div>
-              </div>
-            </li>
-          ))}
-      </ul>
+                <div className="quantity">
+                  <button onClick={() => decreaseItemFromCart(item.id)}>
+                    {" "}
+                    -{" "}
+                  </button>{" "}
+                  {item.quantity}{" "}
+                  <button onClick={() => increaseItemFromCart(item.id)}>
+                    {" "}
+                    +{" "}
+                  </button>
+                  <div>
+                    <FaTrashAlt
+                      style={{ color: "green" }}
+                      onClick={() => removeItemFromCart(item.id)}
+                    />
+                  </div>
+                </div>
+              </li>
+            ))}
+        </ul>
 
-      <Link to="/checkout">
-        <div className="cart">
-          <div>
-            <div className="number">{quantity}</div>
-            <p>Go to checkout</p>
+        <Link to="/checkout">
+          <div className="cart">
+            <div>
+              <div className="number">{quantity}</div>
+              <p>Go to checkout</p>
+            </div>
+
+            <p>RSD {totalAmount}.00</p>
           </div>
-
-          <p>RSD {totalAmount}.00</p>
-        </div>
-      </Link>
+        </Link>
+      </div>
     </div>
   );
 }
