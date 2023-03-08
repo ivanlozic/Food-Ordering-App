@@ -5,7 +5,7 @@ const Popcorn = ({ modal }) => {
   const [popcornList, setPopcornList] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/popcorn")
+    fetch("https://food-ordering-app-api.onrender.com/api/popcorn")
       .then((response) => response.json())
       .then((data) => setPopcornList(data));
   }, []);
@@ -29,7 +29,7 @@ const Popcorn = ({ modal }) => {
 
               <img
                 className={classes.img}
-                src={`http://localhost:5000/image/popcorn/${popcorn.id}.jpeg`}
+                src={`https://food-ordering-app-api.onrender.com/image/popcorn/${popcorn.id}.jpeg`}
                 alt={popcorn.title}
               />
             </div>

@@ -29,7 +29,7 @@ const Pasta = ({ modal }) => {
 
               <img
                 className={classes.img}
-                src={`http://localhost:5000/image/pasta/${pasta.id}.jpeg`}
+                src={`https://food-ordering-app-api.onrender.com/image/pasta/${pasta.id}.jpeg`}
                 alt={pasta.title}
               />
             </div>

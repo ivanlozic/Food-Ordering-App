@@ -5,7 +5,7 @@ const Other = ({ modal }) => {
   const [itemList, setItemList] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/ostalo")
+    fetch("https://food-ordering-app-api.onrender.com/api/ostalo")
       .then((response) => response.json())
       .then((data) => setItemList(data));
   }, []);
@@ -29,7 +29,7 @@ const Other = ({ modal }) => {
 
               <img
                 className={classes.img}
-                src={`http://localhost:5000/image/ostalo/${item.id}.jpeg`}
+                src={`https://food-ordering-app-api.onrender.com/image/ostalo/${item.id}.jpeg`}
                 alt={item.title}
               />
             </div>

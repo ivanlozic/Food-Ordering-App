@@ -107,7 +107,7 @@ function Checkout(props) {
                     <div className="li-box_description">
                       <img
                         className="side-modal-img"
-                        src={`http://localhost:5000/image/${item.type}/${item.id}.jpeg`}
+                        src={`https://food-ordering-app-api.onrender.com/image/${item.type}/${item.id}.jpeg`}
                         alt={item.title}
                       />
                       <div>

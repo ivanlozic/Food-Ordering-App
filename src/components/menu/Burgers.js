@@ -5,7 +5,7 @@ const Burgers = ({ modal }) => {
   const [burgerList, setBurgerList] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/burgers")
+    fetch("https://food-ordering-app-api.onrender.com/api/burgers")
       .then((response) => response.json())
       .then((data) => setBurgerList(data));
   }, []);
@@ -29,7 +29,7 @@ const Burgers = ({ modal }) => {
 
               <img
                 className={classes.img}
-                src={`http://localhost:5000/image/burgers/${burger.id}.jpeg`}
+                src={`https://food-ordering-app-api.onrender.com/image/burgers/${burger.id}.jpeg`}
                 alt={burger.title}
               />
             </div>

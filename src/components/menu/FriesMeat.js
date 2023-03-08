@@ -5,7 +5,7 @@ const FriesMeat = ({ modal }) => {
   const [friesMeatList, setFriesMeatList] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/fries-meat")
+    fetch("https://food-ordering-app-api.onrender.com/api/fries-meat")
       .then((response) => response.json())
       .then((data) => setFriesMeatList(data));
   }, []);
@@ -29,7 +29,7 @@ const FriesMeat = ({ modal }) => {
 
               <img
                 className={classes.img}
-                src={`http://localhost:5000/image/fries-meat/${item.id}.jpeg`}
+                src={`https://food-ordering-app-api.onrender.com/image/fries-meat/${item.id}.jpeg`}
                 alt={item.title}
               />
             </div>
