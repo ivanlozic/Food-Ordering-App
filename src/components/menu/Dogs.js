@@ -12,7 +12,7 @@ const Dogs = ({ modal }) => {
 
   return (
     <div id="dogs">
-      <h2 style={{ marginLeft: "2rem" }}>POPCORN</h2>
+      <h2 style={{ marginLeft: "2rem" }}>DOGS</h2>
       <div className={classes.box}>
         {dogList.map((dog) => {
           return (

@@ -5,7 +5,7 @@ const Pasta = ({ modal }) => {
   const [pastaList, setPastaList] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/pasta")
+    fetch("https://food-ordering-app-api.onrender.com/api/pasta")
       .then((response) => response.json())
       .then((data) => setPastaList(data));
   }, []);
