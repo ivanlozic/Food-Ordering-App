@@ -5,9 +5,17 @@ const Popcorn = ({ modal }) => {
   const [popcornList, setPopcornList] = useState([]);
 
   useEffect(() => {
-    fetch("https://food-ordering-app-api.onrender.com/api/popcorn")
-      .then((response) => response.json())
-      .then((data) => setPopcornList(data));
+    async function fetchPasta() {
+      const response = await fetch(
+        "https://food-ordering-app-api.onrender.com/api/popcorn"
+      );
+
+      const popcorn = await response.json();
+
+      return popcorn;
+    }
+
+    fetchPasta().then((data) => setPopcornList(data));
   }, []);
 
   return (

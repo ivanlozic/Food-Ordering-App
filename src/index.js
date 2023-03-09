@@ -6,7 +6,7 @@ import store from "./store/store";
 import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Checkout from "./pages/Checkout";
+import CheckoutPage from "./pages/CheckoutPage";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -14,7 +14,7 @@ root.render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />} />
-        <Route path="checkout" element={<Checkout />} />
+        <Route path="checkout" element={<CheckoutPage />} />
       </Routes>
     </BrowserRouter>
   </Provider>

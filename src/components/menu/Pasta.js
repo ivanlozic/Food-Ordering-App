@@ -5,9 +5,17 @@ const Pasta = ({ modal }) => {
   const [pastaList, setPastaList] = useState([]);
 
   useEffect(() => {
-    fetch("https://food-ordering-app-api.onrender.com/api/pasta")
-      .then((response) => response.json())
-      .then((data) => setPastaList(data));
+    async function fetchPasta() {
+      const response = await fetch(
+        "https://food-ordering-app-api.onrender.com/api/pasta"
+      );
+
+      const pastas = await response.json();
+
+      return pastas;
+    }
+
+    fetchPasta().then((data) => setPastaList(data));
   }, []);
 
   return (

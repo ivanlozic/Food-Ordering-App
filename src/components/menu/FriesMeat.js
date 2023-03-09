@@ -5,9 +5,17 @@ const FriesMeat = ({ modal }) => {
   const [friesMeatList, setFriesMeatList] = useState([]);
 
   useEffect(() => {
-    fetch("https://food-ordering-app-api.onrender.com/api/fries-meat")
-      .then((response) => response.json())
-      .then((data) => setFriesMeatList(data));
+    async function fetchPasta() {
+      const response = await fetch(
+        "https://food-ordering-app-api.onrender.com/api/fries-meat"
+      );
+
+      const fries = await response.json();
+
+      return fries;
+    }
+
+    fetchPasta().then((data) => setFriesMeatList(data));
   }, []);
 
   return (

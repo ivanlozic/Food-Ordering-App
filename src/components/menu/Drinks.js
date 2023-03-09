@@ -28,7 +28,7 @@ const Drinks = ({ modal }) => {
               </div>
 
               <img
-                className={classes.img}
+                className={classes.imgDrinks}
                 src={`https://food-ordering-app-api.onrender.com/image/drinks/${drink.id}.jpeg`}
                 alt={drink.title}
               />

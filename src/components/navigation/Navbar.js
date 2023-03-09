@@ -4,7 +4,7 @@ import { useState } from "react";
 import Cart from "./Cart";
 import SideModal from "./SideModal";
 import logo from "../../assets/images/logo.jpg";
-import Info from "../Info/Info";
+import Info from "../info/Info";
 
 const Navbar = () => {
   const cart = useSelector((state) => state.cart);
