@@ -58,8 +58,14 @@
 .liBox {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
+.imgCheck{
+  width: 100px;
+  height: 60px;
+  border-radius: 10px;
+}
 .form {
   width: 75%;
   font-size: 20px;
@@ -124,4 +130,53 @@
   color: red;
   margin-top: 3px;
   font-size: 16px;
+}
+
+@media (max-width: 950px) {
+  .container {
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+
+  .form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .orderContainer {
+    width: 95%;
+    margin: 20px 0;
+
+    height: 550px;
+    padding: 20px;
+    overflow-y: scroll;
+    border-radius: 10px;
+  }
+}
+
+
+@media (max-width: 550px) {
+  .amount {
+    width: 95%;
+    padding: 0 10px;
+  }
+  .orderContainer{
+    font-size: 14px;
+  }
+  .liBox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    padding: 10px;
+    flex-direction: column;
+  }
+
+  .imgCheck{
+    width: 70px;
+    height: 40px;
+    border-radius: 10px;
+  }
+
+
 }

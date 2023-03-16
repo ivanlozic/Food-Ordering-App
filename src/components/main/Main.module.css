@@ -33,6 +33,7 @@
   margin-top: 20px;
   padding-bottom: 20px;
 }
+
 .info {
   padding: 20px;
 }
@@ -58,15 +59,15 @@
   cursor: pointer;
 }
 
-
-.orderBox{
+.orderBox {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
+  width: 90%;
   height: fit-content;
+  margin: 0 auto;
 }
-.quantity{
+.quantity {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -88,27 +89,25 @@
   background-color: white;
   color: green;
   font-size: 25px;
-  padding:7px;
+  padding: 7px;
   margin: 0 20px;
   border-radius: 50%;
   cursor: pointer;
   height: 30px;
   width: 30px;
-
 }
 
 .quantity p {
   margin: 0;
   text-align: center;
 }
-.totalAmount{
+.totalAmount {
   display: flex;
   width: 60%;
   background-color: green;
   color: white;
   padding: 20px;
   border-radius: 10px;
-  display: flex;
   align-items: center;
   cursor: pointer;
   font-weight: 500;
@@ -116,6 +115,70 @@
   margin-left: 10px;
 }
 
-.totalAmount p{
-  margin:  0 5px;
+.totalAmount p {
+  margin: 0 5px;
+}
+
+@media (max-width: 810px) {
+  .Modal {
+    width: 80%;
+  }
+}
+
+@media (max-width: 700px) {
+
+  .orderBox {
+    flex-direction: column;
+    margin: 0 auto;
+    margin-top: 0;
+  }
+
+  .quantity {
+    margin-bottom: 10px;
+    width: 50%;
+    margin-left: 0;
+  }
+  .totalAmount {
+    width: 80%;
+    justify-content: center;
+    margin-left: 0;
+  }
+
+  .closeModalBtn {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    border-radius: 50%;
+    padding: 7px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+}
+
+@media (max-width: 480px) {
+  .Modal {
+    font-size: 14px;
+  }
+  .totalAmount  {
+    display: flex;
+    flex-direction: column;
+    margin-top: 5px;
+  }
+
+  .info {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin-left: 0;
+    padding-left: 0;
+  }
+
+
+.info h2{
+  width: 99%;
+}
+  .imgModal {
+    height: 200px;
+  }
 }

@@ -9,7 +9,7 @@
   background-color: white;
   justify-content: space-around;
   width: 30%;
-  height: 170px;
+  height: 200px;
   padding: 17px 10px;
   border-radius: 10px;
   box-shadow: 3px 3px 10px gray;
@@ -17,22 +17,7 @@
   transition: all 1s;
   margin-top: 20px;
   margin: 10px;
-  
 }
-
-
-@media (max-width: 768px) {
-  .box {
-    padding: 5px;
-  }
-
-  .container {
-    width: 45%;
-    height: 200px;
-    margin: 5px;
-  }
-}
-
 
 
 .container:hover {
@@ -40,8 +25,9 @@
 }
 
 .info {
-  width: 100%;
+  width: 90%;
   height: 100%;
+  padding-right: 10px;
 }
 
 .info h3 {
@@ -58,7 +44,7 @@
 
 .img {
   width: 170px;
-  height: 80%;
+  height: 170px;
   margin-top: 10px;
   border-radius: 10px;
 }
@@ -66,4 +52,60 @@
 .imgDrinks {
   width: 200px;
   height: 120px;
+}
+
+
+
+@media (max-width: 1246px) {
+  .box {
+    padding: 5px;
+  }
+
+  .container {
+    width: 46%;
+    height: 215px;
+    margin: 5px;
+  }
+}
+
+
+
+@media (max-width: 810px) {
+  .box {
+    padding: 5px;
+  }
+
+  .container {
+    width: 95%;
+    height: fit-content;
+    margin: 5px;
+  }
+}
+
+@media (max-width: 480px) {
+
+  .container {
+    width: 95%;
+    height: 200px;
+    margin: 5px;
+    margin-top: 20px;
+  }
+ 
+}
+
+@media (max-width: 410px) {
+
+  .container {
+    width: 95%;
+    height: 250px;
+    margin: 5px;
+    margin-top: 20px;
+    flex-direction: column;
+  }
+
+  .img{
+    width: 180px;
+    height: 150px;
+    margin: 0 auto;
+  }
 }

@@ -20,12 +20,11 @@ function CheckoutPage() {
       cart.cartItems.reduce((prev, next) => prev + next.totalAmount, 0)
     );
     setQuantity(cart.cartItems.reduce((prev, next) => prev + next.quantity, 0));
-    /*
+
     if (cart.cartItems.length < 1) {
       alert("Must have some items in cart!");
       navigate("/");
     }
-    */
   }, [cart]);
 
   function removeItemFromCart(id) {
@@ -245,7 +244,7 @@ function CheckoutPage() {
                   <li key={item.name} className={classes.liBox}>
                     <div className="li-box_description">
                       <img
-                        className="side-modal-img"
+                        className={classes.imgCheck}
                         src={`https://food-ordering-app-api.onrender.com/image/${item.type}/${item.id}.jpeg`}
                         alt={item.title}
                       />

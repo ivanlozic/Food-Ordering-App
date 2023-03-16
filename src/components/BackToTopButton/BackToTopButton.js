@@ -46,7 +46,7 @@ function BackToTopButton() {
       }`}
       onClick={scrollToTop}
     >
-      <FaArrowCircleUp />
+      <FaArrowCircleUp style={{color:"green"}} />
     </div>
   );
 }

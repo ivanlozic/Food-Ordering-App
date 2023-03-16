@@ -19,7 +19,7 @@ const Navbar = () => {
   };
 
   return (
-    <div>
+    <div className={classes.Navbar}>
       <div className={classes.nav}>
         <div className={classes.headings}>
           <img src={logo} alt="logo" />

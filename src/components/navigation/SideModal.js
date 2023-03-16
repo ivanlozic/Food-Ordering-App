@@ -111,7 +111,7 @@ function SideModal(props) {
         </ul>
 
         <Link to="/checkout">
-          <div className="cart">
+          <div className="checkoutCart">
             <div>
               <div className="number">{quantity}</div>
               <p>Go to checkout</p>

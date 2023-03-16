@@ -1,6 +1,7 @@
 .ul {
   list-style-type: none;
   display: flex;
+  padding-left: 10px;
 }
 
 .informations {
@@ -16,9 +17,10 @@
   display: flex;
   justify-content: space-between;
   width: 90%;
+  padding: 20px;
 }
 .Modal {
-  width: fit-content;
+  width: 60%;
   max-height: 87vh;
   overflow-y: scroll;
   background-color: white;
@@ -71,4 +73,36 @@
 .iframe{
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
+}
+
+
+
+@media (max-width: 810px) {
+  .Modal {
+    width: 80%;
+  }
+}
+
+@media (max-width: 700px) {
+
+
+
+  .closeModalBtn {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    border-radius: 50%;
+    padding: 7px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+}
+
+@media (max-width: 480px) {
+  .Modal {
+    font-size: 14px;
+  }
+
+
 }

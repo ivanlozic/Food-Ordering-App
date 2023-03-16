@@ -22,9 +22,12 @@ function Cart({ onClick }) {
 
   return (
     <div onClick={onClick} className={classes.cart}>
-      <div className={classes.number}>{quantity}</div>
-      <p className={classes.text}>View order</p>
-      <p>RSD {totalAmount}.00</p>
+      <div>
+        <div className={classes.number}>{quantity}</div>
+        <p className={classes.text}>View order</p>
+      </div>
+
+      <p className={classes.total}>RSD {totalAmount}.00</p>
     </div>
   );
 }
