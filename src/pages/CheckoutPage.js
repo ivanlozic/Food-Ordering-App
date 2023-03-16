@@ -3,7 +3,6 @@ import { FaTrashAlt, FaArrowLeft } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { removeFromCart, updateCartItem, removeAllItems } from "../store/cart";
 import logo from "../assets/images/logo.jpg";
-import Info from "../components/info/Info";
 import { useNavigate } from "react-router-dom";
 import classes from "./CheckoutPage.module.css";
 import BackToTopButton from "../components/BackToTopButton/BackToTopButton";
@@ -26,7 +25,7 @@ function CheckoutPage() {
       alert("Must have some items in cart!");
       navigate("/");
     }
-  }, [cart,navigate]);
+  }, [cart, navigate]);
 
   function removeItemFromCart(id) {
     dispatch(removeFromCart(id));
@@ -158,7 +157,6 @@ function CheckoutPage() {
         </div>
       </div>
 
-      <Info />
       <BackToTopButton />
 
       <div className={classes.container}>
