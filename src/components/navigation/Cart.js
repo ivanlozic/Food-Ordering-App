@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import classes from "./Navbar.module.css";
+import React from "react";
 
 function Cart({ onClick }) {
   const cart = useSelector((state) => state.cart);

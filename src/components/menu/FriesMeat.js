@@ -1,5 +1,6 @@
 import classes from "./Pasta.module.css";
 import { useEffect, useState } from "react";
+import React from "react";
 
 const FriesMeat = ({ modal }) => {
   const [friesMeatList, setFriesMeatList] = useState([]);

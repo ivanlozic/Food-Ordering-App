@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { removeFromCart } from "../../store/cart";
 import { updateCartItem } from "../../store/cart";
+import React from "react";
 
 function SideModal(props) {
   const dispatch = useDispatch();

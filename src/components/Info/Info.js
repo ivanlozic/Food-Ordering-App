@@ -2,6 +2,7 @@ import classes from "./Info.module.css";
 import Modal from "react-modal";
 import { useState } from "react";
 import { FcInfo } from "react-icons/fc";
+import React from "react";
 
 function Info() {
   const [modalIsOpen, setModalIsOpen] = useState(false);

@@ -5,7 +5,7 @@ import Cart from "./Cart";
 import SideModal from "./SideModal";
 import logo from "../../assets/images/logo.jpg";
 import Info from "../info/Info";
-
+import React from "react";
 const Navbar = () => {
   const cart = useSelector((state) => state.cart);
   const [isModalOpen, setIsModalOpen] = useState(false);

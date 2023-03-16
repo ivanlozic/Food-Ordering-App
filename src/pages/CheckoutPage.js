@@ -7,6 +7,7 @@ import Info from "../components/info/Info";
 import { useNavigate } from "react-router-dom";
 import classes from "./CheckoutPage.module.css";
 import BackToTopButton from "../components/BackToTopButton/BackToTopButton";
+import React from "react";
 
 function CheckoutPage() {
   const dispatch = useDispatch();
