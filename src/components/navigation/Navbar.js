@@ -4,7 +4,6 @@ import { useState } from "react";
 import Cart from "./Cart";
 import SideModal from "./SideModal";
 import logo from "../../assets/images/logo.jpg";
-import Info from "../info/Info";
 import React from "react";
 const Navbar = () => {
   const cart = useSelector((state) => state.cart);
@@ -34,7 +33,6 @@ const Navbar = () => {
         <SideModal isOpen={isModalOpen} onClose={handleCloseModal} />
       </div>
 
-      <Info />
       <ul className={classes.ul}>
         <li className={classes.li}>
           <a href="#pasta">Pasta meat</a>
