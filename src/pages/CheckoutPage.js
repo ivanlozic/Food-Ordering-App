@@ -25,7 +25,7 @@ function CheckoutPage() {
       alert("Must have some items in cart!");
       navigate("/");
     }
-  }, [cart]);
+  }, [cart,navigate]);
 
   function removeItemFromCart(id) {
     dispatch(removeFromCart(id));
