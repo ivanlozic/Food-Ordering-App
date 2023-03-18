@@ -85,7 +85,7 @@ function CheckoutPage() {
         totalAmount: totalAmount,
       };
 
-      fetch("http://localhost:5000/api/orders", {
+      fetch("https://food-ordering-app-api.onrender.com/api/orders", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -226,7 +226,7 @@ function CheckoutPage() {
 
             <p>RSD {totalAmount}.00</p>
 
-            <button onClick={handleSubmit}>Submit</button>
+            <button type="" onClick={handleSubmit}>Submit</button>
           </div>
         </form>
 

@@ -61,7 +61,7 @@
   align-items: center;
 }
 
-.imgCheck{
+.imgCheck {
   width: 100px;
   height: 60px;
   border-radius: 10px;
@@ -144,9 +144,8 @@
   }
 
   .orderContainer {
-    width: 95%;
+    width: 80%;
     margin: 20px 0;
-
     height: 550px;
     padding: 20px;
     overflow-y: scroll;
@@ -154,13 +153,12 @@
   }
 }
 
-
 @media (max-width: 550px) {
   .amount {
     width: 95%;
     padding: 0 10px;
   }
-  .orderContainer{
+  .orderContainer {
     font-size: 14px;
   }
   .liBox {
@@ -172,11 +170,9 @@
     flex-direction: column;
   }
 
-  .imgCheck{
+  .imgCheck {
     width: 70px;
     height: 40px;
     border-radius: 10px;
   }
-
-
 }
