@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import classes from "./CheckoutPage.module.css";
 import BackToTopButton from "../components/BackToTopButton/BackToTopButton";
 import React from "react";
-import Info from "../components/info/Info";
+
 
 function CheckoutPage() {
   const dispatch = useDispatch();
@@ -158,7 +158,6 @@ function CheckoutPage() {
         </div>
       </div>
 
-      <Info />
       <BackToTopButton />
 
       <div className={classes.container}>
