@@ -1,0 +1,52 @@
+[
+    {
+      "title": "Tagli malo pakovanje",
+      "description": "Grilovano belo meso u pasti sa pikantno - slatko - kiselim sosom",
+      "price": 450,
+      "id": 0,
+      "type":"pasta"
+    },
+    {
+      "title": "Tagli veliko pakovanje",
+      "description": "Grilovano belo meso u pasti sa pikantno - slatko - kiselim sosom",
+      "price": 570,
+      "id": 1,
+      "type":"pasta"
+    },
+    {
+      "title": "Pene malo pakovanje",
+      "description": "Grilovano belo meso u pasti sa kremastim sosom od 4 vrste sira",
+      "price": 470,
+      "id": 2,
+      "type":"pasta"
+    },
+    {
+      "title": "Pene veliko pakovanje",
+      "description": "Grilovano belo meso u pasti sa kremastim sosom od 4 vrste sira",
+      "price": 590,
+      "id": 3,
+      "type":"pasta"
+    },
+    {
+      "title": "Carbo",
+      "description": "Grilovano dimljeno pileće meso u pasti sa carbonara sosom i sirom",
+      "price": 620,
+      "id": 4,
+      "type":"pasta"
+    },
+    {
+      "title": "Amatri Chicken",
+      "description": "Grilovano belo meso na karamelizovanom luku u pasti sa paradajz sosom i parmezanom",
+      "price": 590,
+      "id": 5,
+      "type":"pasta"
+    },
+    {
+      "title": "Fosi",
+      "description": "Grilovano belo meso u pasti sa sosom sa grilovanim povrćem",
+      "price": 590,
+      "id": 6,
+      "type":"pasta"
+    }
+  ]
+  

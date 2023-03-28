@@ -1,0 +1,16 @@
+[
+    {
+      "title": "Pomfrit porcija",
+      "description": "",
+      "price": 240,
+      "id":20,
+      "type": "ostalo"
+    },
+    {
+      "title": "Burger lepinja",
+      "description": "",
+      "price": 70,
+      "id":21,
+      "type": "ostalo"
+    }
+  ]

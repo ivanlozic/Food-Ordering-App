@@ -1,16 +1,8 @@
 import classes from "./Pasta.module.css";
-import { useEffect, useState } from "react";
 import React from "react";
+import drinkList from "../../data/drinks.json";
 
 const Drinks = ({ modal }) => {
-  const [drinkList, setDrinkList] = useState([]);
-
-  useEffect(() => {
-    fetch("https://food-ordering-app-api.onrender.com/api/drinks")
-      .then((response) => response.json())
-      .then((data) => setDrinkList(data));
-  }, []);
-
   return (
     <div id="drinks">
       <h2 style={{ marginLeft: "2rem" }}>DRINKS</h2>
@@ -30,7 +22,7 @@ const Drinks = ({ modal }) => {
 
               <img
                 className={classes.imgDrinks}
-                src={`https://food-ordering-app-api.onrender.com/image/drinks/${drink.id}.jpeg`}
+                src={`/menu/drinks/${drink.id}.jpeg`}
                 alt={drink.title}
               />
             </div>

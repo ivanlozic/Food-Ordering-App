@@ -1,24 +1,10 @@
 import classes from "./Pasta.module.css";
-import { useEffect, useState } from "react";
+
+import pastaList from "../../data/pasta.json";
+
 import React from "react";
 
 const Pasta = ({ modal }) => {
-  const [pastaList, setPastaList] = useState([]);
-
-  useEffect(() => {
-    async function fetchPasta() {
-      const response = await fetch(
-        "https://food-ordering-app-api.onrender.com/api/pasta"
-      );
-
-      const pastas = await response.json();
-
-      return pastas;
-    }
-
-    fetchPasta().then((data) => setPastaList(data));
-  }, []);
-
   return (
     <div>
       <h2 style={{ marginLeft: "2rem" }}>PASTA MEAT</h2>
@@ -38,7 +24,7 @@ const Pasta = ({ modal }) => {
 
               <img
                 className={classes.img}
-                src={`https://food-ordering-app-api.onrender.com/image/pasta/${pasta.id}.jpeg`}
+                src={`/menu/pasta/${pasta.id}.jpeg`}
                 alt={pasta.title}
               />
             </div>

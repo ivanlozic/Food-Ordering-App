@@ -1,0 +1,30 @@
+[
+    {
+      "title": "Coca Cola 0.33l",
+      "description": "",
+      "price": 150,
+      "id":22,
+      "type": "drinks"
+    },
+    {
+      "title": "Fanta 0.33l",
+      "description": "",
+      "price": 150,
+      "id":23,
+      "type": "drinks"
+    },
+    {
+      "title": "Next Joy Multivitamin",
+      "description": "",
+      "price": 160,
+      "id":24,
+      "type": "drinks"
+    },
+    {
+      "title": "Rosa 0.5l",
+      "description": "",
+      "price": 110,
+      "id":25,
+      "type": "drinks"
+    }
+  ]

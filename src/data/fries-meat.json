@@ -1,0 +1,16 @@
+[
+  {
+    "title": "Kiki Chicken",
+    "description": "Grilovano belo meso sa pomfritom u sosu od kikirikija",
+    "price": 560,
+    "id": 11,
+    "type": "fries-meat"
+  },
+  {
+    "title": "Batak",
+    "description": "Grilovani pileći batak sa pomfritom u BBQ sosu",
+    "price": 560,
+    "id": 12,
+    "type": "fries-meat"
+  }
+]

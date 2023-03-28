@@ -1,24 +1,8 @@
 import classes from "./Pasta.module.css";
-import { useEffect, useState } from "react";
 import React from "react";
+import popcornList from "../../data/popcorn.json";
 
 const Popcorn = ({ modal }) => {
-  const [popcornList, setPopcornList] = useState([]);
-
-  useEffect(() => {
-    async function fetchPasta() {
-      const response = await fetch(
-        "https://food-ordering-app-api.onrender.com/api/popcorn"
-      );
-
-      const popcorn = await response.json();
-
-      return popcorn;
-    }
-
-    fetchPasta().then((data) => setPopcornList(data));
-  }, []);
-
   return (
     <div id="popcorn">
       <h2 style={{ marginLeft: "2rem" }}>POPCORN</h2>
@@ -38,7 +22,7 @@ const Popcorn = ({ modal }) => {
 
               <img
                 className={classes.img}
-                src={`https://food-ordering-app-api.onrender.com/image/popcorn/${popcorn.id}.jpeg`}
+                src={`/menu/popcorn/${popcorn.id}.jpeg`}
                 alt={popcorn.title}
               />
             </div>
