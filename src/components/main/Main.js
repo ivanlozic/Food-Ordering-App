@@ -87,7 +87,7 @@ const Main = () => {
             <div className={classes.container}>
               <img
                 className={classes.imgModal}
-                src={`https://food-ordering-app-api.onrender.com/image/${selectedItem.type}/${selectedItem.id}.jpeg`}
+                src={`menu/${selectedItem.type}/${selectedItem.id}.jpeg`}
                 alt={selectedItem.title}
               />
 
