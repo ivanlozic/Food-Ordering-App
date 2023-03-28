@@ -82,7 +82,7 @@ function SideModal(props) {
                 <div className="li-box_description">
                   <img
                     className="side-modal-img"
-                    src={`https://food-ordering-app-api.onrender.com/image/${item.type}/${item.id}.jpeg`}
+                    src={`menu/${item.type}/${item.id}.jpeg`}
                     alt={item.title}
                   />
                   <div>
