@@ -162,7 +162,6 @@ function CheckoutPage() {
         </div>
       </div>
 
-      <Info />
       <BackToTopButton />
 
       <div className={classes.container}>
