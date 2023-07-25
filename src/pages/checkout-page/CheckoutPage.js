@@ -11,7 +11,6 @@ import { useNavigate } from 'react-router-dom'
 import classes from './CheckoutPage.module.css'
 import BackToTopButton from '../../components/buttons/back-to-top-button/BackToTopButton'
 import React from 'react'
-import Info from '../../components/info/Info'
 
 function CheckoutPage() {
   const dispatch = useDispatch()
