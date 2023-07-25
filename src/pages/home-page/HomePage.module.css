@@ -126,7 +126,6 @@
 }
 
 @media (max-width: 700px) {
-
   .orderBox {
     flex-direction: column;
     margin: 0 auto;
@@ -160,7 +159,7 @@
   .Modal {
     font-size: 14px;
   }
-  .totalAmount  {
+  .totalAmount {
     display: flex;
     flex-direction: column;
     margin-top: 5px;
@@ -174,10 +173,9 @@
     padding-left: 0;
   }
 
-
-.info h2{
-  width: 99%;
-}
+  .info h2 {
+    width: 99%;
+  }
   .imgModal {
     height: 200px;
   }

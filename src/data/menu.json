@@ -1,0 +1,184 @@
+[
+  {
+    "title": "Cheeseburger",
+    "description": "Burger meso, kačkavalj, zelena salata, karamelizovani luk, burger sos",
+    "price": 490,
+    "id": 13,
+    "type": "burgers"
+  },
+  {
+    "title": "BBQ Burger",
+    "description": "Grilovano dimljeno pileće meso sa sirom, pavlaka - senf sos, zelena salata, karamelizovani luk, BBQ sos",
+    "price": 530,
+    "id": 14,
+    "type": "burgers"
+  },
+  {
+    "title": "Double Cheeseburger",
+    "description": "Burger meso, kačkavalj, zelena salata, karamelizovani luk, burger sos",
+    "price": 650,
+    "id": 15,
+    "type": "burgers"
+  },
+  {
+    "title": "Spicz Burger",
+    "description": "Burger meso, kačkavalj, ljuti BBQ, ljuti cheddar sos,karamelizovani luk, zelena salata",
+    "price": 530,
+    "id": 16,
+    "type": "burgers"
+  },
+  {
+    "title": "Red dog",
+    "description": "Grilovane dimljene kobasice, pavlaka - senf sos, karamelizovani luk, cheddar sos",
+    "price": 540,
+    "id": 17,
+    "type": "dogs"
+  },
+  {
+    "title": "White dog",
+    "description": "Grilovano belo meso sa sirom, pavlaka - feta sos, zelena salata, honey mustard sos",
+    "price": 540,
+    "id": 18,
+    "type": "dogs"
+  },
+  {
+    "title": "Pop dog",
+    "description": "Pohovane kuglice belog mesa, pavlaka - feta sos, zelena salata, domaći sos od paradajza",
+    "price": 540,
+    "id": 19,
+    "type": "dogs"
+  },
+  {
+    "title": "Coca Cola 0.33l",
+    "description": "",
+    "price": 150,
+    "id": 22,
+    "type": "drinks"
+  },
+  {
+    "title": "Fanta 0.33l",
+    "description": "",
+    "price": 150,
+    "id": 23,
+    "type": "drinks"
+  },
+  {
+    "title": "Next Joy Multivitamin",
+    "description": "",
+    "price": 160,
+    "id": 24,
+    "type": "drinks"
+  },
+  {
+    "title": "Rosa 0.5l",
+    "description": "",
+    "price": 110,
+    "id": 25,
+    "type": "drinks"
+  },
+  {
+    "title": "Kiki Chicken",
+    "description": "Grilovano belo meso sa pomfritom u sosu od kikirikija",
+    "price": 560,
+    "id": 11,
+    "type": "fries-meat"
+  },
+  {
+    "title": "Batak",
+    "description": "Grilovani pileći batak sa pomfritom u BBQ sosu",
+    "price": 560,
+    "id": 12,
+    "type": "fries-meat"
+  },
+  {
+    "title": "Pomfrit porcija",
+    "description": "",
+    "price": 240,
+    "id": 20,
+    "type": "ostalo"
+  },
+  {
+    "title": "Burger lepinja",
+    "description": "",
+    "price": 70,
+    "id": 21,
+    "type": "ostalo"
+  },
+  {
+    "title": "Tagli malo pakovanje",
+    "description": "Grilovano belo meso u pasti sa pikantno - slatko - kiselim sosom",
+    "price": 450,
+    "id": 0,
+    "type": "pasta"
+  },
+  {
+    "title": "Tagli veliko pakovanje",
+    "description": "Grilovano belo meso u pasti sa pikantno - slatko - kiselim sosom",
+    "price": 570,
+    "id": 1,
+    "type": "pasta"
+  },
+  {
+    "title": "Pene malo pakovanje",
+    "description": "Grilovano belo meso u pasti sa kremastim sosom od 4 vrste sira",
+    "price": 470,
+    "id": 2,
+    "type": "pasta"
+  },
+  {
+    "title": "Pene veliko pakovanje",
+    "description": "Grilovano belo meso u pasti sa kremastim sosom od 4 vrste sira",
+    "price": 590,
+    "id": 3,
+    "type": "pasta"
+  },
+  {
+    "title": "Carbo",
+    "description": "Grilovano dimljeno pileće meso u pasti sa carbonara sosom i sirom",
+    "price": 620,
+    "id": 4,
+    "type": "pasta"
+  },
+  {
+    "title": "Amatri Chicken",
+    "description": "Grilovano belo meso na karamelizovanom luku u pasti sa paradajz sosom i parmezanom",
+    "price": 590,
+    "id": 5,
+    "type": "pasta"
+  },
+  {
+    "title": "Fosi",
+    "description": "Grilovano belo meso u pasti sa sosom sa grilovanim povrćem",
+    "price": 590,
+    "id": 6,
+    "type": "pasta"
+  },
+  {
+    "title": "Popcorn Classic malo pakovanje",
+    "description": "Pohovane kuglice belog mesa sa pomfritom, 1 umak",
+    "price": 450,
+    "id": 7,
+    "type": "popcorn"
+  },
+  {
+    "title": "Popcorn Classic veliko pakovanje",
+    "description": "Pohovane kuglice belog mesa sa pomfritom, 2 umaka",
+    "price": 560,
+    "id": 8,
+    "type": "popcorn"
+  },
+  {
+    "title": "Popcorn Cheese",
+    "description": "Mix pohovanih kuglica i pohovanog sira sa pomfritom, 2 umaka po izboru",
+    "price": 560,
+    "id": 9,
+    "type": "popcorn"
+  },
+  {
+    "title": "Popcorn Cheese Max",
+    "description": "Pohovane kuglice sira sa pomfritom, 2 umak sosa po izboru",
+    "price": 560,
+    "id": 10,
+    "type": "popcorn"
+  }
+]

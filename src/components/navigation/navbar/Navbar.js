@@ -1,10 +1,12 @@
 import classes from "./Navbar.module.css";
 import { useSelector } from "react-redux";
 import { useState } from "react";
-import Cart from "./Cart";
-import SideModal from "./SideModal";
-import logo from "../../assets/images/logo.jpg";
+import Cart from '../cart/Cart'
+import SideModal from "../side-modal/SideModal";
+import logo from "../../../assets/images/logo.jpg";
 import React from "react";
+import Info from "../../info/Info";
+
 const Navbar = () => {
   const cart = useSelector((state) => state.cart);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -42,7 +44,7 @@ const Navbar = () => {
           <a href="#popcorn">Popcorn</a>
         </li>
         <li className={classes.li}>
-          <a href="#fries">Fries meat</a>
+          <a href="#fries-meat">Fries meat</a>
         </li>
         <li className={classes.li}>
           <a href="#burgers">Burgers</a>
@@ -57,6 +59,9 @@ const Navbar = () => {
           <a href="#drinks">Drinks</a>
         </li>
       </ul>
+
+
+      <Info />
     </div>
   );
 };

@@ -116,9 +116,9 @@ function Info() {
               src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11235.171302957104!2d19.836434!3d45.251982!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x475b111906687591%3A0xfc32ea5e3421ca3a!2sChicken%20Chill!5e0!3m2!1ssr!2srs!4v1677652304537!5m2!1ssr!2srs"
               width="100%"
               height="450"
-              allowfullscreen=""
+              allowFullScreen=""
               loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade"
+              referrerPolicy="no-referrer-when-downgrade"
               title="a"
               className={classes.iframe}
             ></iframe>

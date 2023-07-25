@@ -1,13 +1,12 @@
-import classes from "./Pasta.module.css";
 import React from "react";
-import friesMeatList from "../../data/fries-meat.json";
+import classes from "./MenuItem.module.css"
 
-const FriesMeat = ({ modal }) => {
+const MenuItem = ({ items, itemType, modal }) => {
   return (
-    <div id="fries">
-      <h2 style={{ marginLeft: "2rem" }}>FRIES MEAT</h2>
+    <div id={itemType}>
+      <h2 style={{ marginLeft: "2rem" }}>{itemType.toUpperCase()}</h2>
       <div className={classes.box}>
-        {friesMeatList.map((item) => {
+        {items.map((item) => {
           return (
             <div
               key={item.id}
@@ -22,7 +21,7 @@ const FriesMeat = ({ modal }) => {
 
               <img
                 className={classes.img}
-                src={`/menu/fries-meat/${item.id}.jpeg`}
+                src={`/menu/${itemType.toLowerCase()}/${item.id}.jpeg`}
                 alt={item.title}
               />
             </div>
@@ -33,4 +32,4 @@ const FriesMeat = ({ modal }) => {
   );
 };
 
-export default FriesMeat;
+export default MenuItem;

@@ -1,0 +1,117 @@
+.box {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px;
+  }
+  
+  .container {
+    display: flex;
+    background-color: white;
+    justify-content: space-around;
+    align-items: center;
+    width: 30%;
+    height: 200px;
+    padding: 17px 10px;
+    border-radius: 10px;
+    box-shadow: 3px 3px 10px gray;
+    cursor: pointer;
+    transition: all 1s;
+    margin-top: 20px;
+    margin: 10px;
+  }
+  
+  .container:hover {
+    transform: scale(1.05);
+  }
+  
+  .info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 90%;
+    height: 100%;
+    padding-right: 10px;
+  }
+  
+  .info h3 {
+    margin-left: 15px;
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+  
+  .price {
+    color: green;
+    margin-left: 15px;
+    font-weight: bold;
+  }
+  
+  .img {
+    width: 170px;
+    height: 170px;
+    margin-top: 10px;
+    border-radius: 10px;
+  }
+  
+  .imgDrinks {
+    width: 200px;
+    height: 120px;
+  }
+  
+  @media (max-width: 1246px) {
+    .box {
+      padding: 5px;
+    }
+  
+    .container {
+      width: 46%;
+      height: 215px;
+      margin: 5px;
+    }
+  }
+  
+  @media (max-width: 810px) {
+    .box {
+      padding: 5px;
+    }
+  
+    .container {
+      width: 95%;
+      height: fit-content;
+      margin: 5px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .box{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .container {
+      width: 80%;
+      height: 230px;
+      margin: 5px;
+      margin-top: 20px;
+    }
+  }
+  
+  @media (max-width: 410px) {
+    .container {
+      width: 80%;
+      height: 300px;
+      margin: 5px;
+      margin-top: 20px;
+      padding-bottom: 35px;
+      flex-direction: column;
+    }
+    .info {
+      align-items: center;
+    }
+  
+    .img {
+      width: 180px;
+      height: 150px;
+      margin: 0 auto;
+    }
+  }
+  
