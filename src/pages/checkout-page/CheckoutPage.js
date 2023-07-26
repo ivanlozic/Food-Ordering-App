@@ -9,14 +9,25 @@ import {
 import logo from '../../assets/images/logo.jpg'
 import { useNavigate } from 'react-router-dom'
 import classes from './CheckoutPage.module.css'
-import BackToTopButton from '../../components/buttons/back-to-top-button/BackToTopButton'
+import { BackToTopButton } from '../../components/buttons/back-to-top-button'
 import React from 'react'
+import { DecreaseButton } from '../../components/buttons/decrease-button'
+import { IncreaseButton } from '../../components/buttons/increase-button'
+import { SubmitButton } from '../../components/buttons/submit-button'
 
 function CheckoutPage() {
   const dispatch = useDispatch()
   const cart = useSelector((state) => state.cart)
   const [totalAmount, setTotalAmount] = useState(0)
   const [quantity, setQuantity] = useState(0)
+  const [values, setValues] = useState({
+    FirstName: '',
+    LastName: '',
+    Address: '',
+    Email: '',
+    MobilePhone: ''
+  })
+  const [errors, setErrors] = useState({})
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -24,7 +35,6 @@ function CheckoutPage() {
       cart.cartItems.reduce((prev, next) => prev + next.totalAmount, 0)
     )
     setQuantity(cart.cartItems.reduce((prev, next) => prev + next.quantity, 0))
-
     if (cart.cartItems.length < 1) {
       alert('Must have some items in cart!')
       navigate('/')
@@ -34,6 +44,7 @@ function CheckoutPage() {
   function removeItemFromCart(id) {
     dispatch(removeFromCart(id))
   }
+
   function increaseItemFromCart(id) {
     const existingItem = cart.cartItems.find((item) => item.id === id)
     const updatedItem = {
@@ -43,6 +54,7 @@ function CheckoutPage() {
     }
     dispatch(updateCartItem(updatedItem))
   }
+
   function decreaseItemFromCart(id) {
     const existingItem = cart.cartItems.find((item) => item.id === id)
     if (existingItem.quantity > 1) {
@@ -56,18 +68,6 @@ function CheckoutPage() {
       dispatch(removeFromCart(id))
     }
   }
-
-  /*FORM VALIDATION*/
-
-  const [values, setValues] = useState({
-    FirstName: '',
-    LastName: '',
-    Address: '',
-    Email: '',
-    MobilePhone: ''
-  })
-
-  const [errors, setErrors] = useState({})
 
   const handleChange = (event) => {
     const { name, value } = event.target
@@ -151,6 +151,7 @@ function CheckoutPage() {
   function backToMenuHandler() {
     navigate('/')
   }
+
   return (
     <div className={classes.body}>
       <div className={classes.nav}>
@@ -230,9 +231,9 @@ function CheckoutPage() {
 
             <p>RSD {totalAmount}.00</p>
 
-            <button type='' onClick={handleSubmit}>
+            <SubmitButton type='submit' onClick={handleSubmit}>
               Submit
-            </button>
+            </SubmitButton>
           </div>
         </form>
 
@@ -259,15 +260,14 @@ function CheckoutPage() {
                       </div>
                     </div>
                     <div className='quantity'>
-                      <button onClick={() => decreaseItemFromCart(item.id)}>
-                        {' '}
-                        -{' '}
-                      </button>{' '}
-                      {item.quantity}{' '}
-                      <button onClick={() => increaseItemFromCart(item.id)}>
-                        {' '}
-                        +{' '}
-                      </button>
+                      <DecreaseButton
+                        onClick={() => decreaseItemFromCart(item.id)}
+                        disabled={item.quantity === 1}
+                      />
+                      {item.quantity}
+                      <IncreaseButton
+                        onClick={() => increaseItemFromCart(item.id)}
+                      />
                       <div>
                         <FaTrashAlt
                           style={{ color: 'green' }}

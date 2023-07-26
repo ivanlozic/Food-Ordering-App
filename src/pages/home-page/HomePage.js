@@ -1,34 +1,20 @@
-import BackToTopButton from '../../components/buttons/back-to-top-button/BackToTopButton'
-import Navbar from '../../components/navigation/navbar/Navbar'
+import { BackToTopButton } from '../../components/buttons/back-to-top-button/index'
+import { Navbar } from '../../components/navigation/navbar'
 import React, { useState } from 'react'
 import Modal from 'react-modal'
 import { useDispatch } from 'react-redux'
 import { addToCart } from '../../redux-store/cart'
-import MenuItem from '../../components/menu/ment-item/MenuItem'
+import { MenuItem } from '../../components/menu/ment-item'
 import menuData from '../../data/menu.json'
 import classes from './HomePage.module.css'
+import { CloseButton } from '../../components/buttons/close-button'
+import { DecreaseButton } from '../../components/buttons/decrease-button'
+import { IncreaseButton } from '../../components/buttons/increase-button'
 
 const customStyles = {
   overlay: {
     backgroundColor: 'rgba(0, 0, 0, 0.7)'
   }
-}
-const pastaList = menuData.filter((item) => item.type === 'pasta')
-const popcornList = menuData.filter((item) => item.type === 'popcorn')
-const friesMeatList = menuData.filter((item) => item.type === 'fries-meat')
-const burgersList = menuData.filter((item) => item.type === 'burgers')
-const dogsList = menuData.filter((item) => item.type === 'dogs')
-const ostaloList = menuData.filter((item) => item.type === 'ostalo')
-const drinksList = menuData.filter((item) => item.type === 'drinks')
-
-const menuDataByType = {
-  pasta: pastaList,
-  popcorn: popcornList,
-  'fries-meat': friesMeatList,
-  burgers: burgersList,
-  dogs: dogsList,
-  ostalo: ostaloList,
-  drinks: drinksList
 }
 
 const HomePage = () => {
@@ -37,6 +23,20 @@ const HomePage = () => {
   const [selectedItem, setSelectedItem] = useState(null)
   const [totalPriceValue, setTotalPriceValue] = useState(0)
   const [currentQuantity, setCurrentQuantity] = useState(1)
+
+  const getMenuDataByType = (type) => {
+    return menuData.filter((item) => item.type === type)
+  }
+
+  const menuDataByType = {
+    pasta: getMenuDataByType('pasta'),
+    popcorn: getMenuDataByType('popcorn'),
+    'fries-meat': getMenuDataByType('fries-meat'),
+    burgers: getMenuDataByType('burgers'),
+    dogs: getMenuDataByType('dogs'),
+    ostalo: getMenuDataByType('ostalo'),
+    drinks: getMenuDataByType('drinks')
+  }
 
   function openModal(pasta) {
     setSelectedItem(pasta)
@@ -72,20 +72,25 @@ const HomePage = () => {
     setModalIsOpen(false)
     setCurrentQuantity(1)
   }
-
-  const menuComponents = Object.keys(menuDataByType).map((type) => {
-    const itemList = menuDataByType[type]
-    return itemList.length > 0 ? (
-      <MenuItem items={itemList} itemType={type} modal={openModal} key={type} />
-    ) : null
-  })
-
+  const generateMenuComponents = () => {
+    return Object.keys(menuDataByType).map((type) => {
+      const itemList = menuDataByType[type]
+      return itemList.length > 0 ? (
+        <MenuItem
+          items={itemList}
+          itemType={type}
+          modal={openModal}
+          key={type}
+        />
+      ) : null
+    })
+  }
   return (
     <div>
       <Navbar />
 
       <div className={classes.Main}>
-        {menuComponents}
+        {generateMenuComponents()}
         <Modal
           isOpen={modalIsOpen}
           onRequestClose={() => {
@@ -107,16 +112,13 @@ const HomePage = () => {
                   alt={selectedItem.title}
                 />
 
-                <button
-                  className={classes.closeModalBtn}
+                <CloseButton
                   onClick={() => {
                     setSelectedItem(null)
                     setModalIsOpen(false)
                     setCurrentQuantity(1)
                   }}
-                >
-                  X
-                </button>
+                />
               </div>
 
               <div className={classes.info}>
@@ -127,14 +129,12 @@ const HomePage = () => {
 
               <div className={classes.orderBox}>
                 <div className={classes.quantity}>
-                  <button
-                    disabled={currentQuantity === 1}
+                  <DecreaseButton
                     onClick={decreaseQuantity}
-                  >
-                    -
-                  </button>
+                    disabled={currentQuantity === 1}
+                  />
                   <p>{currentQuantity}</p>
-                  <button onClick={increaseQuantity}>+</button>
+                  <IncreaseButton onClick={increaseQuantity} />
                 </div>
 
                 <div onClick={addItemToCart} className={classes.totalAmount}>

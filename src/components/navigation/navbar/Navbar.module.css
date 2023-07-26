@@ -26,6 +26,9 @@
 .li:hover {
   color: red;
 }
+a {
+  text-decoration: none;
+}
 
 
 .headings {

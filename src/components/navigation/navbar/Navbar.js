@@ -1,8 +1,8 @@
 import classes from './Navbar.module.css'
 import { useSelector } from 'react-redux'
 import { useState } from 'react'
-import Cart from '../cart/Cart'
-import SideModal from '../side-modal/SideModal'
+import { Cart } from '../cart'
+import { SideModal } from '../side-modal'
 import logo from '../../../assets/images/logo.jpg'
 import React from 'react'
 

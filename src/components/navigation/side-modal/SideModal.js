@@ -7,6 +7,8 @@ import { useDispatch } from 'react-redux'
 import { removeFromCart } from '../../../redux-store/cart'
 import { updateCartItem } from '../../../redux-store/cart'
 import React from 'react'
+import { DecreaseButton } from '../../buttons/decrease-button'
+import { IncreaseButton } from '../../buttons/increase-button'
 
 function SideModal(props) {
   const dispatch = useDispatch()
@@ -91,15 +93,14 @@ function SideModal(props) {
                   </div>
                 </div>
                 <div className='quantity'>
-                  <button onClick={() => decreaseItemFromCart(item.id)}>
-                    {' '}
-                    -{' '}
-                  </button>{' '}
-                  {item.quantity}{' '}
-                  <button onClick={() => increaseItemFromCart(item.id)}>
-                    {' '}
-                    +{' '}
-                  </button>
+                  <DecreaseButton
+                    onClick={() => decreaseItemFromCart(item.id)}
+                    disabled={item.quantity === 1}
+                  />
+                  {item.quantity}
+                  <IncreaseButton
+                    onClick={() => increaseItemFromCart(item.id)}
+                  />
                   <div>
                     <FaTrashAlt
                       style={{ color: 'green' }}
