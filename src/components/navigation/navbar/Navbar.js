@@ -5,10 +5,13 @@ import { Cart } from '../cart'
 import { SideModal } from '../side-modal'
 import logo from '../../../assets/images/logo.jpg'
 import React from 'react'
+import LoginForm from '../login-form/LoginForm'
+import { Link } from 'react-router-dom'
 
 const Navbar = () => {
   const cart = useSelector((state) => state.cart)
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [showLoginForm, setShowLoginForm] = useState(false)
 
   const handleCartClick = () => {
     setIsModalOpen(true)
@@ -16,6 +19,10 @@ const Navbar = () => {
 
   const handleCloseModal = () => {
     setIsModalOpen(false)
+  }
+
+  const handleLoginClick = () => {
+    setShowLoginForm(!showLoginForm)
   }
 
   return (
@@ -57,6 +64,16 @@ const Navbar = () => {
           <a href='#drinks'>Drinks</a>
         </li>
       </ul>
+
+      <div className={classes.authButtons}>
+        <button onClick={handleLoginClick}>Log In</button>
+
+        <Link to='/createAccount'>
+          <button>Sign Up</button>
+        </Link>
+      </div>
+
+      {showLoginForm && <LoginForm onClose={handleLoginClick} />}
     </div>
   )
 }
