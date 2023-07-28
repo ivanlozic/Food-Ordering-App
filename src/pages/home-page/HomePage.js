@@ -23,6 +23,24 @@ const HomePage = () => {
   const [selectedItem, setSelectedItem] = useState(null)
   const [totalPriceValue, setTotalPriceValue] = useState(0)
   const [currentQuantity, setCurrentQuantity] = useState(1)
+  
+  /*
+  const [menu, setMenu] = useState([])
+
+  useEffect(() => {
+    async function logMenu() {
+      try {
+        const response = await fetch('http://localhost:5000/api/menu')
+        const menuData = await response.json()
+        setMenu(menuData)
+      } catch (error) {
+        console.error('Error fetching menu:', error)
+      }
+    }
+    logMenu()
+  }, [])
+
+  */
 
   const getMenuDataByType = (type) => {
     return menuData.filter((item) => item.type === type)

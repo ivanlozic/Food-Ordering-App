@@ -117,6 +117,55 @@ function CheckoutPage() {
     }
   }
 
+  /*
+
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    const validationErrors = validate()
+    if (Object.keys(validationErrors).length === 0) {
+      const cartData = [...cart.cartItems]
+      const data = {
+        FirstName: values.FirstName,
+        LastName: values.LastName,
+        Address: values.Address,
+        Email: values.Email,
+        MobilePhone: values.MobilePhone,
+        order: cartData,
+        totalAmount: totalAmount
+      }
+
+      fetch('http://localhost:5000/api/orders', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log('Response from server:', data)
+          dispatch(removeAllItems())
+          setValues({
+            FirstName: '',
+            LastName: '',
+            Address: '',
+            Email: '',
+            MobilePhone: ''
+          })
+          alert('Successfully ordered')
+          navigate('/')
+        })
+        .catch((error) => {
+          console.error('Error:', error)
+        })
+    } else {
+      setErrors(validationErrors)
+    }
+  }
+
+  */
+
+
   const validate = () => {
     let errors = {}
     if (!values.FirstName) {
