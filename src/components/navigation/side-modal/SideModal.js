@@ -2,21 +2,25 @@ import { useEffect, useState, useRef } from 'react'
 import { useSelector } from 'react-redux'
 import './SideModal.css'
 import { FaTrashAlt } from 'react-icons/fa'
-import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { removeFromCart } from '../../../redux-store/cart'
 import { updateCartItem } from '../../../redux-store/cart'
 import React from 'react'
 import { DecreaseButton } from '../../buttons/decrease-button'
 import { IncreaseButton } from '../../buttons/increase-button'
+import { useNavigate } from "react-router-dom";
+
 
 function SideModal(props) {
   const dispatch = useDispatch()
   const cart = useSelector((state) => state.cart)
+  const user = useSelector((state) => state.user)
+  const [showLoginPrompt, setShowLoginPrompt] = useState(false)
   const [quantity, setQuantity] = useState(0)
   const [totalAmount, setTotalAmount] = useState(0)
   const modalRef = useRef(null)
 
+  const navigate = useNavigate();
   useEffect(() => {
     if (cart.cartItems.length > 0) {
       setQuantity(
@@ -67,6 +71,15 @@ function SideModal(props) {
       dispatch(removeFromCart(id))
     }
   }
+
+  const handleCheckoutClick = () => {
+    if (user.isLoggedIn) {
+      navigate('/checkout')
+    } else {
+      setShowLoginPrompt(true)
+    }
+  }
+
   return (
     <div className={props.isOpen ? 'modal-overlay open' : 'modal-container'}>
       <div
@@ -112,16 +125,20 @@ function SideModal(props) {
             ))}
         </ul>
 
-        <Link to='/checkout'>
-          <div className='checkoutCart'>
-            <div>
-              <div className='number'>{quantity}</div>
-              <p>Go to checkout</p>
-            </div>
-
-            <p>RSD {totalAmount}.00</p>
+        <div className='checkoutCart' onClick={handleCheckoutClick}>
+          <div>
+            <div className='number'>{quantity}</div>
+            <p>Go to checkout</p>
           </div>
-        </Link>
+          <p>RSD {totalAmount}.00</p>
+        </div>
+
+        {showLoginPrompt && (
+          <div className='loginPrompt'>
+            <p>Please log in to proceed to checkout.</p>
+            <button onClick={() => setShowLoginPrompt(false)}>OK</button>
+          </div>
+        )}
       </div>
     </div>
   )

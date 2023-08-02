@@ -1,0 +1,32 @@
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.reservationList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.reservationItem {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.reservationItem h3 {
+  margin: 0;
+}
+
+.reservationItem p {
+  margin: 5px 0;
+}
+
+.noReservations {
+  font-style: italic;
+  text-align: center;
+  color: #999;
+}

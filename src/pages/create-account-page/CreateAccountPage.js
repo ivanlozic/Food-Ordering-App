@@ -1,20 +1,19 @@
-import React, { useState } from 'react';
-import styles from './CreateAccountPage.module.css'; 
+import React, { useState } from "react";
+import styles from "./CreateAccountPage.module.css";
 
 const CreateAccountPage = () => {
-  const [name, setName] = useState('');
-  const [surname, setSurname] = useState('');
-  const [address, setAddress] = useState('');
-  const [email, setEmail] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
+  const [name, setName] = useState("");
+  const [surname, setSurname] = useState("");
+  const [address, setAddress] = useState("");
+  const [email, setEmail] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
 
   const handleSubmit = (event) => {
     event.preventDefault();
-   
   };
 
   return (
-    <div className={styles.container}> 
+    <div className={styles.container}>
       <h1>Create Account</h1>
       <form onSubmit={handleSubmit}>
         <div className={styles.formGroup}>
@@ -34,7 +33,7 @@ const CreateAccountPage = () => {
             id="surname"
             value={surname}
             onChange={(e) => setSurname(e.target.value)}
-            className={styles.input} 
+            className={styles.input}
           />
         </div>
         <div className={styles.formGroup}>
@@ -44,7 +43,7 @@ const CreateAccountPage = () => {
             id="address"
             value={address}
             onChange={(e) => setAddress(e.target.value)}
-            className={styles.input} 
+            className={styles.input}
           />
         </div>
         <div className={styles.formGroup}>
@@ -54,7 +53,7 @@ const CreateAccountPage = () => {
             id="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className={styles.input} 
+            className={styles.input}
           />
         </div>
         <div className={styles.formGroup}>
@@ -64,10 +63,12 @@ const CreateAccountPage = () => {
             id="phoneNumber"
             value={phoneNumber}
             onChange={(e) => setPhoneNumber(e.target.value)}
-            className={styles.input} 
+            className={styles.input}
           />
         </div>
-        <button type="submit" className={styles.button}>Create Account</button> 
+        <button type="submit" className={styles.button}>
+          Create Account
+        </button>
       </form>
     </div>
   );

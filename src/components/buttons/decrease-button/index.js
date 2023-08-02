@@ -1,3 +1,3 @@
-import DecreaseButton from './DecreaseButton'
+import DecreaseButton from "./DecreaseButton";
 
-export { DecreaseButton }
+export { DecreaseButton };

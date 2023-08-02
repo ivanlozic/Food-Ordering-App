@@ -1,3 +1,3 @@
-import BackToTopButton from './BackToTopButton'
+import BackToTopButton from "./BackToTopButton";
 
-export { BackToTopButton }
+export { BackToTopButton };

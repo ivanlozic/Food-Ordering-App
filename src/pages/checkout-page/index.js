@@ -1,3 +1,3 @@
-import CheckoutPage from './CheckoutPage'
+import CheckoutPage from "./CheckoutPage";
 
-export { CheckoutPage }
+export { CheckoutPage };

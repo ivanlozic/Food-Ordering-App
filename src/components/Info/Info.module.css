@@ -13,7 +13,7 @@
   cursor: pointer;
 }
 
-.opening{
+.opening {
   display: flex;
   justify-content: space-between;
   width: 90%;
@@ -41,7 +41,6 @@
 .Modal::-webkit-scrollbar-track {
   background: #f1f1f1;
   border-radius: 10px;
-
 }
 
 .Modal::-webkit-scrollbar-thumb {
@@ -56,7 +55,6 @@
 .container {
   position: relative;
   border-radius: 10px;
-
 }
 
 .closeModalBtn {
@@ -70,12 +68,10 @@
   cursor: pointer;
 }
 
-.iframe{
-    border-top-right-radius: 10px;
-    border-top-left-radius: 10px;
+.iframe {
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
 }
-
-
 
 @media (max-width: 810px) {
   .Modal {
@@ -84,9 +80,6 @@
 }
 
 @media (max-width: 700px) {
-
-
-
   .closeModalBtn {
     position: absolute;
     right: 10px;
@@ -103,6 +96,4 @@
   .Modal {
     font-size: 14px;
   }
-
-
 }

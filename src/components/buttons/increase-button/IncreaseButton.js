@@ -1,5 +1,5 @@
-import React from 'react';
-import classes from './IncreaseButton.module.css';
+import React from "react";
+import classes from "./IncreaseButton.module.css";
 
 const IncreaseButton = ({ onClick }) => {
   return (

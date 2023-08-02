@@ -1,3 +1,3 @@
-import SideModal from './SideModal'
+import SideModal from "./SideModal";
 
-export { SideModal }
+export { SideModal };

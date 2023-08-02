@@ -1,3 +1,3 @@
-import IncreaseButton from './IncreaseButton'
+import IncreaseButton from "./IncreaseButton";
 
-export { IncreaseButton }
+export { IncreaseButton };

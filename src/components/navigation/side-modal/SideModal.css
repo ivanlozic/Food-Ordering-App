@@ -143,10 +143,10 @@ li {
   font-weight: 500;
 }
 
-.checkoutCart{
+.checkoutCart {
   position: absolute;
   bottom: 50px;
-  width:  85%;
+  width: 85%;
   height: 20px;
   background-color: green;
   color: white;
@@ -158,7 +158,7 @@ li {
   cursor: pointer;
   font-weight: 500;
 }
-.checkoutCart div{
+.checkoutCart div {
   display: flex;
   align-items: center;
 }
@@ -210,18 +210,50 @@ li {
   width: 30px;
 }
 
+.loginPrompt {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.loginPrompt p {
+  margin: 0 0 10px 0;
+}
+
+.loginPrompt button {
+  padding: 8px 16px;
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.loginPrompt button:hover {
+  background-color: #45a049;
+}
+
+
 @media (max-width: 810px) {
   .modal-container {
     width: 60%;
   }
- 
-    
-.checkoutCart {
-  width: 80%;
-  bottom: 50px;
-}
 
-  
+  .checkoutCart {
+    width: 80%;
+    bottom: 50px;
+  }
 }
 
 @media (max-width: 600px) {
@@ -258,13 +290,16 @@ li {
     margin-top: 10px;
   }
 
-      
-.checkoutCart {
-  width: 80%;
-  bottom: 70px;
+  .checkoutCart {
+    width: 80%;
+    bottom: 70px;
+
+    button {
+      background-color: transparent;
+    }
+  }
 }
 
-}
 
 @media (max-width: 450px) {
   .quantity {

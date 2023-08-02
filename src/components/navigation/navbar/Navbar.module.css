@@ -64,3 +64,46 @@ a {
 .authButtons button:hover {
   background-color: #0056b3;
 }
+
+.profileButton {
+  position: relative;
+}
+
+.profilePicture {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+.dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 8px;
+  display: none;
+}
+
+.dropdown li {
+  list-style: none;
+}
+
+.dropdown a,
+.dropdown button {
+  display: block;
+  padding: 8px;
+  text-decoration: none;
+  color: #333;
+}
+
+.dropdown a:hover,
+.dropdown button:hover {
+  background-color: #f3f3f3;
+}
+
+.profileButton:hover .dropdown {
+  display: block;
+}

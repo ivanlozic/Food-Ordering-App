@@ -1,5 +1,5 @@
 import React from "react";
-import classes from "./MenuItem.module.css"
+import classes from "./MenuItem.module.css";
 
 const MenuItem = ({ items, itemType, modal }) => {
   return (

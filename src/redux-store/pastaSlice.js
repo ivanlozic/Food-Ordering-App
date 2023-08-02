@@ -12,7 +12,9 @@ export const pastaSlice = createSlice({
       state.pastas.push(action.payload);
     },
     removePasta: (state, action) => {
-      state.pastas = state.pastas.filter((pasta) => pasta.id !== action.payload);
+      state.pastas = state.pastas.filter(
+        (pasta) => pasta.id !== action.payload,
+      );
     },
   },
 });

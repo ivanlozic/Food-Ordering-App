@@ -55,7 +55,7 @@ function Info() {
     }
 
     const hoursUntilClosing = Math.floor(
-      (closingTimeMinutes - currentTime) / 60
+      (closingTimeMinutes - currentTime) / 60,
     );
     const minutesUntilClosing = (closingTimeMinutes - currentTime) % 60;
 

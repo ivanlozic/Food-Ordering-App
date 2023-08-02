@@ -1,3 +1,3 @@
-import CreateAccountPage from './CreateAccountPage'
+import CreateAccountPage from "./CreateAccountPage";
 
-export { CreateAccountPage }
+export { CreateAccountPage };
