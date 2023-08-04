@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import classes from './myReservationsPage.module.css'
 
 const MyReservationsPage = () => {
-  const reservations = useState([])
+  const [reservations] = useState([])
 
   return (
     <div className={classes.container}>

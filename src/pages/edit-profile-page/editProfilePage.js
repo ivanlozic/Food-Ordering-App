@@ -6,7 +6,10 @@ const EditProfilePage = () => {
   const user = useSelector((state) => state.user)
   const [formData, setFormData] = useState({
     name: user.name,
-    email: user.email
+    surname: user.surname,
+    email: user.email,
+    password: user.password,
+    phone: user.phone
   })
 
   const handleChange = (e) => {
@@ -35,12 +38,42 @@ const EditProfilePage = () => {
           />
         </div>
         <div className={classes['form-group']}>
+          <label htmlFor='surname'>Surname:</label>
+          <input
+            type='text'
+            id='surname'
+            name='surname'
+            value={formData.surname}
+            onChange={handleChange}
+          />
+        </div>
+        <div className={classes['form-group']}>
           <label htmlFor='email'>Email:</label>
           <input
             type='email'
             id='email'
             name='email'
             value={formData.email}
+            onChange={handleChange}
+          />
+        </div>
+        <div className={classes['form-group']}>
+          <label htmlFor='password'>Password:</label>
+          <input
+            type='password'
+            id='password'
+            name='password'
+            value={formData.password}
+            onChange={handleChange}
+          />
+        </div>
+        <div className={classes['form-group']}>
+          <label htmlFor='phone'>Phone:</label>
+          <input
+            type='text'
+            id='phone'
+            name='phone'
+            value={formData.phone}
             onChange={handleChange}
           />
         </div>
