@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import styles from './CreateAccountPage.module.css'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
 
 const CreateAccountPage = () => {
   const [name, setName] = useState('')
@@ -31,6 +32,9 @@ const CreateAccountPage = () => {
   return (
     <div className={styles.container}>
       <h1>Create Account</h1>
+      <Link to='/' className={styles.backButton}>
+        Back to Home Page
+      </Link>
       <form onSubmit={handleSubmit}>
         <div className={styles.formGroup}>
           <label htmlFor='name'>Name:</label>

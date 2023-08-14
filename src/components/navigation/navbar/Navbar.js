@@ -7,14 +7,14 @@ import logo from '../../../assets/images/logo.jpg'
 import React from 'react'
 import LoginForm from '../login-form/LoginForm'
 import { Link } from 'react-router-dom'
-import { login, logout } from '../../../redux-store/authSlice'
+import { logout } from '../../../redux-store/authSlice'
 import profilePhoto from '../../../assets/images/user.png'
 
 const Navbar = () => {
   const cart = useSelector((state) => state.cart)
   const user = useSelector((state) => state.user)
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const [showLoginForm] = useState(false)
+  const [showLoginForm, setShowLoginForm] = useState(false)
   const dispatch = useDispatch()
   const handleCartClick = () => {
     setIsModalOpen(true)
@@ -25,7 +25,7 @@ const Navbar = () => {
   }
 
   const handleLoginClick = () => {
-    dispatch(login())
+    setShowLoginForm(true)
   }
 
   const handleLogout = () => {
@@ -106,7 +106,7 @@ const Navbar = () => {
         )}
       </div>
 
-      {showLoginForm && <LoginForm onClose={handleLoginClick} />}
+      {showLoginForm && <LoginForm onClose={() => setShowLoginForm(false)} />}
     </div>
   )
 }
