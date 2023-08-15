@@ -18,10 +18,10 @@ const LoginForm = ({ onClose }) => {
         password
       })
 
-      const { token } = response.data
+      const { token, id } = response.data
 
       if (token) {
-        dispatch(login({ token }))
+        dispatch(login({ token, id }))
         onClose()
       }
     } catch (error) {

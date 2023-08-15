@@ -5,6 +5,7 @@ import { CheckoutPage } from './pages/checkout-page'
 import { CreateAccountPage } from './pages/create-account-page'
 import { EditProfilePage } from './pages/edit-profile-page'
 import { MyReservationsPage } from './pages/my-reservation-page'
+import {  NotFoundPage } from './pages/404-not-found-page'
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path='createAccount' element={<CreateAccountPage />} />
         <Route path='editProfilePage' element={<EditProfilePage />} />
         <Route path='myReservationsPage' element={<MyReservationsPage />} />
+        <Route path='notFoundPage' element={<NotFoundPage />} />
       </Routes>
     </div>
   )

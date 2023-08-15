@@ -1,16 +1,35 @@
-import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import classes from './editProfilePage.module.css'
+import { fetchUser } from '../../redux-store/authSlice'
 
 const EditProfilePage = () => {
   const user = useSelector((state) => state.user)
   const [formData, setFormData] = useState({
-    name: user.name,
-    surname: user.surname,
-    email: user.email,
-    password: user.password,
-    phone: user.phone
-  })
+    name: '',
+    surname: '',
+    email: '',
+    password: '',
+    phone: ''
+  });
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    if (user.id) {
+      dispatch(fetchUser(user.id))
+    }
+  }, [dispatch, user])
+
+  useEffect(() => {
+    setFormData({
+      name: user.name || '',
+      surname: user.surname || '',
+      email: user.email || '',
+      password: user.password || '',
+      phone: user.phone || ''
+    });
+  }, [user]);
 
   const handleChange = (e) => {
     setFormData({

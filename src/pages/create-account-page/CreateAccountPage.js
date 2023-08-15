@@ -9,24 +9,37 @@ const CreateAccountPage = () => {
   const [email, setEmail] = useState('')
   const [phoneNumber, setPhoneNumber] = useState('')
   const [password, setPassword] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [passwordMatchError,setPasswordMatchError] = useState('');
 
   const handleSubmit = async (event) => {
     event.preventDefault()
+
+    if (password !== confirmPassword) {
+      setPasswordMatchError('Passwords do not match');
+      return;
+    }
+
 
     const userData = {
       name,
       surname,
       email,
       password,
+      confirmPassword,
       phoneNumber
     }
 
-    try {
-      const response = await axios.post('http://localhost:5000/users', userData)
-      console.log('User registered successfully:', response.data)
-    } catch (error) {
-      console.error('Error registering user:', error.message)
-    }
+  
+      try {
+        const response = await axios.post('http://localhost:5000/users', userData)
+        console.log('User registered successfully:', response.data)
+      } catch (error) {
+        console.error('Error registering user:', error.message)
+      }
+    
+
+  
   }
 
   return (
@@ -65,6 +78,17 @@ const CreateAccountPage = () => {
             onChange={(e) => setPassword(e.target.value)}
             className={styles.input}
           />
+        </div>
+        <div className={styles.formGroup}>
+          <label htmlFor="confirmPassword">Confirm Password:</label>
+          <input
+            type="password"
+            id="confirmPassword"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}      
+            className={styles.input}
+          />
+          {passwordMatchError && <p className={styles.errorMessage}>{passwordMatchError}</p>}
         </div>
         <div className={styles.formGroup}>
           <label htmlFor='email'>Email:</label>
