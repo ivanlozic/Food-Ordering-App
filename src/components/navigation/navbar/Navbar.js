@@ -43,70 +43,68 @@ const Navbar = () => {
           </div>
         </div>
 
-        {cart.cartItems.length > 0 && <Cart onClick={handleCartClick} />}
+        <ul className={classes.ul}>
+          <li className={classes.li}>
+            <a href='#pasta'>Pasta meat</a>
+          </li>
+          <li className={classes.li}>
+            <a href='#popcorn'>Popcorn</a>
+          </li>
+          <li className={classes.li}>
+            <a href='#fries-meat'>Fries meat</a>
+          </li>
+          <li className={classes.li}>
+            <a href='#burgers'>Burgers</a>
+          </li>
+          <li className={classes.li}>
+            <a href='#dogs'>Dogs</a>
+          </li>
+          <li className={classes.li}>
+            <a href='#other'>Other</a>
+          </li>
+          <li className={classes.li}>
+            <a href='#drinks'>Drinks</a>
+          </li>
+        </ul>
 
-        <SideModal isOpen={isModalOpen} onClose={handleCloseModal} />
-      </div>
-
-      <ul className={classes.ul}>
-        <li className={classes.li}>
-          <a href='#pasta'>Pasta meat</a>
-        </li>
-        <li className={classes.li}>
-          <a href='#popcorn'>Popcorn</a>
-        </li>
-        <li className={classes.li}>
-          <a href='#fries-meat'>Fries meat</a>
-        </li>
-        <li className={classes.li}>
-          <a href='#burgers'>Burgers</a>
-        </li>
-        <li className={classes.li}>
-          <a href='#dogs'>Dogs</a>
-        </li>
-        <li className={classes.li}>
-          <a href='#other'>Other</a>
-        </li>
-        <li className={classes.li}>
-          <a href='#drinks'>Drinks</a>
-        </li>
-      </ul>
-
-      <div className={classes.authButtons}>
-        {user.isLoggedIn ? (
-          <div className={classes.profileButton}>
-            <button>
-              <img
-                src={profilePhoto}
-                alt='Profile'
-                className={classes.profilePicture}
-              />
-            </button>
-            <div className={classes.dropdown}>
-              <ul>
-                <li>
-                  <Link to='/myReservationsPage'>My Reservations</Link>
-                </li>
-                <li>
-                  <Link to='/editProfilePage'>Edit Profile</Link>
-                </li>
-                <li>
-                  <button onClick={handleLogout}>Logout</button>
-                </li>
-              </ul>
+        <div className={classes.authButtons}>
+          {user.isLoggedIn ? (
+            <div className={classes.profileButton}>
+              <button>
+                <img
+                  src={profilePhoto}
+                  alt='Profile'
+                  className={classes.profilePicture}
+                />
+              </button>
+              <div className={classes.dropdown}>
+                <ul>
+                  <li>
+                    <Link to='/myReservationsPage'>My Reservations</Link>
+                  </li>
+                  <li>
+                    <Link to='/editProfilePage'>Edit Profile</Link>
+                  </li>
+                  <li>
+                    <button onClick={handleLogout}>Logout</button>
+                  </li>
+                </ul>
+              </div>
             </div>
-          </div>
-        ) : (
-          <>
-            <button onClick={handleLoginClick}>Log In</button>
-            <Link to='/createAccount'>
-              <button>Sign Up</button>
-            </Link>
-          </>
-        )}
+          ) : (
+            <>
+              <button onClick={handleLoginClick}>Log In</button>
+              <Link to='/createAccount'>
+                <button>Sign Up</button>
+              </Link>
+            </>
+          )}
+        </div>
       </div>
-
       {showLoginForm && <LoginForm onClose={() => setShowLoginForm(false)} />}
+      {cart.cartItems.length > 0 && <Cart onClick={handleCartClick} />}
+
+      <SideModal isOpen={isModalOpen} onClose={handleCloseModal} />
     </div>
   )
 }

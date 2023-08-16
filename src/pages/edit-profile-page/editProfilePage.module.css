@@ -12,6 +12,11 @@
   margin-bottom: 15px;
 }
 
+.checkboxLabel {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
 label {
   font-weight: bold;
 }

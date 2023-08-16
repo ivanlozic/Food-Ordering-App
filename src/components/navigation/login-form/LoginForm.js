@@ -17,7 +17,7 @@ const LoginForm = ({ onClose }) => {
         email: username,
         password
       })
-
+      
       const { token, id } = response.data
 
       if (token) {

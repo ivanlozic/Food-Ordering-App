@@ -2,18 +2,24 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import classes from './editProfilePage.module.css'
 import { fetchUser } from '../../redux-store/authSlice'
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 const EditProfilePage = () => {
   const user = useSelector((state) => state.user)
+  const [changePassword, setChangePassword] = useState(false)
   const [formData, setFormData] = useState({
     name: '',
     surname: '',
     email: '',
     password: '',
-    phone: ''
-  });
+    phone: '',
+    newPassword: '',
+    confirmPassword: ''
+  })
 
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   useEffect(() => {
     if (user.id) {
@@ -26,10 +32,12 @@ const EditProfilePage = () => {
       name: user.name || '',
       surname: user.surname || '',
       email: user.email || '',
-      password: user.password || '',
-      phone: user.phone || ''
-    });
-  }, [user]);
+      password: '',
+      phone: user.phone || '',
+      newPassword: '',
+      confirmPassword: ''
+    })
+  }, [user])
 
   const handleChange = (e) => {
     setFormData({
@@ -38,8 +46,41 @@ const EditProfilePage = () => {
     })
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
+
+    const updatedProfileData = {
+      name: formData.name,
+      surname: formData.surname,
+      email: formData.email,
+      password: formData.password,
+      phone: formData.phone,
+      ...(changePassword && {
+        newPassword: formData.newPassword,
+        confirmPassword: formData.confirmPassword
+      })
+    }
+
+    try {
+      const response = await axios.put(
+        'http://localhost:5000/users',
+        updatedProfileData
+      )
+
+      if (response.status === 200) {
+        if (
+          window.confirm(
+            'Profile updated successfully. Click OK to return to the home page.'
+          )
+        ) {
+          navigate('/')
+        }
+      } else {
+        console.error('Error updating profile:', response.data.message)
+      }
+    } catch (error) {
+      console.error('Axios error:', error)
+    }
   }
 
   return (
@@ -86,6 +127,41 @@ const EditProfilePage = () => {
             onChange={handleChange}
           />
         </div>
+
+        <div className={classes['form-group']}>
+          <label className={classes.checkboxLabel}>
+            <input
+              type='checkbox'
+              checked={changePassword}
+              onChange={(e) => setChangePassword(e.target.checked)}
+            />
+            <span>Change Password</span>
+          </label>
+        </div>
+        {changePassword && (
+          <div>
+            <div className={classes['form-group']}>
+              <label htmlFor='newPassword'>New Password:</label>
+              <input
+                type='password'
+                id='newPassword'
+                name='newPassword'
+                value={formData.newPassword}
+                onChange={handleChange}
+              />
+            </div>
+            <div className={classes['form-group']}>
+              <label htmlFor='confirmPassword'>Confirm New Password:</label>
+              <input
+                type='password'
+                id='confirmPassword'
+                name='confirmPassword'
+                value={formData.confirmPassword}
+                onChange={handleChange}
+              />
+            </div>
+          </div>
+        )}
         <div className={classes['form-group']}>
           <label htmlFor='phone'>Phone:</label>
           <input
