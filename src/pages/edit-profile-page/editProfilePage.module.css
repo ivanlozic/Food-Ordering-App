@@ -7,7 +7,39 @@
   border-radius: 8px;
   background-color: #fff;
 }
+.backButton {
+  display: inline-block;
+  margin-bottom: 20px;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  color: #007bff;
+  text-decoration: none;
+  cursor: pointer;
+  font-weight: bold;
+}
 
+.deleteAccountButton,
+.cancelDeleteButton {
+  background-color: #d9534f;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.deleteAccountButton:hover,
+.cancelDeleteButton:hover {
+  background-color: #c9302c;
+}
+
+.deleteAccountPrompt {
+  margin-top: 20px;
+  padding: 10px;
+  border: 1px solid #d9534f;
+  background-color: #f2dede;
+  color: #a94442;
+}
 .form-group {
   margin-bottom: 15px;
 }

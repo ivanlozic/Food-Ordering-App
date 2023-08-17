@@ -3,11 +3,14 @@ import { useDispatch, useSelector } from 'react-redux'
 import classes from './editProfilePage.module.css'
 import { fetchUser } from '../../redux-store/authSlice'
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const EditProfilePage = () => {
   const user = useSelector((state) => state.user)
   const [changePassword, setChangePassword] = useState(false)
+  const [deleteAccount, setDeleteAccount] = useState(false)
+  const [deleteEmail, setDeleteEmail] = useState('')
+  const [deletePassword, setDeletePassword] = useState('')
   const [formData, setFormData] = useState({
     name: '',
     surname: '',
@@ -39,11 +42,47 @@ const EditProfilePage = () => {
     })
   }, [user])
 
+  useEffect(() => {
+    if (!user.isLoggedIn && deleteAccount) {
+      alert('You must be logged in to delete your account.')
+      navigate('/')
+      return
+    }
+  }, [user.isLoggedIn, deleteAccount, navigate, user])
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     })
+  }
+
+  const handleDelete = async () => {
+    setDeleteAccount(true)
+  }
+
+  const handleCancelDelete = () => {
+    setDeleteAccount(false)
+  }
+
+  const handleConfirmDelete = async () => {
+    try {
+      const response = await axios.delete('http://localhost:5000/users', {
+        data: {
+          email: deleteEmail,
+          password: deletePassword
+        }
+      })
+
+      if (response.status === 200) {
+        alert('Account deleted successfully')
+        navigate('/')
+      } else {
+        console.error('Error deleting account:', response.data.message)
+      }
+    } catch (error) {
+      console.error('Axios error:', error)
+    }
   }
 
   const handleSubmit = async (e) => {
@@ -85,6 +124,9 @@ const EditProfilePage = () => {
 
   return (
     <div className={classes.container}>
+      <Link to='/' className={classes.backButton}>
+        Back to Home Page
+      </Link>
       <h2>Edit Profile</h2>
       <form onSubmit={handleSubmit}>
         <div className={classes['form-group']}>
@@ -177,6 +219,46 @@ const EditProfilePage = () => {
           <button type='submit'>Save Changes</button>
         </div>
       </form>
+
+      {deleteAccount ? (
+        <div className={classes.deleteAccountPrompt}>
+          <p>
+            To confirm account deletion, please enter your email and password.
+          </p>
+          <label>Email:</label>
+          <input
+            type='email'
+            name='email'
+            value={deleteEmail}
+            onChange={(e) => setDeleteEmail(e.target.value)}
+          />
+          <label>Password:</label>
+          <input
+            type='password'
+            name='password'
+            value={deletePassword}
+            onChange={(e) => setDeletePassword(e.target.value)}
+          />
+          <div>
+            <button
+              onClick={handleConfirmDelete}
+              className={classes.deleteAccountButton}
+            >
+              Confirm Delete
+            </button>
+            <button
+              onClick={handleCancelDelete}
+              className={classes.cancelDeleteButton}
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      ) : (
+        <button onClick={handleDelete} className={classes.deleteAccountButton}>
+          Delete My Account
+        </button>
+      )}
     </div>
   )
 }
