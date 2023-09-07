@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import styles from './CreateAccountPage.module.css'
 import axios from 'axios'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const CreateAccountPage = () => {
   const [name, setName] = useState('')
@@ -12,6 +12,10 @@ const CreateAccountPage = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [passwordMatchError,setPasswordMatchError] = useState('');
 
+
+  const navigate = useNavigate();
+
+
   const handleSubmit = async (event) => {
     event.preventDefault()
 
@@ -19,7 +23,6 @@ const CreateAccountPage = () => {
       setPasswordMatchError('Passwords do not match');
       return;
     }
-
 
     const userData = {
       name,
@@ -34,8 +37,11 @@ const CreateAccountPage = () => {
       try {
         const response = await axios.post('http://localhost:5000/users', userData)
         console.log('User registered successfully:', response.data)
+        alert('User registered successfully')
+        navigate('/')
+       
       } catch (error) {
-        console.error('Error registering user:', error.message)
+        console.log(error)
       }
     
 
