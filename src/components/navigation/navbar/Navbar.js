@@ -9,12 +9,16 @@ import LoginForm from '../login-form/LoginForm'
 import { Link } from 'react-router-dom'
 import { logout } from '../../../redux-store/authSlice'
 import profilePhoto from '../../../assets/images/user.png'
+import Modal from 'react-modal'
+import { CloseButton } from '../../buttons/close-button'
 
 const Navbar = () => {
   const cart = useSelector((state) => state.cart)
   const user = useSelector((state) => state.user)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [showLoginForm, setShowLoginForm] = useState(false)
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false)
+
   const dispatch = useDispatch()
   const handleCartClick = () => {
     setIsModalOpen(true)
@@ -24,12 +28,16 @@ const Navbar = () => {
     setIsModalOpen(false)
   }
 
-  const handleLoginClick = () => {
-    setShowLoginForm(true)
-  }
-
   const handleLogout = () => {
     dispatch(logout())
+  }
+
+  const openLoginModal = () => {
+    setIsLoginModalOpen(true)
+  }
+
+  const closeLoginModal = () => {
+    setIsLoginModalOpen(false)
   }
 
   return (
@@ -93,7 +101,7 @@ const Navbar = () => {
             </div>
           ) : (
             <>
-              <button onClick={handleLoginClick}>Log In</button>
+              <button onClick={openLoginModal}>Log In</button>
               <Link to='/createAccount'>
                 <button>Sign Up</button>
               </Link>
@@ -103,6 +111,19 @@ const Navbar = () => {
       </div>
       {showLoginForm && <LoginForm onClose={() => setShowLoginForm(false)} />}
       {cart.cartItems.length > 0 && <Cart onClick={handleCartClick} />}
+
+      <Modal
+        isOpen={isLoginModalOpen}
+        onRequestClose={closeLoginModal}
+        contentLabel='Login Modal'
+        ariaHideApp={false}
+        className={classes.Modal}
+      >
+         <CloseButton onClick={closeLoginModal} />
+        <LoginForm />
+    
+       
+      </Modal>
 
       <SideModal isOpen={isModalOpen} onClose={handleCloseModal} />
     </div>

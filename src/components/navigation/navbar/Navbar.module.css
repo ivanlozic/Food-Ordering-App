@@ -3,7 +3,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
-  background-color: #fff;
+  background-color: black;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
@@ -19,21 +19,24 @@
 .ul {
   list-style-type: none;
   display: flex;
-  flex-wrap: wrap;
 }
 
 .li {
   cursor: pointer;
   padding: 0.5rem;
   margin: 0.5rem;
+  height: 30px;
+  text-align: center;
+  width: 100px;
   background-color: gainsboro;
   border-radius: 10px;
   font-weight: 500;
+  font-size: 20px;
   text-transform: uppercase;
 }
 
 .li:hover {
-  color: red;
+  transform: scale(1.1);
 }
 a {
   text-decoration: none;
@@ -49,22 +52,26 @@ a {
   margin: 0;
 }
 .headings img {
-  width: 100px;
-  height: 100px;
-  margin-right: 15px;
+  width: 200px;
+  height: 150px;
+  border-radius: 10px;
 }
 
 .authButtons {
   display: flex;
   align-items: center;
+  border: 4px solid #2375cd;
+  border-radius: 10px;
+  margin-left: 20px;
 }
 
 .authButtons button {
-  margin-left: 10px;
+  margin: 10px;
   padding: 12px 25px;
   font-size: 16px;
+  width: 100px;
   color: #fff;
-  background-color: #007bff;
+  background-color: #2375cd;
   border: none;
   border-radius: 7px;
   cursor: pointer;
@@ -76,7 +83,6 @@ a {
 
 .profileButton {
   position: relative;
-  margin-left: 20px;
 }
 
 .profilePicture {
@@ -90,7 +96,7 @@ a {
 
 .dropdown {
   position: absolute;
-  top: 100%;
+  top: 105%;
   left: 0;
   background-color: #fff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -100,6 +106,7 @@ a {
 
 .dropdown li {
   list-style: none;
+  width: 150px;
 }
 
 .dropdown a,
@@ -117,4 +124,14 @@ a {
 
 .profileButton:hover .dropdown {
   display: block;
+}
+
+.Modal {
+  width: 35%;
+  height: fit-content;
+  background-color: white;
+  margin: 0 auto;
+  border-radius: 10px;
+  margin-top: 20px;
+  padding-bottom: 20px;
 }

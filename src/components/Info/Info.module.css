@@ -7,7 +7,7 @@
 .informations {
   display: flex;
   align-items: center;
-  color: green;
+  color: #2375cd;
   font-weight: bold;
   margin-left: 10px;
   cursor: pointer;

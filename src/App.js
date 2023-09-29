@@ -6,6 +6,7 @@ import { CreateAccountPage } from './pages/create-account-page'
 import { EditProfilePage } from './pages/edit-profile-page'
 import { MyReservationsPage } from './pages/my-reservation-page'
 import {  NotFoundPage } from './pages/404-not-found-page'
+import './App.css'
 
 function App() {
   return (

@@ -1,54 +1,54 @@
-import React, { useState, useEffect } from "react";
-import { FaArrowCircleUp } from "react-icons/fa";
-import { useSelector } from "react-redux";
-import "./BackToTopButton.css";
+import React, { useState, useEffect } from 'react'
+import { FaArrowCircleUp } from 'react-icons/fa'
+import { useSelector } from 'react-redux'
+import './BackToTopButton.css'
 
 function BackToTopButton() {
-  const [isVisible, setIsVisible] = useState(false);
-  const [isItemAdded, setIsItemAdded] = useState(false);
-  const cart = useSelector((state) => state.cart);
+  const [isVisible, setIsVisible] = useState(false)
+  const [isItemAdded, setIsItemAdded] = useState(false)
+  const cart = useSelector((state) => state.cart)
 
   useEffect(() => {
     const toggleVisibility = () => {
       if (window.pageYOffset > 200) {
-        setIsVisible(true);
+        setIsVisible(true)
       } else {
-        setIsVisible(false);
+        setIsVisible(false)
       }
-    };
-
-    if (cart.cartItems.length > 0) {
-      setIsItemAdded(true);
-
-      setTimeout(() => {
-        setIsItemAdded(false);
-      }, 3000);
     }
 
-    window.addEventListener("scroll", toggleVisibility);
+    if (cart.cartItems.length > 0) {
+      setIsItemAdded(true)
+
+      setTimeout(() => {
+        setIsItemAdded(false)
+      }, 3000)
+    }
+
+    window.addEventListener('scroll', toggleVisibility)
 
     return () => {
-      window.removeEventListener("scroll", toggleVisibility);
-    };
-  }, [cart]);
+      window.removeEventListener('scroll', toggleVisibility)
+    }
+  }, [cart])
 
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
-      behavior: "smooth",
-    });
-  };
+      behavior: 'smooth'
+    })
+  }
 
   return (
     <div
-      className={`back-to-top-button ${isVisible ? "visible" : ""} ${
-        isItemAdded ? "blink" : ""
+      className={`back-to-top-button ${isVisible ? 'visible' : ''} ${
+        isItemAdded ? 'blink' : ''
       }`}
       onClick={scrollToTop}
     >
-      <FaArrowCircleUp style={{ color: "green" }} />
+      <FaArrowCircleUp style={{ color: '#2375cd' }} />
     </div>
-  );
+  )
 }
 
-export default BackToTopButton;
+export default BackToTopButton

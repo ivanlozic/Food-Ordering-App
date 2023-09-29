@@ -332,7 +332,7 @@ function CheckoutPage() {
                       />
                       <div>
                         <FaTrashAlt
-                          style={{ color: 'green' }}
+                          style={{ color: '#2375cd' }}
                           onClick={() => removeItemFromCart(item.id)}
                         />
                       </div>

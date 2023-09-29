@@ -8,8 +8,7 @@ import { updateCartItem } from '../../../redux-store/cart'
 import React from 'react'
 import { DecreaseButton } from '../../buttons/decrease-button'
 import { IncreaseButton } from '../../buttons/increase-button'
-import { useNavigate } from "react-router-dom";
-
+import { useNavigate } from 'react-router-dom'
 
 function SideModal(props) {
   const dispatch = useDispatch()
@@ -20,7 +19,7 @@ function SideModal(props) {
   const [totalAmount, setTotalAmount] = useState(0)
   const modalRef = useRef(null)
 
-  const navigate = useNavigate();
+  const navigate = useNavigate()
   useEffect(() => {
     if (cart.cartItems.length > 0) {
       setQuantity(
@@ -116,7 +115,7 @@ function SideModal(props) {
                   />
                   <div>
                     <FaTrashAlt
-                      style={{ color: 'green' }}
+                      style={{ color: '#2375cd' }}
                       onClick={() => removeItemFromCart(item.id)}
                     />
                   </div>
