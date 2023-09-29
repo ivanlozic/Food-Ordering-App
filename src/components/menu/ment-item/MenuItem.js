@@ -16,7 +16,7 @@ const MenuItem = ({ items, itemType, modal }) => {
               <div className={classes.info}>
                 <h3>{item.title}</h3>
                 <p>{item.description}</p>
-                <p className={classes.price}>RSD {item.price}.00</p>
+                <p className={classes.price}>${item.price}</p>
               </div>
 
               <img

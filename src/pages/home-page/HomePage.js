@@ -1,28 +1,28 @@
-import { BackToTopButton } from "../../components/buttons/back-to-top-button/index";
-import { Navbar } from "../../components/navigation/navbar";
-import React, { useState } from "react";
-import Modal from "react-modal";
-import { useDispatch } from "react-redux";
-import { addToCart } from "../../redux-store/cart";
-import { MenuItem } from "../../components/menu/ment-item";
-import menuData from "../../data/menu.json";
-import classes from "./HomePage.module.css";
-import { CloseButton } from "../../components/buttons/close-button";
-import { DecreaseButton } from "../../components/buttons/decrease-button";
-import { IncreaseButton } from "../../components/buttons/increase-button";
+import { BackToTopButton } from '../../components/buttons/back-to-top-button/index'
+import { Navbar } from '../../components/navigation/navbar'
+import React, { useState } from 'react'
+import Modal from 'react-modal'
+import { useDispatch } from 'react-redux'
+import { addToCart } from '../../redux-store/cart'
+import { MenuItem } from '../../components/menu/ment-item'
+import menuData from '../../data/menu.json'
+import classes from './HomePage.module.css'
+import { CloseButton } from '../../components/buttons/close-button'
+import { DecreaseButton } from '../../components/buttons/decrease-button'
+import { IncreaseButton } from '../../components/buttons/increase-button'
 
 const customStyles = {
   overlay: {
-    backgroundColor: "rgba(0, 0, 0, 0.7)",
-  },
-};
+    backgroundColor: 'rgba(0, 0, 0, 0.7)'
+  }
+}
 
 const HomePage = () => {
-  const dispatch = useDispatch();
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [selectedItem, setSelectedItem] = useState(null);
-  const [totalPriceValue, setTotalPriceValue] = useState(0);
-  const [currentQuantity, setCurrentQuantity] = useState(1);
+  const dispatch = useDispatch()
+  const [modalIsOpen, setModalIsOpen] = useState(false)
+  const [selectedItem, setSelectedItem] = useState(null)
+  const [totalPriceValue, setTotalPriceValue] = useState(0)
+  const [currentQuantity, setCurrentQuantity] = useState(1)
 
   /*
   const [menu, setMenu] = useState([])
@@ -43,36 +43,36 @@ const HomePage = () => {
   */
 
   const getMenuDataByType = (type) => {
-    return menuData.filter((item) => item.type === type);
-  };
+    return menuData.filter((item) => item.type === type)
+  }
 
   const menuDataByType = {
-    pasta: getMenuDataByType("pasta"),
-    popcorn: getMenuDataByType("popcorn"),
-    "fries-meat": getMenuDataByType("fries-meat"),
-    burgers: getMenuDataByType("burgers"),
-    dogs: getMenuDataByType("dogs"),
-    ostalo: getMenuDataByType("ostalo"),
-    drinks: getMenuDataByType("drinks"),
-  };
+    pasta: getMenuDataByType('pasta'),
+    popcorn: getMenuDataByType('popcorn'),
+    'fries-meat': getMenuDataByType('fries-meat'),
+    burgers: getMenuDataByType('burgers'),
+    dogs: getMenuDataByType('dogs'),
+    other: getMenuDataByType('other'),
+    drinks: getMenuDataByType('drinks')
+  }
 
   function openModal(pasta) {
-    setSelectedItem(pasta);
-    setTotalPriceValue(pasta.price);
-    setModalIsOpen(true);
+    setSelectedItem(pasta)
+    setTotalPriceValue(pasta.price)
+    setModalIsOpen(true)
   }
 
   function increaseQuantity() {
-    const newQuantity = currentQuantity + 1;
-    setCurrentQuantity(newQuantity);
-    setTotalPriceValue(newQuantity * selectedItem.price);
+    const newQuantity = currentQuantity + 1
+    setCurrentQuantity(newQuantity)
+    setTotalPriceValue(newQuantity * selectedItem.price)
   }
 
   function decreaseQuantity() {
     if (currentQuantity > 1) {
-      const newQuantity = currentQuantity - 1;
-      setCurrentQuantity(newQuantity);
-      setTotalPriceValue(newQuantity * selectedItem.price);
+      const newQuantity = currentQuantity - 1
+      setCurrentQuantity(newQuantity)
+      setTotalPriceValue(newQuantity * selectedItem.price)
     }
   }
 
@@ -83,16 +83,16 @@ const HomePage = () => {
       quantity: currentQuantity,
       totalAmount: totalPriceValue,
       price: selectedItem.price,
-      type: selectedItem.type,
-    };
-    dispatch(addToCart(newPasta));
-    setSelectedItem(null);
-    setModalIsOpen(false);
-    setCurrentQuantity(1);
+      type: selectedItem.type
+    }
+    dispatch(addToCart(newPasta))
+    setSelectedItem(null)
+    setModalIsOpen(false)
+    setCurrentQuantity(1)
   }
   const generateMenuComponents = () => {
     return Object.keys(menuDataByType).map((type) => {
-      const itemList = menuDataByType[type];
+      const itemList = menuDataByType[type]
       return itemList.length > 0 ? (
         <MenuItem
           items={itemList}
@@ -100,9 +100,9 @@ const HomePage = () => {
           modal={openModal}
           key={type}
         />
-      ) : null;
-    });
-  };
+      ) : null
+    })
+  }
   return (
     <div>
       <Navbar />
@@ -112,11 +112,11 @@ const HomePage = () => {
         <Modal
           isOpen={modalIsOpen}
           onRequestClose={() => {
-            setSelectedItem(null);
-            setModalIsOpen(false);
-            setCurrentQuantity(1);
+            setSelectedItem(null)
+            setModalIsOpen(false)
+            setCurrentQuantity(1)
           }}
-          contentLabel="Example Modal"
+          contentLabel='Example Modal'
           ariaHideApp={false}
           className={classes.Modal}
           style={customStyles}
@@ -132,9 +132,9 @@ const HomePage = () => {
 
                 <CloseButton
                   onClick={() => {
-                    setSelectedItem(null);
-                    setModalIsOpen(false);
-                    setCurrentQuantity(1);
+                    setSelectedItem(null)
+                    setModalIsOpen(false)
+                    setCurrentQuantity(1)
                   }}
                 />
               </div>
@@ -142,7 +142,7 @@ const HomePage = () => {
               <div className={classes.info}>
                 <h2>{selectedItem.title}</h2>
                 <p>{selectedItem.description}</p>
-                <p>RSD {selectedItem.price}.00</p>
+                <p>${selectedItem.price}</p>
               </div>
 
               <div className={classes.orderBox}>
@@ -158,9 +158,9 @@ const HomePage = () => {
                 <div onClick={addItemToCart} className={classes.totalAmount}>
                   <p>Add to order</p>
                   <p>
-                    RSD &nbsp;
+                    $ &nbsp;
                     {currentQuantity === 1 && selectedItem.price}
-                    {currentQuantity !== 1 && totalPriceValue}.00
+                    {currentQuantity !== 1 && totalPriceValue}
                   </p>
                 </div>
               </div>
@@ -171,7 +171,7 @@ const HomePage = () => {
 
       <BackToTopButton />
     </div>
-  );
-};
+  )
+}
 
-export default HomePage;
+export default HomePage

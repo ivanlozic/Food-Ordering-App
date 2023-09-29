@@ -291,7 +291,7 @@ function CheckoutPage() {
               <div className='number'>{quantity}</div>
             </div>
 
-            <p>RSD {totalAmount}.00</p>
+            <p>${totalAmount}</p>
 
             <SubmitButton type='submit' onClick={handleSubmit}>
               Submit
@@ -318,7 +318,7 @@ function CheckoutPage() {
                       />
                       <div>
                         <p>{item.name}</p>
-                        <p>RSD {item.totalAmount}.00</p>
+                        <p>${item.totalAmount}</p>
                       </div>
                     </div>
                     <div className='quantity'>

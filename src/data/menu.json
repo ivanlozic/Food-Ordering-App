@@ -1,183 +1,183 @@
 [
   {
     "title": "Cheeseburger",
-    "description": "Burger meso, kačkavalj, zelena salata, karamelizovani luk, burger sos",
-    "price": 490,
+    "description": "Beef patty, cheddar cheese, lettuce, caramelized onions, burger sauce",
+    "price": 4.90,
     "id": 13,
     "type": "burgers"
   },
   {
     "title": "BBQ Burger",
-    "description": "Grilovano dimljeno pileće meso sa sirom, pavlaka - senf sos, zelena salata, karamelizovani luk, BBQ sos",
-    "price": 530,
+    "description": "Grilled smoked chicken patty with cheese, sour cream - mustard sauce, lettuce, caramelized onions, BBQ sauce",
+    "price": 5.30,
     "id": 14,
     "type": "burgers"
   },
   {
     "title": "Double Cheeseburger",
-    "description": "Burger meso, kačkavalj, zelena salata, karamelizovani luk, burger sos",
-    "price": 650,
+    "description": "Beef patty, cheddar cheese, lettuce, caramelized onions, burger sauce",
+    "price": 6.50,
     "id": 15,
     "type": "burgers"
   },
   {
     "title": "Spicz Burger",
-    "description": "Burger meso, kačkavalj, ljuti BBQ, ljuti cheddar sos,karamelizovani luk, zelena salata",
-    "price": 530,
+    "description": "Beef patty, cheddar cheese, spicy BBQ, spicy cheddar sauce, caramelized onions, lettuce",
+    "price": 5.30,
     "id": 16,
     "type": "burgers"
   },
   {
-    "title": "Red dog",
-    "description": "Grilovane dimljene kobasice, pavlaka - senf sos, karamelizovani luk, cheddar sos",
-    "price": 540,
+    "title": "Red Dog",
+    "description": "Grilled smoked sausages, sour cream - mustard sauce, caramelized onions, cheddar sauce",
+    "price": 5.40,
     "id": 17,
-    "type": "dogs"
+    "type": "hot dogs"
   },
   {
-    "title": "White dog",
-    "description": "Grilovano belo meso sa sirom, pavlaka - feta sos, zelena salata, honey mustard sos",
-    "price": 540,
+    "title": "White Dog",
+    "description": "Grilled white meat with cheese, sour cream - feta sauce, lettuce, honey mustard sauce",
+    "price": 5.40,
     "id": 18,
-    "type": "dogs"
+    "type": "hot dogs"
   },
   {
-    "title": "Pop dog",
-    "description": "Pohovane kuglice belog mesa, pavlaka - feta sos, zelena salata, domaći sos od paradajza",
-    "price": 540,
+    "title": "Pop Dog",
+    "description": "Breaded white meat balls, sour cream - feta sauce, lettuce, homemade tomato sauce",
+    "price": 5.40,
     "id": 19,
-    "type": "dogs"
+    "type": "hot dogs"
   },
   {
     "title": "Coca Cola 0.33l",
     "description": "",
-    "price": 150,
+    "price": 1.50,
     "id": 22,
     "type": "drinks"
   },
   {
     "title": "Fanta 0.33l",
     "description": "",
-    "price": 150,
+    "price": 1.50,
     "id": 23,
     "type": "drinks"
   },
   {
     "title": "Next Joy Multivitamin",
     "description": "",
-    "price": 160,
+    "price": 1.60,
     "id": 24,
     "type": "drinks"
   },
   {
     "title": "Rosa 0.5l",
     "description": "",
-    "price": 110,
+    "price": 1.10,
     "id": 25,
     "type": "drinks"
   },
   {
     "title": "Kiki Chicken",
-    "description": "Grilovano belo meso sa pomfritom u sosu od kikirikija",
-    "price": 560,
+    "description": "Grilled white meat with french fries in peanut sauce",
+    "price": 5.60,
     "id": 11,
     "type": "fries-meat"
   },
   {
     "title": "Batak",
-    "description": "Grilovani pileći batak sa pomfritom u BBQ sosu",
-    "price": 560,
+    "description": "Grilled chicken leg with french fries in BBQ sauce",
+    "price": 5.60,
     "id": 12,
     "type": "fries-meat"
   },
   {
-    "title": "Pomfrit porcija",
+    "title": "French Fries Portion",
     "description": "",
-    "price": 240,
+    "price": 2.40,
     "id": 20,
-    "type": "ostalo"
+    "type": "other"
   },
   {
-    "title": "Burger lepinja",
+    "title": "Burger Bun",
     "description": "",
-    "price": 70,
+    "price": 0.70,
     "id": 21,
-    "type": "ostalo"
+    "type": "other"
   },
   {
-    "title": "Tagli malo pakovanje",
-    "description": "Grilovano belo meso u pasti sa pikantno - slatko - kiselim sosom",
-    "price": 450,
+    "title": "Tagli Small Portion",
+    "description": "Grilled white meat in pasta with spicy-sweet-sour sauce",
+    "price": 4.50,
     "id": 0,
     "type": "pasta"
   },
   {
-    "title": "Tagli veliko pakovanje",
-    "description": "Grilovano belo meso u pasti sa pikantno - slatko - kiselim sosom",
-    "price": 570,
+    "title": "Tagli Large Portion",
+    "description": "Grilled white meat in pasta with spicy-sweet-sour sauce",
+    "price": 5.70,
     "id": 1,
     "type": "pasta"
   },
   {
-    "title": "Pene malo pakovanje",
-    "description": "Grilovano belo meso u pasti sa kremastim sosom od 4 vrste sira",
-    "price": 470,
+    "title": "Pene Small Portion",
+    "description": "Grilled white meat in pasta with creamy 4 cheese sauce",
+    "price": 4.70,
     "id": 2,
     "type": "pasta"
   },
   {
-    "title": "Pene veliko pakovanje",
-    "description": "Grilovano belo meso u pasti sa kremastim sosom od 4 vrste sira",
-    "price": 590,
+    "title": "Pene Large Portion",
+    "description": "Grilled white meat in pasta with creamy 4 cheese sauce",
+    "price": 5.90,
     "id": 3,
     "type": "pasta"
   },
   {
     "title": "Carbo",
-    "description": "Grilovano dimljeno pileće meso u pasti sa carbonara sosom i sirom",
-    "price": 620,
+    "description": "Grilled smoked chicken meat in pasta with carbonara sauce and cheese",
+    "price": 6.20,
     "id": 4,
     "type": "pasta"
   },
   {
     "title": "Amatri Chicken",
-    "description": "Grilovano belo meso na karamelizovanom luku u pasti sa paradajz sosom i parmezanom",
-    "price": 590,
+    "description": "Grilled white meat on caramelized onions in pasta with tomato sauce and parmesan",
+    "price": 5.90,
     "id": 5,
     "type": "pasta"
   },
   {
     "title": "Fosi",
-    "description": "Grilovano belo meso u pasti sa sosom sa grilovanim povrćem",
-    "price": 590,
+    "description": "Grilled white meat in pasta with grilled vegetable sauce",
+    "price": 5.90,
     "id": 6,
     "type": "pasta"
   },
   {
-    "title": "Popcorn Classic malo pakovanje",
-    "description": "Pohovane kuglice belog mesa sa pomfritom, 1 umak",
-    "price": 450,
+    "title": "Popcorn Classic Small Portion",
+    "description": "Breaded white meat balls with french fries, 1 sauce",
+    "price": 4.50,
     "id": 7,
     "type": "popcorn"
   },
   {
-    "title": "Popcorn Classic veliko pakovanje",
-    "description": "Pohovane kuglice belog mesa sa pomfritom, 2 umaka",
-    "price": 560,
+    "title": "Popcorn Classic Large Portion",
+    "description": "Breaded white meat balls with french fries, 2 sauces",
+    "price": 5.60,
     "id": 8,
     "type": "popcorn"
   },
   {
     "title": "Popcorn Cheese",
-    "description": "Mix pohovanih kuglica i pohovanog sira sa pomfritom, 2 umaka po izboru",
-    "price": 560,
+    "description": "Mix of breaded balls and fried cheese with french fries, 2 sauces of choice",
+    "price": 5.60,
     "id": 9,
     "type": "popcorn"
   },
   {
     "title": "Popcorn Cheese Max",
-    "description": "Pohovane kuglice sira sa pomfritom, 2 umak sosa po izboru",
-    "price": 560,
+    "description": "Breaded cheese balls with french fries, 2 sauce options",
+    "price": 5.60,
     "id": 10,
     "type": "popcorn"
   }
