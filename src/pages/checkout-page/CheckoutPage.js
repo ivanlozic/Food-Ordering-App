@@ -345,7 +345,7 @@ function CheckoutPage() {
       </div>
 
       <iframe
-        src='https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11235.171302957104!2d19.836434!3d45.251982!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x475b111906687591%3A0xfc32ea5e3421ca3a!2sChicken%20Chill!5e0!3m2!1ssr!2srs!4v1677652304537!5m2!1ssr!2srs'
+        src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14080.930124383065!2d-82.4210919!3d28.078449149999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88c2c7a1ffcac323%3A0x42dc6a309fa2e214!2sStarbucks!5e0!3m2!1ssr!2sus!4v1696113589874!5m2!1ssr!2sus'
         width='600'
         height='450'
         allowFullScreen=''
