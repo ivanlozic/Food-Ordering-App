@@ -6,7 +6,7 @@ import {
   updateCartItem,
   removeAllItems
 } from '../../redux-store/cart'
-import logo from '../../assets/images/logo.jpg'
+import logo from '../../assets/images/logo3.png'
 import { useNavigate } from 'react-router-dom'
 import classes from './CheckoutPage.module.css'
 import { BackToTopButton } from '../../components/buttons/back-to-top-button'
@@ -15,6 +15,7 @@ import { DecreaseButton } from '../../components/buttons/decrease-button'
 import { IncreaseButton } from '../../components/buttons/increase-button'
 import { SubmitButton } from '../../components/buttons/submit-button'
 import { fetchUser } from '../../redux-store/authSlice'
+import { CloseButton } from '../../components/buttons/close-button'
 
 function CheckoutPage() {
   const dispatch = useDispatch()
@@ -30,6 +31,11 @@ function CheckoutPage() {
     MobilePhone: ''
   })
   const [errors, setErrors] = useState({})
+  const [showPaymentModal, setShowPaymentModal] = useState(false)
+  const [paymentMethod, setPaymentMethod] = useState('')
+  const [formReadyToSubmit, setFormReadyToSubmit] = useState(false)
+  const [paymentCardButton, setPaymentCardButton] = useState(false)
+
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -37,6 +43,11 @@ function CheckoutPage() {
       dispatch(fetchUser(user.id))
     }
   }, [dispatch, user])
+
+  useEffect(() => {
+    const hasErrors = Object.keys(errors).length > 0
+    setFormReadyToSubmit(!hasErrors)
+  }, [errors])
 
   useEffect(() => {
     setValues({
@@ -49,11 +60,7 @@ function CheckoutPage() {
       cart.cartItems.reduce((prev, next) => prev + next.totalAmount, 0)
     )
     setQuantity(cart.cartItems.reduce((prev, next) => prev + next.quantity, 0))
-    if (cart.cartItems.length < 1) {
-      alert('Must have some items in cart!')
-      navigate('/')
-    }
-  }, [cart, user, navigate])
+  }, [cart, user])
 
   function removeItemFromCart(id) {
     dispatch(removeFromCart(id))
@@ -83,11 +90,6 @@ function CheckoutPage() {
     }
   }
 
-  const handleChange = (event) => {
-    const { name, value } = event.target
-    setValues({ ...values, [name]: value })
-  }
-
   const handleSubmit = (event) => {
     event.preventDefault()
     const validationErrors = validate()
@@ -103,7 +105,7 @@ function CheckoutPage() {
         totalAmount: totalAmount
       }
 
-      fetch('https://food-ordering-app-api.onrender.com/api/orders', {
+      fetch('https://fluffy-jay-peplum.cyclic.cloud/api/orders', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -130,6 +132,13 @@ function CheckoutPage() {
       setErrors(validationErrors)
     }
   }
+
+  const handleCashPayment = () => {
+    const cartData = [...cart.cartItems]
+    console.log(cartData, 'dasda')
+  }
+
+  // Perform form input validation
 
   /*
 
@@ -178,8 +187,21 @@ function CheckoutPage() {
   }
 
   */
+  const handlePaymentSubmit = (event) => {
+    event.preventDefault()
+    const validationErrors = validate()
 
-  const validate = () => {
+    if (paymentMethod === 'cash') {
+      if (Object.keys(validationErrors).length === 0) {
+        handleCashPayment()
+      } else {
+        setErrors(validationErrors)
+      }
+    } else if (paymentMethod === 'card') {
+      setShowPaymentModal(true)
+    }
+  }
+  const validate = (values) => {
     let errors = {}
     if (!values.FirstName) {
       errors.FirstName = 'First Name is required'
@@ -210,8 +232,18 @@ function CheckoutPage() {
     return errors
   }
 
-  function backToMenuHandler() {
-    navigate('/')
+  const isFormValid = () => {
+    const validationErrors = validate(values)
+    setErrors(validationErrors)
+    setFormReadyToSubmit(Object.keys(validationErrors).length === 0)
+    console.log(errors)
+  }
+
+  const handleChange = (event) => {
+    const { name, value } = event.target
+    setValues((prevValues) => ({ ...prevValues, [name]: value }))
+    const validationErrors = validate({ ...values, [name]: value })
+    setErrors(validationErrors)
   }
 
   return (
@@ -219,8 +251,7 @@ function CheckoutPage() {
       <div className={classes.nav}>
         <img className={classes.img} src={logo} alt='logo' />
         <div>
-          <h2>Chicken chill</h2>
-          <h4>Feel the chill</h4>
+          <h2>Company name</h2>
         </div>
       </div>
 
@@ -274,7 +305,7 @@ function CheckoutPage() {
             )}
           </div>
           <div className={classes.formGroup}>
-            <label>Mobile Phone: (+381 )</label>
+            <label>Mobile Phone:</label>
             <input
               name='MobilePhone'
               onChange={handleChange}
@@ -286,21 +317,57 @@ function CheckoutPage() {
             )}
           </div>
 
-          <div className={classes.amount}>
-            <div>
-              <div className='number'>{quantity}</div>
-            </div>
+          {paymentMethod === 'cash' && (
+            <button onClick={handlePaymentSubmit} disabled={!formReadyToSubmit}>
+              Fill the form correctly and submit
+            </button>
+          )}
+          {paymentCardButton && (
+            <button
+              type='button'
+              onClick={() => setPaymentMethod('card')}
+              disabled={!formReadyToSubmit}
+            >
+              Fill the form correctly and proceed
+            </button>
+          )}
 
-            <p>${totalAmount}</p>
-
-            <SubmitButton type='submit' onClick={handleSubmit}>
-              Submit
-            </SubmitButton>
-          </div>
         </form>
 
+        
+        {paymentMethod === 'card' && (
+            <div className={classes.cardPaymentForm}>
+              <CloseButton
+                onClick={() => {
+                  setPaymentMethod('')
+                }}
+                isSmall={true}
+              />
+              <form className={classes.cardForm}>
+                <div>
+                  <label>Card owner name:</label>
+                  <input placeholder='First name and Last name' />
+                </div>
+                <div>
+                  <label>Card number:</label>
+                  <input type='number' placeholder='Card number' />
+                </div>
+                <div>
+                  <label>Date of expiration:</label>
+                  <input placeholder='dd/yy' />
+                </div>
+                <div>
+                  <label>CVC</label>
+                  <input type='number' placeholder='3 digits number' />
+                </div>
+
+                <button onClick={handlePaymentSubmit} disabled={!formReadyToSubmit}>Submit</button>
+              </form>
+            </div>
+          )}
+
         <div className={classes.orderContainer}>
-          <div className={classes.back} onClick={backToMenuHandler}>
+          <div className={classes.back} onClick={() => navigate('/')}>
             <FaArrowLeft />
             <p>Back to menu</p>
           </div>
@@ -340,9 +407,53 @@ function CheckoutPage() {
                   </li>
                 ))}
             </ul>
+
+            <div className={classes.amount}>
+              <div>
+                <div className='number'>{quantity}</div>
+              </div>
+
+              <p>${totalAmount}</p>
+
+              <button onClick={() => setShowPaymentModal(true)}>
+                Choose payment method
+              </button>
+            </div>
           </div>
         </div>
       </div>
+
+      {showPaymentModal && (
+        <div className={classes.paymentModal}>
+          <CloseButton
+            onClick={() => {
+              setShowPaymentModal(false)
+            }}
+            isSmall={true}
+          />
+          <h2>Choose Payment Method</h2>
+          <div>
+            <button
+              onClick={() => {
+                setPaymentMethod('cash')
+                setShowPaymentModal(false)
+                isFormValid()
+              }}
+            >
+              Pay with Cash
+            </button>
+            <button
+              onClick={() => {
+                setPaymentCardButton(true)
+                isFormValid()
+                setShowPaymentModal(false)
+              }}
+            >
+              Pay with Card
+            </button>
+          </div>
+        </div>
+      )}
 
       <iframe
         src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14080.930124383065!2d-82.4210919!3d28.078449149999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88c2c7a1ffcac323%3A0x42dc6a309fa2e214!2sStarbucks!5e0!3m2!1ssr!2sus!4v1696113589874!5m2!1ssr!2sus'

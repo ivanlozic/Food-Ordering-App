@@ -35,7 +35,7 @@ const CreateAccountPage = () => {
 
   
       try {
-        const response = await axios.post('http://localhost:5000/users', userData)
+        const response = await axios.post('https://fluffy-jay-peplum.cyclic.cloud/users', userData)
         console.log('User registered successfully:', response.data)
         alert('User registered successfully')
         navigate('/')

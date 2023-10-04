@@ -1,9 +1,11 @@
 import React from "react";
 import classes from "./CloseButton.module.css";
 
-const CloseButton = ({ onClick }) => {
+const CloseButton = ({ onClick, isSmall }) => {
+  const closeButtonClass = isSmall ? classes.smallCloseButton : classes.closeModalBtn;
+
   return (
-    <button className={classes.closeModalBtn} onClick={onClick}>
+    <button className={closeButtonClass} onClick={onClick}>
       X
     </button>
   );

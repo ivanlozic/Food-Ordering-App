@@ -1,11 +1,10 @@
 import { BackToTopButton } from '../../components/buttons/back-to-top-button/index'
 import { Navbar } from '../../components/navigation/navbar'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Modal from 'react-modal'
 import { useDispatch } from 'react-redux'
 import { addToCart } from '../../redux-store/cart'
 import { MenuItem } from '../../components/menu/ment-item'
-import menuData from '../../data/menu.json'
 import classes from './HomePage.module.css'
 import { CloseButton } from '../../components/buttons/close-button'
 import { DecreaseButton } from '../../components/buttons/decrease-button'
@@ -24,13 +23,13 @@ const HomePage = () => {
   const [totalPriceValue, setTotalPriceValue] = useState(0)
   const [currentQuantity, setCurrentQuantity] = useState(1)
 
-  /*
+  
   const [menu, setMenu] = useState([])
 
   useEffect(() => {
     async function logMenu() {
       try {
-        const response = await fetch('http://localhost:5000/api/menu')
+        const response = await fetch('https://fluffy-jay-peplum.cyclic.cloud/api/menu')
         const menuData = await response.json()
         setMenu(menuData)
       } catch (error) {
@@ -40,10 +39,10 @@ const HomePage = () => {
     logMenu()
   }, [])
 
-  */
+
 
   const getMenuDataByType = (type) => {
-    return menuData.filter((item) => item.type === type)
+    return menu.filter((item) => item.type === type)
   }
 
   const menuDataByType = {
