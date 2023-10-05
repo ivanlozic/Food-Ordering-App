@@ -1,11 +1,11 @@
 import classes from './Navbar.module.css'
 import { useDispatch, useSelector } from 'react-redux'
-import {  useState } from 'react'
-import { Cart } from '../cart'
-import { SideModal } from '../side-modal'
+import { useState } from 'react'
+import { Cart } from '../../cart'
+import { SideModal } from './side-modal'
 import logo from '../../../assets/images/logo3.png'
 import React from 'react'
-import LoginForm from '../login-form/LoginForm'
+import LoginForm from './login-form/LoginForm'
 import { Link } from 'react-router-dom'
 import { logout } from '../../../redux-store/authSlice'
 import profilePhoto from '../../../assets/images/user.png'
@@ -28,8 +28,8 @@ const Navbar = () => {
     setIsModalOpen(false)
   }
   const handleLogout = () => {
-    localStorage.removeItem('authToken');
-    dispatch(logout());
+    localStorage.removeItem('authToken')
+    dispatch(logout())
   }
 
   const openLoginModal = () => {

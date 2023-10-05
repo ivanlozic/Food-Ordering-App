@@ -331,40 +331,47 @@ function CheckoutPage() {
               Fill the form correctly and proceed
             </button>
           )}
-
         </form>
 
-        
         {paymentMethod === 'card' && (
-            <div className={classes.cardPaymentForm}>
-              <CloseButton
-                onClick={() => {
-                  setPaymentMethod('')
-                }}
-                isSmall={true}
-              />
-              <form className={classes.cardForm}>
-                <div>
-                  <label>Card owner name:</label>
-                  <input placeholder='First name and Last name' />
-                </div>
-                <div>
-                  <label>Card number:</label>
-                  <input type='number' placeholder='Card number' />
-                </div>
-                <div>
-                  <label>Date of expiration:</label>
-                  <input placeholder='dd/yy' />
-                </div>
-                <div>
-                  <label>CVC</label>
-                  <input type='number' placeholder='3 digits number' />
-                </div>
+          <div className={classes.cardPaymentForm}>
+            <CloseButton
+              onClick={() => {
+                setPaymentMethod('')
+              }}
+              isSmall={true}
+            />
+            <form className={classes.cardForm}>
+              <div>
+                <label>Card owner name:</label>
+                <input id='owner' placeholder='First name and Last name' />
+              </div>
+              <div>
+                <label>Card number:</label>
+                <input
+                  id='card-number'
+                  type='number'
+                  placeholder='Card number'
+                />
+              </div>
+              <div>
+                <label>Date of expiration:</label>
+                <input id='date-of-expiration' placeholder='dd/yy' />
+              </div>
+              <div>
+                <label>CVC</label>
+                <input id='cvc' type='number' placeholder='3 digits number' />
+              </div>
 
-                <button onClick={handlePaymentSubmit} disabled={!formReadyToSubmit}>Submit</button>
-              </form>
-            </div>
-          )}
+              <button
+                onClick={handlePaymentSubmit}
+                disabled={!formReadyToSubmit}
+              >
+                Submit
+              </button>
+            </form>
+          </div>
+        )}
 
         <div className={classes.orderContainer}>
           <div className={classes.back} onClick={() => navigate('/')}>
@@ -435,6 +442,7 @@ function CheckoutPage() {
           <div>
             <button
               onClick={() => {
+                setPaymentCardButton(false)
                 setPaymentMethod('cash')
                 setShowPaymentModal(false)
                 isFormValid()
@@ -444,6 +452,7 @@ function CheckoutPage() {
             </button>
             <button
               onClick={() => {
+                setPaymentMethod('')
                 setPaymentCardButton(true)
                 isFormValid()
                 setShowPaymentModal(false)

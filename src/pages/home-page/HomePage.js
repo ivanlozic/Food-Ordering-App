@@ -9,6 +9,7 @@ import classes from './HomePage.module.css'
 import { CloseButton } from '../../components/buttons/close-button'
 import { DecreaseButton } from '../../components/buttons/decrease-button'
 import { IncreaseButton } from '../../components/buttons/increase-button'
+import Spinner from '../../components/spinner/Spinner'
 
 const customStyles = {
   overlay: {
@@ -23,7 +24,7 @@ const HomePage = () => {
   const [totalPriceValue, setTotalPriceValue] = useState(0)
   const [currentQuantity, setCurrentQuantity] = useState(1)
 
-  
+  const [loading, setLoading] = useState(true);
   const [menu, setMenu] = useState([])
 
   useEffect(() => {
@@ -32,8 +33,10 @@ const HomePage = () => {
         const response = await fetch('https://fluffy-jay-peplum.cyclic.cloud/api/menu')
         const menuData = await response.json()
         setMenu(menuData)
+        setLoading(false);
       } catch (error) {
         console.error('Error fetching menu:', error)
+        setLoading(false);
       }
     }
     logMenu()
@@ -107,7 +110,12 @@ const HomePage = () => {
       <Navbar />
 
       <div className={classes.Main}>
-        {generateMenuComponents()}
+      {loading ? ( 
+        <Spinner />
+      ) : (
+        generateMenuComponents()
+      )}
+      
         <Modal
           isOpen={modalIsOpen}
           onRequestClose={() => {
