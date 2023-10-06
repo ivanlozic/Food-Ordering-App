@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import classes from './editProfilePage.module.css'
-import { fetchUser } from '../../redux-store/authSlice'
+import { logout } from '../../redux-store/authSlice'
 import axios from 'axios'
 import { Link, useNavigate } from 'react-router-dom'
 
@@ -12,35 +12,17 @@ const EditProfilePage = () => {
   const [deleteEmail, setDeleteEmail] = useState('')
   const [deletePassword, setDeletePassword] = useState('')
   const [formData, setFormData] = useState({
-    name: '',
-    surname: '',
-    email: '',
+    name: user.name || '',
+    surname: user.surname || '',
+    email: user.email || '',
     password: '',
-    phone: '',
+    phone: user.phone || '',
     newPassword: '',
     confirmPassword: ''
   })
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
-
-  useEffect(() => {
-    if (user.id) {
-      dispatch(fetchUser(user.id))
-    }
-  }, [dispatch, user])
-
-  useEffect(() => {
-    setFormData({
-      name: user.name || '',
-      surname: user.surname || '',
-      email: user.email || '',
-      password: '',
-      phone: user.phone || '',
-      newPassword: '',
-      confirmPassword: ''
-    })
-  }, [user])
 
   useEffect(() => {
     if (!user.isLoggedIn && deleteAccount) {
@@ -89,6 +71,7 @@ const EditProfilePage = () => {
     e.preventDefault()
 
     const updatedProfileData = {
+      id:user.id,
       name: formData.name,
       surname: formData.surname,
       email: formData.email,
@@ -109,9 +92,10 @@ const EditProfilePage = () => {
       if (response.status === 200) {
         if (
           window.confirm(
-            'Profile updated successfully. Click OK to return to the home page.'
+            'Profile updated successfully. Click OK to return to the home page and login again.'
           )
         ) {
+          dispatch(logout())
           navigate('/')
         }
       } else {

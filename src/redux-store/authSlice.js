@@ -1,5 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 const storedToken = localStorage.getItem('authToken');
+const storedUserData = localStorage.getItem('userData');
+
 const initialState = {
   isLoggedIn: !!storedToken,
   token: storedToken || '',
@@ -8,9 +10,17 @@ const initialState = {
   name: '',
   surname: '',
   email: '',
-  phone: ''
+  phone: '',
 };
 
+if (storedUserData) {
+  const userData = JSON.parse(storedUserData);
+  initialState.id = userData.id;
+  initialState.name = userData.name;
+  initialState.surname = userData.surname;
+  initialState.email = userData.email;
+  initialState.phone = userData.phoneNumber;
+}
 
 const userSlice = createSlice({
   name: 'user',
@@ -19,9 +29,13 @@ const userSlice = createSlice({
     login: (state, action) => {
       state.isLoggedIn = true
       state.token = action.payload.token
-      state.id = action.payload.id
+      state.id = action.payload.user.id
+      state.name = action.payload.user.name
+      state.surname = action.payload.user.surname
+      state.email = action.payload.user.email
+      state.phone = action.payload.user.phoneNumber
       localStorage.setItem('authToken', action.payload.token);
-
+      localStorage.setItem('userData', JSON.stringify(action.payload.user));
     },
     logout: (state) => {
       state.isLoggedIn = false
@@ -47,7 +61,7 @@ export const fetchUser = (id) => async (dispatch) => {
   try {
     const response = await fetch(`http://localhost:5000/users/${id}`)
     const userData = await response.json()
-
+    console.log(response.data)
     dispatch({
       type: 'user/updateProfile',
       payload: {

@@ -24,11 +24,10 @@ function CheckoutPage() {
   const [totalAmount, setTotalAmount] = useState(0)
   const [quantity, setQuantity] = useState(0)
   const [values, setValues] = useState({
-    FirstName: '',
-    LastName: '',
-    Address: '',
-    Email: '',
-    MobilePhone: ''
+    FirstName: user.name || '',
+    LastName: user.surname || '',
+    Email: user.email || '',
+    MobilePhone: user.phone !== undefined && user.phone !== null ? String(user.phone) : ''
   })
   const [errors, setErrors] = useState({})
   const [showPaymentModal, setShowPaymentModal] = useState(false)
@@ -39,23 +38,12 @@ function CheckoutPage() {
   const navigate = useNavigate()
 
   useEffect(() => {
-    if (user.id) {
-      dispatch(fetchUser(user.id))
-    }
-  }, [dispatch, user])
-
-  useEffect(() => {
     const hasErrors = Object.keys(errors).length > 0
     setFormReadyToSubmit(!hasErrors)
   }, [errors])
 
   useEffect(() => {
-    setValues({
-      FirstName: user.name || '',
-      LastName: user.surname || '',
-      Email: user.email || '',
-      MobilePhone: user.phone || ''
-    })
+   
     setTotalAmount(
       cart.cartItems.reduce((prev, next) => prev + next.totalAmount, 0)
     )
@@ -89,7 +77,7 @@ function CheckoutPage() {
       dispatch(removeFromCart(id))
     }
   }
-
+/*
   const handleSubmit = (event) => {
     event.preventDefault()
     const validationErrors = validate()
@@ -132,6 +120,8 @@ function CheckoutPage() {
       setErrors(validationErrors)
     }
   }
+
+  */
 
   const handleCashPayment = () => {
     const cartData = [...cart.cartItems]
@@ -240,11 +230,14 @@ function CheckoutPage() {
   }
 
   const handleChange = (event) => {
-    const { name, value } = event.target
-    setValues((prevValues) => ({ ...prevValues, [name]: value }))
+    const { name, value } = event.target;
+    setValues((prevValues) => ({
+      ...prevValues,
+      [name]: value
+    }));
     const validationErrors = validate({ ...values, [name]: value })
     setErrors(validationErrors)
-  }
+  };
 
   return (
     <div className={classes.body}>
@@ -262,6 +255,7 @@ function CheckoutPage() {
           <div className={classes.formGroup}>
             <label>First Name:</label>
             <input
+              id='FirstName'
               name='FirstName'
               onChange={handleChange}
               value={values.FirstName}
@@ -273,6 +267,7 @@ function CheckoutPage() {
           <div className={classes.formGroup}>
             <label>Last Name:</label>
             <input
+              id='LastName'
               name='LastName'
               onChange={handleChange}
               value={values.LastName}
@@ -284,6 +279,7 @@ function CheckoutPage() {
           <div className={classes.formGroup}>
             <label>Address:</label>
             <input
+            id='Address'
               name='Address'
               onChange={handleChange}
               value={values.Address}
@@ -295,6 +291,7 @@ function CheckoutPage() {
           <div className={classes.formGroup}>
             <label>Email:</label>
             <input
+            id='Email'
               name='Email'
               type='email'
               onChange={handleChange}
@@ -307,6 +304,7 @@ function CheckoutPage() {
           <div className={classes.formGroup}>
             <label>Mobile Phone:</label>
             <input
+              id='MobilePhone'
               name='MobilePhone'
               onChange={handleChange}
               value={values.MobilePhone}

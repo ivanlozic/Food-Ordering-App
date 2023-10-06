@@ -24,25 +24,23 @@ const HomePage = () => {
   const [totalPriceValue, setTotalPriceValue] = useState(0)
   const [currentQuantity, setCurrentQuantity] = useState(1)
 
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true)
   const [menu, setMenu] = useState([])
 
   useEffect(() => {
     async function logMenu() {
       try {
-        const response = await fetch('https://fluffy-jay-peplum.cyclic.cloud/api/menu')
+        const response = await fetch('http://localhost:5000/api/menu')
         const menuData = await response.json()
         setMenu(menuData)
-        setLoading(false);
+        setLoading(false)
       } catch (error) {
         console.error('Error fetching menu:', error)
-        setLoading(false);
+        setLoading(false)
       }
     }
     logMenu()
   }, [])
-
-
 
   const getMenuDataByType = (type) => {
     return menu.filter((item) => item.type === type)
@@ -110,12 +108,8 @@ const HomePage = () => {
       <Navbar />
 
       <div className={classes.Main}>
-      {loading ? ( 
-        <Spinner />
-      ) : (
-        generateMenuComponents()
-      )}
-      
+        {loading ? <Spinner /> : generateMenuComponents()}
+
         <Modal
           isOpen={modalIsOpen}
           onRequestClose={() => {
