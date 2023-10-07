@@ -14,7 +14,6 @@ import React from 'react'
 import { DecreaseButton } from '../../components/buttons/decrease-button'
 import { IncreaseButton } from '../../components/buttons/increase-button'
 import { SubmitButton } from '../../components/buttons/submit-button'
-import { fetchUser } from '../../redux-store/authSlice'
 import { CloseButton } from '../../components/buttons/close-button'
 
 function CheckoutPage() {
@@ -26,6 +25,7 @@ function CheckoutPage() {
   const [values, setValues] = useState({
     FirstName: user.name || '',
     LastName: user.surname || '',
+    Address: '',
     Email: user.email || '',
     MobilePhone: user.phone !== undefined && user.phone !== null ? String(user.phone) : ''
   })
@@ -123,18 +123,12 @@ function CheckoutPage() {
 
   */
 
-  const handleCashPayment = () => {
-    const cartData = [...cart.cartItems]
-    console.log(cartData, 'dasda')
-  }
-
-  // Perform form input validation
-
-  /*
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    const validationErrors = validate()
+    console.log(values)
+    const validationErrors = validate(values)
+    const dateToday = new Date()
     if (Object.keys(validationErrors).length === 0) {
       const cartData = [...cart.cartItems]
       const data = {
@@ -144,8 +138,10 @@ function CheckoutPage() {
         Email: values.Email,
         MobilePhone: values.MobilePhone,
         order: cartData,
-        totalAmount: totalAmount
+        totalAmount: totalAmount,
+        date: dateToday
       }
+      console.log(data)
 
       fetch('http://localhost:5000/api/orders', {
         method: 'POST',
@@ -176,42 +172,29 @@ function CheckoutPage() {
     }
   }
 
-  */
-  const handlePaymentSubmit = (event) => {
-    event.preventDefault()
-    const validationErrors = validate()
-
-    if (paymentMethod === 'cash') {
-      if (Object.keys(validationErrors).length === 0) {
-        handleCashPayment()
-      } else {
-        setErrors(validationErrors)
-      }
-    } else if (paymentMethod === 'card') {
-      setShowPaymentModal(true)
-    }
-  }
+  
   const validate = (values) => {
     let errors = {}
-    if (!values.FirstName) {
-      errors.FirstName = 'First Name is required'
+ 
+    if (!values || !values.FirstName || values.FirstName.trim() === '' ) {
+      errors.FirstName = 'First Name is required';
     } else if (values.FirstName[0].toUpperCase() !== values.FirstName[0]) {
-      errors.FirstName = 'First name should start with an uppercase letter'
+      errors.FirstName = 'First name should start with an uppercase letter';
     }
-    if (!values.LastName) {
+    if (!values || !values.LastName || values.LastName.trim() === '') {
       errors.LastName = 'Last Name is required'
     } else if (values.LastName[0].toUpperCase() !== values.LastName[0]) {
       errors.LastName = 'Last name should start with an uppercase letter'
     }
-    if (!values.Address) {
+    if (!values || !values.Address || values.Address.trim() === '') {
       errors.Address = 'Address is required'
     }
-    if (!values.Email) {
+    if (!values || !values.Email || values.Email.trim() === '') {
       errors.Email = 'Email is required'
     } else if (!/\S+@\S+\.\S+/.test(values.Email)) {
       errors.Email = 'Invalid email address'
     }
-    if (!values.MobilePhone) {
+    if (!values || !values.MobilePhone ) {
       errors.MobilePhone = 'Mobile Phone is required'
     } else if (
       !/^[0-9]+$/.test(values.MobilePhone) ||
@@ -316,7 +299,7 @@ function CheckoutPage() {
           </div>
 
           {paymentMethod === 'cash' && (
-            <button onClick={handlePaymentSubmit} disabled={!formReadyToSubmit}>
+            <button onClick={handleSubmit} disabled={!formReadyToSubmit}>
               Fill the form correctly and submit
             </button>
           )}
@@ -362,7 +345,7 @@ function CheckoutPage() {
               </div>
 
               <button
-                onClick={handlePaymentSubmit}
+                onClick={handleSubmit}
                 disabled={!formReadyToSubmit}
               >
                 Submit
