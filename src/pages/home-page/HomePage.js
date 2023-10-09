@@ -143,7 +143,7 @@ const HomePage = () => {
               <div className={classes.info}>
                 <h2>{selectedItem.title}</h2>
                 <p>{selectedItem.description}</p>
-                <p>${selectedItem.price}</p>
+                <p>${selectedItem.price.toFixed(2)}</p>
               </div>
 
               <div className={classes.orderBox}>

@@ -25,9 +25,12 @@ function CheckoutPage() {
   const [values, setValues] = useState({
     FirstName: user.name || '',
     LastName: user.surname || '',
-    Address: '',
+    Address: user.streetAddress || '',
     Email: user.email || '',
-    MobilePhone: user.phone !== undefined && user.phone !== null ? String(user.phone) : ''
+    MobilePhone:
+      user.phone !== undefined && user.phone !== null ? String(user.phone) : '',
+    city: user.city || '',
+    country: user.country || ''
   })
   const [errors, setErrors] = useState({})
   const [showPaymentModal, setShowPaymentModal] = useState(false)
@@ -43,11 +46,11 @@ function CheckoutPage() {
   }, [errors])
 
   useEffect(() => {
-   
     setTotalAmount(
       cart.cartItems.reduce((prev, next) => prev + next.totalAmount, 0)
     )
     setQuantity(cart.cartItems.reduce((prev, next) => prev + next.quantity, 0))
+    console.log(cart)
   }, [cart, user])
 
   function removeItemFromCart(id) {
@@ -77,7 +80,7 @@ function CheckoutPage() {
       dispatch(removeFromCart(id))
     }
   }
-/*
+  /*
   const handleSubmit = (event) => {
     event.preventDefault()
     const validationErrors = validate()
@@ -123,7 +126,6 @@ function CheckoutPage() {
 
   */
 
-
   const handleSubmit = (event) => {
     event.preventDefault()
     console.log(values)
@@ -132,18 +134,21 @@ function CheckoutPage() {
     if (Object.keys(validationErrors).length === 0) {
       const cartData = [...cart.cartItems]
       const data = {
+        UserId: user.id,
         FirstName: values.FirstName,
         LastName: values.LastName,
         Address: values.Address,
         Email: values.Email,
         MobilePhone: values.MobilePhone,
+        city: values.city,
+        country: values.country,
         order: cartData,
         totalAmount: totalAmount,
         date: dateToday
       }
       console.log(data)
 
-      fetch('http://localhost:5000/api/orders', {
+      fetch(`http://localhost:5000/api/orders/:${user.id}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -159,12 +164,15 @@ function CheckoutPage() {
             LastName: '',
             Address: '',
             Email: '',
-            MobilePhone: ''
+            MobilePhone: '',
+            city: '',
+            country: ''
           })
           alert('Successfully ordered')
           navigate('/')
         })
         .catch((error) => {
+          alert(error.response.data.message)
           console.error('Error:', error)
         })
     } else {
@@ -172,14 +180,13 @@ function CheckoutPage() {
     }
   }
 
-  
   const validate = (values) => {
     let errors = {}
- 
-    if (!values || !values.FirstName || values.FirstName.trim() === '' ) {
-      errors.FirstName = 'First Name is required';
+
+    if (!values || !values.FirstName || values.FirstName.trim() === '') {
+      errors.FirstName = 'First Name is required'
     } else if (values.FirstName[0].toUpperCase() !== values.FirstName[0]) {
-      errors.FirstName = 'First name should start with an uppercase letter';
+      errors.FirstName = 'First name should start with an uppercase letter'
     }
     if (!values || !values.LastName || values.LastName.trim() === '') {
       errors.LastName = 'Last Name is required'
@@ -194,13 +201,21 @@ function CheckoutPage() {
     } else if (!/\S+@\S+\.\S+/.test(values.Email)) {
       errors.Email = 'Invalid email address'
     }
-    if (!values || !values.MobilePhone ) {
+    if (!values || !values.MobilePhone) {
       errors.MobilePhone = 'Mobile Phone is required'
     } else if (
       !/^[0-9]+$/.test(values.MobilePhone) ||
       values.MobilePhone.length < 11
     ) {
       errors.MobilePhone = 'Mobile Phone must have at least 11-digits'
+    }
+
+    if (!values || !values.city || values.city.trim() === '') {
+      errors.city = 'City is required'
+    }
+
+    if (!values || !values.country || values.country.trim() === '') {
+      errors.country = 'County is required'
     }
     return errors
   }
@@ -213,14 +228,14 @@ function CheckoutPage() {
   }
 
   const handleChange = (event) => {
-    const { name, value } = event.target;
+    const { name, value } = event.target
     setValues((prevValues) => ({
       ...prevValues,
       [name]: value
-    }));
+    }))
     const validationErrors = validate({ ...values, [name]: value })
     setErrors(validationErrors)
-  };
+  }
 
   return (
     <div className={classes.body}>
@@ -262,7 +277,7 @@ function CheckoutPage() {
           <div className={classes.formGroup}>
             <label>Address:</label>
             <input
-            id='Address'
+              id='Address'
               name='Address'
               onChange={handleChange}
               value={values.Address}
@@ -272,9 +287,33 @@ function CheckoutPage() {
             )}
           </div>
           <div className={classes.formGroup}>
+            <label>City:</label>
+            <input
+              id='city'
+              name='city'
+              onChange={handleChange}
+              value={values.city}
+            />
+            {errors.city && (
+              <div className={classes.error}>{errors.city}</div>
+            )}
+          </div>
+          <div className={classes.formGroup}>
+            <label>Country:</label>
+            <input
+              id='country'
+              name='country'
+              onChange={handleChange}
+              value={values.country}
+            />
+            {errors.country && (
+              <div className={classes.error}>{errors.country}</div>
+            )}
+          </div>
+          <div className={classes.formGroup}>
             <label>Email:</label>
             <input
-            id='Email'
+              id='Email'
               name='Email'
               type='email'
               onChange={handleChange}
@@ -344,10 +383,7 @@ function CheckoutPage() {
                 <input id='cvc' type='number' placeholder='3 digits number' />
               </div>
 
-              <button
-                onClick={handleSubmit}
-                disabled={!formReadyToSubmit}
-              >
+              <button onClick={handleSubmit} disabled={!formReadyToSubmit}>
                 Submit
               </button>
             </form>
@@ -373,7 +409,7 @@ function CheckoutPage() {
                       />
                       <div>
                         <p>{item.name}</p>
-                        <p>${item.totalAmount}</p>
+                        <p>${item.totalAmount.toFixed(2)}</p>
                       </div>
                     </div>
                     <div className='quantity'>
@@ -401,7 +437,7 @@ function CheckoutPage() {
                 <div className='number'>{quantity}</div>
               </div>
 
-              <p>${totalAmount}</p>
+              <p>${totalAmount.toFixed(2)}</p>
 
               <button onClick={() => setShowPaymentModal(true)}>
                 Choose payment method

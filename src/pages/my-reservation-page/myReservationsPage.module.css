@@ -1,20 +1,26 @@
 .container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
+  padding: 30px;
 }
 
+.heading {
+  text-align: center;
+}
 .reservationList {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
 .reservationItem {
+  width: 90%;
+  margin: 30px;
   border: 1px solid #ccc;
   border-radius: 8px;
   padding: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 
 .reservationItem h3 {
@@ -29,4 +35,58 @@
   font-style: italic;
   text-align: center;
   color: #999;
+}
+
+.liBox {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.imgCheck {
+  width: 150px;
+  height: 90px;
+  border-radius: 10px;
+  margin: 10px;
+}
+
+
+.filterOptions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.filterOptions button {
+  background-color: #f4f4f4;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.filterOptions button:hover {
+  background-color: #ddd;
+}
+
+.backButton {
+  display: inline-block;
+  position: absolute;
+  top: 30px;
+  left: 30px;
+  color: #2375cd;
+  text-decoration: none;
+  cursor: pointer;
+  font-weight: bold;
 }

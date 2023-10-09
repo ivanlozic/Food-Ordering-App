@@ -11,6 +11,9 @@ const initialState = {
   surname: '',
   email: '',
   phone: '',
+  streetAddress: '',
+  city: '',
+  country: '',
 };
 
 if (storedUserData) {
@@ -20,6 +23,9 @@ if (storedUserData) {
   initialState.surname = userData.surname;
   initialState.email = userData.email;
   initialState.phone = userData.phoneNumber;
+  initialState.streetAddress = userData.streetAddress;
+  initialState.city = userData.city;
+  initialState.country = userData.country;
 }
 
 const userSlice = createSlice({
@@ -34,6 +40,9 @@ const userSlice = createSlice({
       state.surname = action.payload.user.surname
       state.email = action.payload.user.email
       state.phone = action.payload.user.phoneNumber
+      state.streetAddress = action.payload.user.streetAddress
+      state.city = action.payload.user.city
+      state.country = action.payload.user.country
       localStorage.setItem('authToken', action.payload.token);
       localStorage.setItem('userData', JSON.stringify(action.payload.user));
     },
@@ -46,14 +55,20 @@ const userSlice = createSlice({
       state.surname = ''
       state.email = ''
       state.phone = ''
+      state.streetAddress = ''
+      state.city = ''
+      state.country = ''
     },
     updateProfile: (state, action) => {
-      const { name, surname, email, phone } = action.payload
-      state.name = name
-      state.surname = surname
-      state.email = email
-      state.phone = phone
-    }
+      const { name, surname, email, phone, streetAddress, city, country } = action.payload;
+      state.name = name;
+      state.surname = surname;
+      state.email = email;
+      state.phone = phone;
+      state.streetAddress = streetAddress;
+      state.city = city;
+      state.country = country;
+    },
   }
 })
 

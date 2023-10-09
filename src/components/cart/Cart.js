@@ -28,7 +28,7 @@ function Cart({ onClick }) {
         <p className={classes.text}>View order</p>
       </div>
 
-      <p className={classes.total}>$ {totalAmount}</p>
+      <p className={classes.total}>$ {totalAmount.toFixed(2)}</p>
     </div>
   )
 }

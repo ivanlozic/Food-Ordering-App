@@ -101,7 +101,7 @@ function SideModal(props) {
                   />
                   <div>
                     <p>{item.name}</p>
-                    <p>${item.totalAmount}</p>
+                    <p>${item.totalAmount.toFixed(2)}</p>
                   </div>
                 </div>
                 <div className='quantity'>
@@ -129,7 +129,7 @@ function SideModal(props) {
             <div className='number'>{quantity}</div>
             <p>Go to checkout</p>
           </div>
-          <p>${totalAmount}</p>
+          <p>${totalAmount.toFixed(2)}</p>
         </div>
 
         {showLoginPrompt && (

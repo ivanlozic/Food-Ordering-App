@@ -5,20 +5,30 @@ import { logout } from '../../redux-store/authSlice'
 import axios from 'axios'
 import { Link, useNavigate } from 'react-router-dom'
 
+import 'react-phone-number-input/style.css'
+import PhoneInput from 'react-phone-number-input'
+import Spinner from '../../components/spinner/Spinner'
+
 const EditProfilePage = () => {
   const user = useSelector((state) => state.user)
   const [changePassword, setChangePassword] = useState(false)
   const [deleteAccount, setDeleteAccount] = useState(false)
   const [deleteEmail, setDeleteEmail] = useState('')
   const [deletePassword, setDeletePassword] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
+
   const [formData, setFormData] = useState({
+    id: user.id,
     name: user.name || '',
     surname: user.surname || '',
     email: user.email || '',
     password: '',
     phone: user.phone || '',
     newPassword: '',
-    confirmPassword: ''
+    confirmPassword: '',
+    streetAddress: user.streetAddress || '',
+    city: user.city || '',
+    country: user.country || ''
   })
 
   const dispatch = useDispatch()
@@ -71,18 +81,22 @@ const EditProfilePage = () => {
     e.preventDefault()
 
     const updatedProfileData = {
-      id:user.id,
+      id: user.id,
       name: formData.name,
       surname: formData.surname,
       email: formData.email,
       password: formData.password,
       phone: formData.phone,
+      streetAddress: formData.streetAddress,
+      city: formData.city,
+      country: formData.country,
       ...(changePassword && {
         newPassword: formData.newPassword,
         confirmPassword: formData.confirmPassword
       })
     }
 
+    setIsLoading(true)
     try {
       const response = await axios.put(
         'http://localhost:5000/users',
@@ -90,6 +104,7 @@ const EditProfilePage = () => {
       )
 
       if (response.status === 200) {
+        setIsLoading(false)
         if (
           window.confirm(
             'Profile updated successfully. Click OK to return to the home page and login again.'
@@ -98,10 +113,9 @@ const EditProfilePage = () => {
           dispatch(logout())
           navigate('/')
         }
-      } else {
-        console.error('Error updating profile:', response.data.message)
       }
     } catch (error) {
+      alert(error.response.data.message)
       console.error('Axios error:', error)
     }
   }
@@ -111,8 +125,13 @@ const EditProfilePage = () => {
       <Link to='/' className={classes.backButton}>
         Back to Home Page
       </Link>
+      {isLoading && <Spinner />}
       <h2>Edit Profile</h2>
       <form onSubmit={handleSubmit}>
+        <div className={classes['form-group']}>
+          <label htmlFor='name'>ID:</label>
+          <input type='text' id='id' name='id' value={formData.id} disabled />
+        </div>
         <div className={classes['form-group']}>
           <label htmlFor='name'>Name:</label>
           <input
@@ -153,7 +172,6 @@ const EditProfilePage = () => {
             onChange={handleChange}
           />
         </div>
-
         <div className={classes['form-group']}>
           <label className={classes.checkboxLabel}>
             <input
@@ -188,13 +206,45 @@ const EditProfilePage = () => {
             </div>
           </div>
         )}
+
+        <PhoneInput
+          placeholder='Enter phone number'
+          value={String(formData.phone)}
+          onChange={(value) => {
+            setFormData({
+              ...formData,
+              phone: value
+            })
+          }}
+        />
+
         <div className={classes['form-group']}>
-          <label htmlFor='phone'>Phone:</label>
+          <label htmlFor='streetAddress'>Street Address:</label>
           <input
             type='text'
-            id='phone'
-            name='phone'
-            value={formData.phone}
+            id='streetAddress'
+            name='streetAddress'
+            value={formData.streetAddress}
+            onChange={handleChange}
+          />
+        </div>
+        <div className={classes['form-group']}>
+          <label htmlFor='city'>City:</label>
+          <input
+            type='text'
+            id='city'
+            name='city'
+            value={formData.city}
+            onChange={handleChange}
+          />
+        </div>
+        <div className={classes['form-group']}>
+          <label htmlFor='country'>Country:</label>
+          <input
+            type='text'
+            id='country'
+            name='country'
+            value={formData.country}
             onChange={handleChange}
           />
         </div>

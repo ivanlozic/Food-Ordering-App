@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import styles from './CreateAccountPage.module.css'
 import axios from 'axios'
 import { Link, useNavigate } from 'react-router-dom'
+import 'react-phone-number-input/style.css'
+import PhoneInput from 'react-phone-number-input'
 
 const CreateAccountPage = () => {
   const [name, setName] = useState('')
@@ -9,19 +11,20 @@ const CreateAccountPage = () => {
   const [email, setEmail] = useState('')
   const [phoneNumber, setPhoneNumber] = useState('')
   const [password, setPassword] = useState('')
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [passwordMatchError,setPasswordMatchError] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('')
+  const [passwordMatchError, setPasswordMatchError] = useState('')
+  const [streetAddress, setStreetAddress] = useState('')
+  const [city, setCity] = useState('')
+  const [country, setCountry] = useState('')
 
-
-  const navigate = useNavigate();
-
+  const navigate = useNavigate()
 
   const handleSubmit = async (event) => {
     event.preventDefault()
 
     if (password !== confirmPassword) {
-      setPasswordMatchError('Passwords do not match');
-      return;
+      setPasswordMatchError('Passwords do not match')
+      return
     }
 
     const userData = {
@@ -33,19 +36,22 @@ const CreateAccountPage = () => {
       phoneNumber
     }
 
-  
-      try {
-        const response = await axios.post('http://localhost:5000/users', userData)
-        console.log('User registered successfully:', response.data)
-        alert('User registered successfully')
-        navigate('/')
-       
-      } catch (error) {
-        console.log(error)
-      }
-    
+    try {
+      const response = await axios.post('http://localhost:5000/users', userData)
+      console.log('User registered successfully:', response.data)
 
-  
+      
+      if (response.status === 200) {
+        alert('User registered successfully')
+        navigate('/')        
+      }
+
+    } catch (error) {
+      alert(error.response.data.message)
+      console.log(error)
+    }
+
+    
   }
 
   return (
@@ -86,15 +92,17 @@ const CreateAccountPage = () => {
           />
         </div>
         <div className={styles.formGroup}>
-          <label htmlFor="confirmPassword">Confirm Password:</label>
+          <label htmlFor='confirmPassword'>Confirm Password:</label>
           <input
-            type="password"
-            id="confirmPassword"
+            type='password'
+            id='confirmPassword'
             value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}      
+            onChange={(e) => setConfirmPassword(e.target.value)}
             className={styles.input}
           />
-          {passwordMatchError && <p className={styles.errorMessage}>{passwordMatchError}</p>}
+          {passwordMatchError && (
+            <p className={styles.errorMessage}>{passwordMatchError}</p>
+          )}
         </div>
         <div className={styles.formGroup}>
           <label htmlFor='email'>Email:</label>
@@ -106,16 +114,44 @@ const CreateAccountPage = () => {
             className={styles.input}
           />
         </div>
+
+        <PhoneInput
+          placeholder='Enter phone number'
+          value={String(phoneNumber)}
+          onChange={(value) => setPhoneNumber(value)}
+        />
+
         <div className={styles.formGroup}>
-          <label htmlFor='phoneNumber'>Phone Number:</label>
+          <label htmlFor='streetAddress'>Street Address:</label>
           <input
-            type='tel'
-            id='phoneNumber'
-            value={phoneNumber}
-            onChange={(e) => setPhoneNumber(e.target.value)}
+            type='text'
+            id='streetAddress'
+            value={streetAddress}
+            onChange={(e) => setStreetAddress(e.target.value)}
             className={styles.input}
           />
         </div>
+        <div className={styles.formGroup}>
+          <label htmlFor='city'>City:</label>
+          <input
+            type='text'
+            id='city'
+            value={city}
+            onChange={(e) => setCity(e.target.value)}
+            className={styles.input}
+          />
+        </div>
+        <div className={styles.formGroup}>
+          <label htmlFor='country'>Country:</label>
+          <input
+            type='text'
+            id='country'
+            value={country}
+            onChange={(e) => setCountry(e.target.value)}
+            className={styles.input}
+          />
+        </div>
+
         <button type='submit' className={styles.button}>
           Create Account
         </button>
