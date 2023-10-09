@@ -21,7 +21,7 @@ const MyReservationsPage = () => {
   }
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/orders/${user.id}`)
+    fetch(`https://fluffy-jay-peplum.cyclic.cloud/api/orders/${user.id}`)
       .then((response) => response.json())
       .then((data) => {
         if (Array.isArray(data.data.orders)) {

@@ -13,7 +13,6 @@ import { BackToTopButton } from '../../components/buttons/back-to-top-button'
 import React from 'react'
 import { DecreaseButton } from '../../components/buttons/decrease-button'
 import { IncreaseButton } from '../../components/buttons/increase-button'
-import { SubmitButton } from '../../components/buttons/submit-button'
 import { CloseButton } from '../../components/buttons/close-button'
 
 function CheckoutPage() {
@@ -148,7 +147,7 @@ function CheckoutPage() {
       }
       console.log(data)
 
-      fetch(`http://localhost:5000/api/orders/:${user.id}`, {
+      fetch(`https://fluffy-jay-peplum.cyclic.cloud/api/orders/:${user.id}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -294,9 +293,7 @@ function CheckoutPage() {
               onChange={handleChange}
               value={values.city}
             />
-            {errors.city && (
-              <div className={classes.error}>{errors.city}</div>
-            )}
+            {errors.city && <div className={classes.error}>{errors.city}</div>}
           </div>
           <div className={classes.formGroup}>
             <label>Country:</label>
@@ -474,6 +471,7 @@ function CheckoutPage() {
                 isFormValid()
                 setShowPaymentModal(false)
               }}
+              disabled
             >
               Pay with Card
             </button>

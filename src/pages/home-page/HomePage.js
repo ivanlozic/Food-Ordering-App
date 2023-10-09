@@ -30,7 +30,9 @@ const HomePage = () => {
   useEffect(() => {
     async function logMenu() {
       try {
-        const response = await fetch('http://localhost:5000/api/menu')
+        const response = await fetch(
+          'https://fluffy-jay-peplum.cyclic.cloud/api/menu'
+        )
         const menuData = await response.json()
         setMenu(menuData)
         setLoading(false)

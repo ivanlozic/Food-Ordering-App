@@ -59,12 +59,15 @@ const EditProfilePage = () => {
 
   const handleConfirmDelete = async () => {
     try {
-      const response = await axios.delete('http://localhost:5000/users', {
-        data: {
-          email: deleteEmail,
-          password: deletePassword
+      const response = await axios.delete(
+        'https://fluffy-jay-peplum.cyclic.cloud/users',
+        {
+          data: {
+            email: deleteEmail,
+            password: deletePassword
+          }
         }
-      })
+      )
 
       if (response.status === 200) {
         alert('Account deleted successfully')
@@ -99,7 +102,7 @@ const EditProfilePage = () => {
     setIsLoading(true)
     try {
       const response = await axios.put(
-        'http://localhost:5000/users',
+        'https://fluffy-jay-peplum.cyclic.cloud/users',
         updatedProfileData
       )
 

@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
-const storedToken = localStorage.getItem('authToken');
-const storedUserData = localStorage.getItem('userData');
+const storedToken = localStorage.getItem('authToken')
+const storedUserData = localStorage.getItem('userData')
 
 const initialState = {
   isLoggedIn: !!storedToken,
@@ -13,19 +13,19 @@ const initialState = {
   phone: '',
   streetAddress: '',
   city: '',
-  country: '',
-};
+  country: ''
+}
 
 if (storedUserData) {
-  const userData = JSON.parse(storedUserData);
-  initialState.id = userData.id;
-  initialState.name = userData.name;
-  initialState.surname = userData.surname;
-  initialState.email = userData.email;
-  initialState.phone = userData.phoneNumber;
-  initialState.streetAddress = userData.streetAddress;
-  initialState.city = userData.city;
-  initialState.country = userData.country;
+  const userData = JSON.parse(storedUserData)
+  initialState.id = userData.id
+  initialState.name = userData.name
+  initialState.surname = userData.surname
+  initialState.email = userData.email
+  initialState.phone = userData.phoneNumber
+  initialState.streetAddress = userData.streetAddress
+  initialState.city = userData.city
+  initialState.country = userData.country
 }
 
 const userSlice = createSlice({
@@ -43,8 +43,8 @@ const userSlice = createSlice({
       state.streetAddress = action.payload.user.streetAddress
       state.city = action.payload.user.city
       state.country = action.payload.user.country
-      localStorage.setItem('authToken', action.payload.token);
-      localStorage.setItem('userData', JSON.stringify(action.payload.user));
+      localStorage.setItem('authToken', action.payload.token)
+      localStorage.setItem('userData', JSON.stringify(action.payload.user))
     },
     logout: (state) => {
       state.isLoggedIn = false
@@ -60,21 +60,24 @@ const userSlice = createSlice({
       state.country = ''
     },
     updateProfile: (state, action) => {
-      const { name, surname, email, phone, streetAddress, city, country } = action.payload;
-      state.name = name;
-      state.surname = surname;
-      state.email = email;
-      state.phone = phone;
-      state.streetAddress = streetAddress;
-      state.city = city;
-      state.country = country;
-    },
+      const { name, surname, email, phone, streetAddress, city, country } =
+        action.payload
+      state.name = name
+      state.surname = surname
+      state.email = email
+      state.phone = phone
+      state.streetAddress = streetAddress
+      state.city = city
+      state.country = country
+    }
   }
 })
 
 export const fetchUser = (id) => async (dispatch) => {
   try {
-    const response = await fetch(`http://localhost:5000/users/${id}`)
+    const response = await fetch(
+      `https://fluffy-jay-peplum.cyclic.cloud/users/${id}`
+    )
     const userData = await response.json()
     console.log(response.data)
     dispatch({
