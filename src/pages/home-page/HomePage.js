@@ -2,7 +2,7 @@ import { BackToTopButton } from '../../components/buttons/back-to-top-button/ind
 import { Navbar } from '../../components/navigation/navbar'
 import React, { useEffect, useState } from 'react'
 import Modal from 'react-modal'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { addToCart } from '../../redux-store/cart'
 import { MenuItem } from '../../components/menu/ment-item'
 import classes from './HomePage.module.css'
@@ -10,10 +10,6 @@ import { CloseButton } from '../../components/buttons/close-button'
 import { DecreaseButton } from '../../components/buttons/decrease-button'
 import { IncreaseButton } from '../../components/buttons/increase-button'
 import Spinner from '../../components/spinner/Spinner'
-import { Link } from 'react-router-dom'
-import { logout } from '../../redux-store/authSlice'
-import profilePhoto from '../../assets/images/user.png'
-import LoginForm from '../../components/navigation/navbar/login-form/LoginForm'
 
 const customStyles = {
   overlay: {
@@ -27,8 +23,6 @@ const HomePage = () => {
   const [selectedItem, setSelectedItem] = useState(null)
   const [totalPriceValue, setTotalPriceValue] = useState(0)
   const [currentQuantity, setCurrentQuantity] = useState(1)
-  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false)
-  const user = useSelector((state) => state.user)
 
   const [loading, setLoading] = useState(true)
   const [menu, setMenu] = useState([])
@@ -111,67 +105,11 @@ const HomePage = () => {
       ) : null
     })
   }
-
-  const openLoginModal = () => {
-    setIsLoginModalOpen(true)
-  }
-
-  const closeLoginModal = () => {
-    setIsLoginModalOpen(false)
-  }
-  const handleLogout = () => {
-    localStorage.removeItem('authToken')
-    dispatch(logout())
-  }
   return (
     <div>
       <Navbar />
-   
-      <div className={classes.Main}>
-      <div className={classes.authButtons}>
-        {user.isLoggedIn ? (
-          <div className={classes.profileButton}>
-            <button>
-              <img
-                src={profilePhoto}
-                alt='Profile'
-                className={classes.profilePicture}
-              />
-            </button>
-            <div className={classes.dropdown}>
-              <ul>
-                <li>
-                  <Link to='/myReservationsPage'>My Reservations</Link>
-                </li>
-                <li>
-                  <Link to='/editProfilePage'>Edit Profile</Link>
-                </li>
-                <li>
-                  <button className={classes.logoutButton} onClick={handleLogout}>Logout</button>
-                </li>
-              </ul>
-            </div>
-          </div>
-        ) : (
-          <>
-            <button onClick={openLoginModal}>Log In</button>
-            <Link to='/createAccount'>
-              <button>Sign Up</button>
-            </Link>
-          </>
-        )}
-      </div>
 
-      <Modal
-        isOpen={isLoginModalOpen}
-        onRequestClose={closeLoginModal}
-        contentLabel='Login Modal'
-        ariaHideApp={false}
-        className={classes.ModalLogin}
-      >
-        <CloseButton onClick={closeLoginModal} />
-        <LoginForm onClose={() => setIsLoginModalOpen(false)} />
-      </Modal>
+      <div className={classes.Main}>
         {loading ? <Spinner /> : generateMenuComponents()}
 
         <Modal
