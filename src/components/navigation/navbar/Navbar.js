@@ -5,21 +5,11 @@ import { Cart } from '../../cart'
 import { SideModal } from './side-modal'
 import logo from '../../../assets/images/logo3.png'
 import React from 'react'
-import LoginForm from './login-form/LoginForm'
-import { Link } from 'react-router-dom'
-import { logout } from '../../../redux-store/authSlice'
-import profilePhoto from '../../../assets/images/user.png'
-import Modal from 'react-modal'
-import { CloseButton } from '../../buttons/close-button'
 
 const Navbar = () => {
   const cart = useSelector((state) => state.cart)
-  const user = useSelector((state) => state.user)
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const [showLoginForm, setShowLoginForm] = useState(false)
-  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false)
 
-  const dispatch = useDispatch()
   const handleCartClick = () => {
     setIsModalOpen(true)
   }
@@ -27,28 +17,12 @@ const Navbar = () => {
   const handleCloseModal = () => {
     setIsModalOpen(false)
   }
-  const handleLogout = () => {
-    localStorage.removeItem('authToken')
-    dispatch(logout())
-  }
-
-  const openLoginModal = () => {
-    setIsLoginModalOpen(true)
-  }
-
-  const closeLoginModal = () => {
-    setIsLoginModalOpen(false)
-  }
 
   return (
     <div className={classes.Navbar}>
       <div className={classes.nav}>
         <div className={classes.headings}>
           <img src={logo} alt='logo' />
-          <div>
-            <h2>Chicken chill</h2>
-            <h4>Feel the chill</h4>
-          </div>
         </div>
 
         <ul className={classes.ul}>
@@ -74,54 +48,8 @@ const Navbar = () => {
             <a href='#drinks'>Drinks</a>
           </li>
         </ul>
-
-        <div className={classes.authButtons}>
-          {user.isLoggedIn ? (
-            <div className={classes.profileButton}>
-              <button>
-                <img
-                  src={profilePhoto}
-                  alt='Profile'
-                  className={classes.profilePicture}
-                />
-              </button>
-              <div className={classes.dropdown}>
-                <ul>
-                  <li>
-                    <Link to='/myReservationsPage'>My Reservations</Link>
-                  </li>
-                  <li>
-                    <Link to='/editProfilePage'>Edit Profile</Link>
-                  </li>
-                  <li>
-                    <button onClick={handleLogout}>Logout</button>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          ) : (
-            <>
-              <button onClick={openLoginModal}>Log In</button>
-              <Link to='/createAccount'>
-                <button>Sign Up</button>
-              </Link>
-            </>
-          )}
-        </div>
       </div>
-      {showLoginForm && <LoginForm onClose={() => setShowLoginForm(false)} />}
       {cart.cartItems.length > 0 && <Cart onClick={handleCartClick} />}
-
-      <Modal
-        isOpen={isLoginModalOpen}
-        onRequestClose={closeLoginModal}
-        contentLabel='Login Modal'
-        ariaHideApp={false}
-        className={classes.Modal}
-      >
-        <CloseButton onClick={closeLoginModal} />
-        <LoginForm onClose={() => setIsLoginModalOpen(false)} />
-      </Modal>
 
       <SideModal isOpen={isModalOpen} onClose={handleCloseModal} />
     </div>
