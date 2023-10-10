@@ -90,3 +90,10 @@
   cursor: pointer;
   font-weight: bold;
 }
+
+@media (max-width: 768px) {
+  .container {
+    padding: 60px;
+  }
+
+}
