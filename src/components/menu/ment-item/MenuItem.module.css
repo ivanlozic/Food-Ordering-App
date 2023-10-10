@@ -88,22 +88,13 @@
     align-items: center;
   }
   .container {
-    width: 85%;
+    flex-direction: column;
     padding: 20px;
-    height: 250px;
-    margin: 5px;
-    margin-top: 20px;
-  }
-}
-
-@media (max-width: 410px) {
-  .container {
-    width: 80%;
     height: 340px;
     margin: 5px;
     margin-top: 20px;
+    width: 80%;
     padding-bottom: 35px;
-    flex-direction: column;
   }
   .info {
     align-items: center;
