@@ -4,7 +4,7 @@ html {
 
 .Main {
   background-color: rgb(247, 247, 247);
-  padding:10px;
+  padding: 10px;
   padding-top: 80px;
   position: relative;
 }
@@ -111,101 +111,33 @@ html {
   margin-left: 10px;
 }
 
+
 .totalAmount p {
   margin: 0 5px;
 }
 
-.authButtons {
-  position: absolute;
-  right: 30px;
-  top: 30px;
-  width: fit-content;
-  border: 4px solid #2375cd;
-  border-radius: 10px;
-  margin-left: 20px;
-}
-
-.authButtons button {
-  margin: 10px;
-  padding: 12px 25px;
-  font-size: 16px;
-  width: 100px;
-  color: #fff;
-  background-color: #2375cd;
-  border: none;
-  border-radius: 7px;
-  cursor: pointer;
-}
-
-.authButtons button:hover {
-  background-color: #0056b3;
-}
-
-.profileButton {
-  position: relative;
-}
-
-.profilePicture {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  object-fit: cover;
-  cursor: pointer;
-  background-color: white;
-}
-
-.dropdown {
-  position: absolute;
-  top: 105%;
-  left: 0;
-  background-color: #fff;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 8px;
-  display: none;
-}
-
-.dropdown li {
-  list-style: none;
-  width: 150px;
-}
-
-.dropdown a,
-.dropdown button {
-  display: block;
-  padding: 8px;
-  text-decoration: none;
-  color: #333;
-}
-
-.dropdown a:hover,
-.dropdown button:hover {
-  background-color: #f3f3f3;
-}
-
-.profileButton:hover .dropdown {
-  display: block;
-}
-
-.dropdown .logoutButton {
-  color: white;
-}
-.ModalLogin {
-  width: 35%;
-  height: fit-content;
-  background-color: white;
-  margin: 0 auto;
-  border-radius: 10px;
-  margin-top: 20px;
-  padding-bottom: 20px;
-}
-
-@media (max-width: 810px) {
+@media (max-width: 1010px) {
   .Modal {
-    width: 80%;
+    width: 70%;
+    height: 410px;
+  }
+  .imgModal {
+    height: 200px;
+  }
+  
+  .info {
+    display: flex;
+    text-align: center;
+    margin-left: 0;
+    padding-left: 0;
   }
 }
 
 @media (max-width: 700px) {
+
+  .Modal{
+    height: fit-content;
+  }
   .orderBox {
     flex-direction: column;
     margin: 0 auto;

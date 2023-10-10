@@ -43,12 +43,6 @@ a {
   text-decoration: none;
 }
 
-.headings {
-  display: flex;
-  align-items: center;
-}
-
-
 .headings img {
   width: 200px;
   height: 150px;
@@ -95,6 +89,7 @@ a {
 
 .dropdown {
   position: absolute;
+  z-index: 1;
   top: 105%;
   left: 0;
   background-color: #fff;
@@ -135,9 +130,89 @@ a {
   padding-bottom: 20px;
 }
 
-.rightSide{
-  display:flex;
-  flex-direction:column;
+.rightSide {
+  display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+.menuToggle{
+  display: none;
+}
+
+@media (max-width: 868px) {
+  .Navbar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 10px;
+    background-color: black;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+
+  .nav {
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    width: 100vw;
+  }
+
+  .headings img {
+    margin: 0;
+    width: 150px;
+    height: 100px;
+    border-radius: 10px;
+  }
+
+  .li {
+    width: 100%;
+    text-align: center;
+    margin: 10px 0;
+    padding: 6px;
+  }
+
+  .Modal {
+    width: 75%;
+    margin-top: 70px;
+    font-size: 14px;
+  }
+  .dropdown {
+    position: absolute;
+    z-index: 1;
+    top: 105%;
+    left: 0;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 8px;
+    display: none;
+  }
+
+  .ul {
+    display: none;
+    
+  }
+
+  .menuToggle {
+    display: block;
+    cursor: pointer;
+    background-color: #000;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+  }
+
+  .ul.active {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
 }
