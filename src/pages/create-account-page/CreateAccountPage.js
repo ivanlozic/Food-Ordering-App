@@ -3,7 +3,6 @@ import styles from './CreateAccountPage.module.css'
 import axios from 'axios'
 import { Link, useNavigate } from 'react-router-dom'
 import 'react-phone-number-input/style.css'
-import PhoneInput from 'react-phone-number-input'
 
 const CreateAccountPage = () => {
   const [passwordMatchError, setPasswordMatchError] = useState('')
@@ -11,7 +10,7 @@ const CreateAccountPage = () => {
 
   const [values, setValues] = useState({
     name: '',
-    surame: '',
+    surname: '',
     email: '',
     password: '',
     confirmPassword: '',
@@ -36,6 +35,7 @@ const CreateAccountPage = () => {
     }
 
     const userData = values
+    console.log(userData)
     try {
       const response = await axios.post(
         'https://fluffy-jay-peplum.cyclic.cloud/users',
@@ -46,9 +46,10 @@ const CreateAccountPage = () => {
       if (response.status === 200) {
         alert('User registered successfully')
         navigate('/')
+      }else{
+        console.log('Response does not contain data:', response);
       }
     } catch (error) {
-      alert(error.response.data.message)
       console.log(error)
     }
   }
@@ -58,6 +59,8 @@ const CreateAccountPage = () => {
       setPasswordMatchError('Confirm Password is required')
     } else if (confirmPassword !== password) {
       setPasswordMatchError('Passwords do not match')
+    } else {
+      setPasswordMatchError('')
     }
 
     return errors
@@ -207,12 +210,21 @@ const CreateAccountPage = () => {
             <p className={styles.errorMessage}>{errors.email}</p>
           )}
         </div>
+        <div className={styles.formGroup}>
+          <label htmlFor='phoneNumber'>Phone Number:</label>
+          <input
+            type='number'
+            id='phoneNumber'
+            name='phoneNumber'
+            value={values.phoneNumber}
+            onChange={handleChange}
+            className={styles.input}
+          />
+          {errors.phoneNumber && (
+            <p className={styles.errorMessage}>{errors.phoneNumber}</p>
+          )}
+        </div>
 
-        <PhoneInput
-          placeholder='Enter phone number'
-          value={String(values.phoneNumber)}
-          onChange={(value) => setValues({ ...values, phoneNumber: value })}
-        />
         {errors.name && <p className={styles.errorMessage}>{errors.name}</p>}
         <div className={styles.formGroup}>
           <label htmlFor='streetAddress'>Street Address:</label>

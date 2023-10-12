@@ -14,6 +14,7 @@ import React from 'react'
 import { DecreaseButton } from '../../components/buttons/decrease-button'
 import { IncreaseButton } from '../../components/buttons/increase-button'
 import { CloseButton } from '../../components/buttons/close-button'
+import FormValidator from '../../components/formValidator/FormValidator'
 
 function CheckoutPage() {
   const dispatch = useDispatch()
@@ -28,8 +29,8 @@ function CheckoutPage() {
     Email: user.email || '',
     MobilePhone:
       user.phone !== undefined && user.phone !== null ? String(user.phone) : '',
-    city: user.city || '',
-    country: user.country || ''
+    City: user.city || '',
+    Country: user.country || ''
   })
   const [errors, setErrors] = useState({})
   const [showPaymentModal, setShowPaymentModal] = useState(false)
@@ -79,56 +80,10 @@ function CheckoutPage() {
       dispatch(removeFromCart(id))
     }
   }
-  /*
-  const handleSubmit = (event) => {
-    event.preventDefault()
-    const validationErrors = validate()
-    if (Object.keys(validationErrors).length === 0) {
-      const cartData = [...cart.cartItems]
-      const data = {
-        FirstName: values.FirstName,
-        LastName: values.LastName,
-        Address: values.Address,
-        Email: values.Email,
-        MobilePhone: values.MobilePhone,
-        order: cartData,
-        totalAmount: totalAmount
-      }
-
-      fetch('https://fluffy-jay-peplum.cyclic.cloud/api/orders', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-      })
-        .then((response) => {
-          dispatch(removeAllItems())
-          setValues({
-            FirstName: '',
-            LastName: '',
-            Address: '',
-            Email: '',
-            MobilePhone: ''
-          })
-          alert('Succesfully ordered')
-          navigate('/')
-          console.log(response)
-        })
-        .catch((error) => {
-          console.error(error)
-        })
-    } else {
-      setErrors(validationErrors)
-    }
-  }
-
-  */
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    console.log(values)
-    const validationErrors = validate(values)
+    const validationErrors = FormValidator(values)
     const dateToday = new Date()
     if (Object.keys(validationErrors).length === 0) {
       const cartData = [...cart.cartItems]
@@ -139,13 +94,12 @@ function CheckoutPage() {
         Address: values.Address,
         Email: values.Email,
         MobilePhone: values.MobilePhone,
-        city: values.city,
-        country: values.country,
+        City: values.city,
+        Country: values.country,
         order: cartData,
         totalAmount: totalAmount,
         date: dateToday
       }
-      console.log(data)
 
       fetch(`https://fluffy-jay-peplum.cyclic.cloud/api/orders/:${user.id}`, {
         method: 'POST',
@@ -164,8 +118,8 @@ function CheckoutPage() {
             Address: '',
             Email: '',
             MobilePhone: '',
-            city: '',
-            country: ''
+            City: '',
+            Country: ''
           })
           alert('Successfully ordered')
           navigate('/')
@@ -179,48 +133,8 @@ function CheckoutPage() {
     }
   }
 
-  const validate = (values) => {
-    let errors = {}
-
-    if (!values || !values.FirstName || values.FirstName.trim() === '') {
-      errors.FirstName = 'First Name is required'
-    } else if (values.FirstName[0].toUpperCase() !== values.FirstName[0]) {
-      errors.FirstName = 'First name should start with an uppercase letter'
-    }
-    if (!values || !values.LastName || values.LastName.trim() === '') {
-      errors.LastName = 'Last Name is required'
-    } else if (values.LastName[0].toUpperCase() !== values.LastName[0]) {
-      errors.LastName = 'Last name should start with an uppercase letter'
-    }
-    if (!values || !values.Address || values.Address.trim() === '') {
-      errors.Address = 'Address is required'
-    }
-    if (!values || !values.Email || values.Email.trim() === '') {
-      errors.Email = 'Email is required'
-    } else if (!/\S+@\S+\.\S+/.test(values.Email)) {
-      errors.Email = 'Invalid email address'
-    }
-    if (!values || !values.MobilePhone) {
-      errors.MobilePhone = 'Mobile Phone is required'
-    } else if (
-      !/^[0-9]+$/.test(values.MobilePhone) ||
-      values.MobilePhone.length < 11
-    ) {
-      errors.MobilePhone = 'Mobile Phone must have at least 11-digits'
-    }
-
-    if (!values || !values.city || values.city.trim() === '') {
-      errors.city = 'City is required'
-    }
-
-    if (!values || !values.country || values.country.trim() === '') {
-      errors.country = 'County is required'
-    }
-    return errors
-  }
-
   const isFormValid = () => {
-    const validationErrors = validate(values)
+    const validationErrors = FormValidator(values)
     setErrors(validationErrors)
     setFormReadyToSubmit(Object.keys(validationErrors).length === 0)
     console.log(errors)
@@ -232,7 +146,12 @@ function CheckoutPage() {
       ...prevValues,
       [name]: value
     }))
-    const validationErrors = validate({ ...values, [name]: value })
+
+    const validationErrors = FormValidator({
+      ...values,
+      [name]: value
+    })
+
     setErrors(validationErrors)
   }
 
@@ -288,23 +207,23 @@ function CheckoutPage() {
           <div className={classes.formGroup}>
             <label>City:</label>
             <input
-              id='city'
-              name='city'
+              id='City'
+              name='City'
               onChange={handleChange}
-              value={values.city}
+              value={values.City}
             />
-            {errors.city && <div className={classes.error}>{errors.city}</div>}
+            {errors.City && <div className={classes.error}>{errors.City}</div>}
           </div>
           <div className={classes.formGroup}>
             <label>Country:</label>
             <input
-              id='country'
-              name='country'
+              id='Country'
+              name='Country'
               onChange={handleChange}
-              value={values.country}
+              value={values.Country}
             />
-            {errors.country && (
-              <div className={classes.error}>{errors.country}</div>
+            {errors.Country && (
+              <div className={classes.error}>{errors.Country}</div>
             )}
           </div>
           <div className={classes.formGroup}>

@@ -4,12 +4,14 @@ import React, { useEffect, useState } from 'react'
 import Modal from 'react-modal'
 import { useDispatch } from 'react-redux'
 import { addToCart } from '../../redux-store/cart'
-import { MenuItem } from '../../components/menu/ment-item'
+import { MenuItem } from '../../components/mentItem'
 import classes from './HomePage.module.css'
 import { CloseButton } from '../../components/buttons/close-button'
 import { DecreaseButton } from '../../components/buttons/decrease-button'
 import { IncreaseButton } from '../../components/buttons/increase-button'
 import Spinner from '../../components/spinner/Spinner'
+import useFetch from '../../hooks/useFetch/useFetch'
+import { axiosRoutes } from '../../constants/constants'
 
 const customStyles = {
   overlay: {
@@ -25,29 +27,21 @@ const HomePage = () => {
   const [currentQuantity, setCurrentQuantity] = useState(1)
 
   const [loading, setLoading] = useState(true)
-  const [menu, setMenu] = useState([])
+  const [menu] = useFetch(axiosRoutes.menu)
 
   useEffect(() => {
-    async function logMenu() {
-      try {
-        const response = await fetch(
-          'https://fluffy-jay-peplum.cyclic.cloud/api/menu'
-        )
-        const menuData = await response.json()
-        setMenu(menuData)
-        setLoading(false)
-      } catch (error) {
-        console.error('Error fetching menu:', error)
-        setLoading(false)
-      }
+    if (menu === null) {
+      setLoading(true);
+    } else {
+      setLoading(false);
     }
-    logMenu()
-  }, [])
-
+  }, [menu]);
   const getMenuDataByType = (type) => {
-    return menu.filter((item) => item.type === type)
-  }
-
+    if (menu === null) {
+      return [];
+    }
+    return menu.filter((item) => item.type === type);
+  };
   const menuDataByType = {
     pasta: getMenuDataByType('pasta'),
     popcorn: getMenuDataByType('popcorn'),
