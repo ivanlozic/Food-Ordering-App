@@ -15,7 +15,7 @@ const CreateAccountPage = () => {
     password: '',
     confirmPassword: '',
     phoneNumber: '',
-    streetAddress: '',
+    address: '',
     city: '',
     country: ''
   })
@@ -43,7 +43,7 @@ const CreateAccountPage = () => {
       )
       console.log('User registered successfully:', response.data)
 
-      if (response.status === 200) {
+      if (response.status === 201) {
         alert('User registered successfully')
         navigate('/')
       }else{
@@ -89,8 +89,8 @@ const CreateAccountPage = () => {
     }
     if (
       !values ||
-      !values.streetAddress ||
-      values.streetAddress.trim() === ''
+      !values.address ||
+      values.address.trim() === ''
     ) {
       errors.streetAddress = 'Address is required'
     }
@@ -227,11 +227,11 @@ const CreateAccountPage = () => {
 
         {errors.name && <p className={styles.errorMessage}>{errors.name}</p>}
         <div className={styles.formGroup}>
-          <label htmlFor='streetAddress'>Street Address:</label>
+          <label htmlFor='address'>Street Address:</label>
           <input
             type='text'
-            id='streetAddress'
-            name='streetAddress'
+            id='address'
+            name='address'
             value={values.streetAddress}
             onChange={handleChange}
             className={styles.input}
