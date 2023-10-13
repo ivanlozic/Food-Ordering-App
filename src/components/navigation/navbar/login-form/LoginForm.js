@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import styles from './LoginForm.module.css'
+import classes from './LoginForm.module.css'
 import { login } from '../../../../redux-store/authSlice'
 import { useDispatch } from 'react-redux'
 import axios from 'axios'
@@ -48,7 +48,7 @@ const LoginForm = ({ onClose }) => {
       {loading ? (
         <Spinner />
       ) : (
-        <form className={styles.form} onSubmit={handleSubmit}>
+        <form className={classes.form} onSubmit={handleSubmit}>
           <input
             type='text'
             placeholder='Username'

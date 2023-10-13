@@ -2,7 +2,7 @@ import { BackToTopButton } from '../../components/buttons/back-to-top-button/ind
 import { Navbar } from '../../components/navigation/navbar'
 import React, { useEffect, useState } from 'react'
 import Modal from 'react-modal'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { addToCart } from '../../redux-store/cart'
 import { MenuItem } from '../../components/mentItem'
 import classes from './HomePage.module.css'
@@ -103,7 +103,7 @@ const HomePage = () => {
     <div>
       <Navbar />
 
-      <div className={classes.Main}>
+      <div className={classes.main}>
         {loading ? <Spinner /> : generateMenuComponents()}
 
         <Modal

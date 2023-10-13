@@ -10,6 +10,7 @@ const initialState = {
   name: '',
   surname: '',
   email: '',
+  password: '',
   phone: '',
   streetAddress: '',
   city: '',
@@ -22,6 +23,7 @@ if (storedUserData) {
   initialState.name = userData.name
   initialState.surname = userData.surname
   initialState.email = userData.email
+  initialState.password = userData.password
   initialState.phone = userData.phoneNumber
   initialState.streetAddress = userData.streetAddress
   initialState.city = userData.city
@@ -39,6 +41,7 @@ const userSlice = createSlice({
       state.name = action.payload.user.name
       state.surname = action.payload.user.surname
       state.email = action.payload.user.email
+      state.password = action.payload.user.password
       state.phone = action.payload.user.phoneNumber
       state.streetAddress = action.payload.user.streetAddress
       state.city = action.payload.user.city
@@ -54,10 +57,14 @@ const userSlice = createSlice({
       state.name = ''
       state.surname = ''
       state.email = ''
+      state.password = ''
       state.phone = ''
       state.streetAddress = ''
       state.city = ''
       state.country = ''
+
+      localStorage.removeItem('authToken')
+      localStorage.removeItem('userData')
     },
     updateProfile: (state, action) => {
       const { name, surname, email, phone, streetAddress, city, country } =
@@ -86,6 +93,7 @@ export const fetchUser = (id) => async (dispatch) => {
         name: userData.data.name,
         surname: userData.data.surname,
         email: userData.data.email,
+        password: userData.data.password,
         phone: userData.data.phone
       }
     })

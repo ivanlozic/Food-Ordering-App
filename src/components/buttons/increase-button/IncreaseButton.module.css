@@ -1,0 +1,15 @@
+.increaseButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    background-color: white;
+    color: #2375cd;
+    font-size: 25px;
+    padding: 7px;
+    margin: 0 20px;
+    border-radius: 50%;
+    cursor: pointer;
+    height: 30px;
+    width: 30px;
+  }

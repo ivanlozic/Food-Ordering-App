@@ -1,4 +1,4 @@
-.modal-overlay {
+.modalOverlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -11,7 +11,7 @@
   align-items: center;
 }
 
-.modal-container {
+.modalContainer {
   position: fixed;
   top: 0;
   right: -600px;
@@ -27,27 +27,27 @@
   border-top-left-radius: 10px;
 }
 
-.modal-container::-webkit-scrollbar {
+.modalContainer::-webkit-scrollbar {
   width: 14px;
 }
 
-.modal-container::-webkit-scrollbar-track {
+.modalContainer::-webkit-scrollbar-track {
   background: #f1f1f1;
 }
 
-.modal-container::-webkit-scrollbar-thumb {
+.modalContainer::-webkit-scrollbar-thumb {
   background: #888;
   border-radius: 10px;
 }
 
-.modal-container::-webkit-scrollbar-thumb:hover {
+.modalContainer::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
-.modal-container.open {
+.modalContainer.open {
   transform: translateX(-600px);
 }
 
-.close-button {
+.closeButton {
   position: absolute;
   top: 10px;
   right: 10px;
@@ -58,7 +58,7 @@
   color: #000;
 }
 
-.modal-container h2 {
+.modalContainer h2 {
   font-size: 2rem;
   margin-top: 2rem;
 }
@@ -67,28 +67,28 @@ p {
   margin-left: 1rem;
 }
 
-.order-ul {
+.orderList {
   max-height: calc(100% - 220px);
   overflow: auto;
   padding: 0;
   margin-bottom: 120px;
 }
 
-.order-ul::-webkit-scrollbar {
+.orderList::-webkit-scrollbar {
   width: 11px;
 }
 
-.order-ul::-webkit-scrollbar-track {
+.orderList::-webkit-scrollbar-track {
   background: #f1f1f1;
   border-radius: 10px;
 }
 
-.order-ul::-webkit-scrollbar-thumb {
+.orderList::-webkit-scrollbar-thumb {
   background: #888;
   border-radius: 10px;
 }
 
-.order-ul::-webkit-scrollbar-thumb:hover {
+.orderList::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
 
@@ -99,13 +99,13 @@ li {
   list-style: none;
 }
 
-.side-modal-img {
+.sideModalImage {
   width: 100px;
   height: 70px;
   border-radius: 10px;
 }
 
-.li-box {
+.listBox {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -113,16 +113,16 @@ li {
   padding: 10px;
 }
 
-.li-box:hover {
+.listBox:hover {
   background-color: #f2fcfd;
   cursor: pointer;
 }
 
-.li-box_description {
+.listBoxDescription {
   display: flex;
   align-items: center;
 }
-.li-box_description p {
+.listBoxDescription p {
   margin: 10px;
 }
 
@@ -245,7 +245,7 @@ li {
 }
 
 @media (max-width: 810px) {
-  .modal-container {
+  .modalContainer {
     width: 60%;
   }
 
@@ -256,11 +256,11 @@ li {
 }
 
 @media (max-width: 600px) {
-  .close-button {
+  .closeButton {
     top: 10;
     right: 20px;
   }
-  .modal-container {
+  .modalContainer {
     right: -600px;
     width: 90%;
     height: 100%;
@@ -269,7 +269,7 @@ li {
     border-top-left-radius: 0;
   }
 
-  .li-box {
+  .liBox {
     display: flex;
     align-items: center;
     justify-content: center;

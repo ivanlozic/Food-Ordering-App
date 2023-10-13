@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import classes from './editProfilePage.module.css'
 import { logout } from '../../redux-store/authSlice'
-import axios from 'axios'
 import { Link, useNavigate } from 'react-router-dom'
-
 import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input'
 import Spinner from '../../components/spinner/Spinner'
+import { axiosInstance } from '../../config/axios'
+import { axiosRoutes } from '../../constants/constants'
 
 const EditProfilePage = () => {
   const user = useSelector((state) => state.user)
@@ -58,26 +58,29 @@ const EditProfilePage = () => {
   }
 
   const handleConfirmDelete = async () => {
-    try {
-      const response = await axios.delete(
-        'https://fluffy-jay-peplum.cyclic.cloud/users',
-        {
-          data: {
-            email: deleteEmail,
-            password: deletePassword
-          }
-        }
-      )
 
-      if (response.status === 200) {
-        alert('Account deleted successfully')
-        navigate('/')
-      } else {
-        console.error('Error deleting account:', response.data.message)
+    if (user.password === deletePassword){
+      try {
+        const response = await axiosInstance.delete(
+          `${axiosRoutes.users.deleteUser}/${user.email}`
+        )
+        console.log(response)
+
+        if (response.status === 200) {
+          dispatch(logout())
+          alert('Account deleted successfully')
+          navigate('/')
+        } else {
+          console.error('Error deleting account:', response.data.message)
+        }
+      } catch (error) {
+        console.error('Axios error:', error)
       }
-    } catch (error) {
-      console.error('Axios error:', error)
+    }else{
+      console.log(user.password, deletePassword)
+      alert('Your password is not correct')
     }
+   
   }
 
   const handleSubmit = async (e) => {
@@ -101,8 +104,8 @@ const EditProfilePage = () => {
 
     setIsLoading(true)
     try {
-      const response = await axios.put(
-        'https://fluffy-jay-peplum.cyclic.cloud/users',
+      const response = await axiosInstance.put(
+        `${axiosRoutes.users.updateUser}`,
         updatedProfileData
       )
 

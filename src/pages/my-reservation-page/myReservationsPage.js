@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import classes from './myReservationsPage.module.css'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { axiosInstance } from '../../config/axios'
+import { axiosRoutes } from '../../constants/constants'
 
 const MyReservationsPage = () => {
   const [reservations, setReservations] = useState([])
@@ -21,18 +23,17 @@ const MyReservationsPage = () => {
   }
 
   useEffect(() => {
-    fetch(`https://fluffy-jay-peplum.cyclic.cloud/api/orders/${user.id}`)
-      .then((response) => response.json())
-      .then((data) => {
-        if (Array.isArray(data.data.orders)) {
-          setReservations(data.data.orders)
+    axiosInstance
+      .get(`${axiosRoutes.orders.getOrders(user.id)}`)
+      .then((response) => {
+        if (Array.isArray(response.data.data.orders)) {
+          setReservations(response.data.data.orders)
           setLoading(false)
         } else {
-          console.error('API response is not an array:', data)
+          console.error('API response is not an array:', response.data)
           setLoading(false)
         }
       })
-
       .catch((error) => {
         console.error('Error fetching reservations:', error)
         setLoading(false)

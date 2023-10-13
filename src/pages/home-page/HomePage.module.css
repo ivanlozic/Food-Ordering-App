@@ -2,7 +2,7 @@ html {
   scroll-behavior: smooth;
 }
 
-.Main {
+.main {
   background-color: rgb(247, 247, 247);
   padding: 10px;
   padding-top: 80px;
@@ -77,22 +77,6 @@ html {
   color: #2375cd;
 }
 
-.quantity button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: none;
-  background-color: white;
-  color: #2375cd;
-  font-size: 25px;
-  padding: 7px;
-  margin: 0 20px;
-  border-radius: 50%;
-  cursor: pointer;
-  height: 30px;
-  width: 30px;
-}
-
 .quantity p {
   margin: 0;
   text-align: center;
@@ -110,7 +94,6 @@ html {
   height: 20px;
   margin-left: 10px;
 }
-
 
 .totalAmount p {
   margin: 0 5px;

@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import styles from './CreateAccountPage.module.css'
-import axios from 'axios'
 import { Link, useNavigate } from 'react-router-dom'
 import 'react-phone-number-input/style.css'
+import { axiosRoutes } from '../../constants/constants'
+import { axiosInstance } from '../../config/axios'
 
 const CreateAccountPage = () => {
   const [passwordMatchError, setPasswordMatchError] = useState('')
@@ -37,8 +38,8 @@ const CreateAccountPage = () => {
     const userData = values
     console.log(userData)
     try {
-      const response = await axios.post(
-        'https://fluffy-jay-peplum.cyclic.cloud/users',
+      const response = await axiosInstance.post(
+        `${axiosRoutes.users.createUser}`,
         userData
       )
       console.log('User registered successfully:', response.data)
@@ -46,10 +47,11 @@ const CreateAccountPage = () => {
       if (response.status === 201) {
         alert('User registered successfully')
         navigate('/')
-      }else{
-        console.log('Response does not contain data:', response);
+      } else {
+        console.log('Response does not contain data:', response)
       }
     } catch (error) {
+      alert(error.response.data.message)
       console.log(error)
     }
   }
@@ -87,11 +89,7 @@ const CreateAccountPage = () => {
     } else if (values.surname[0].toUpperCase() !== values.surname[0]) {
       errors.surname = 'Last name should start with an uppercase letter'
     }
-    if (
-      !values ||
-      !values.address ||
-      values.address.trim() === ''
-    ) {
+    if (!values || !values.address || values.address.trim() === '') {
       errors.streetAddress = 'Address is required'
     }
     if (!values || !values.email || values.email.trim() === '') {
@@ -232,12 +230,12 @@ const CreateAccountPage = () => {
             type='text'
             id='address'
             name='address'
-            value={values.streetAddress}
+            value={values.address}
             onChange={handleChange}
             className={styles.input}
           />
-          {errors.streetAddress && (
-            <p className={styles.errorMessage}>{errors.streetAddress}</p>
+          {errors.address && (
+            <p className={styles.errorMessage}>{errors.address}</p>
           )}
         </div>
         <div className={styles.formGroup}>
