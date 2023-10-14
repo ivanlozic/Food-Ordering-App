@@ -21,26 +21,17 @@ const customStyles = {
 
 const HomePage = () => {
   const dispatch = useDispatch()
-  const [modalIsOpen, setModalIsOpen] = useState(false)
-  const [selectedItem, setSelectedItem] = useState(null)
-  const [totalPriceValue, setTotalPriceValue] = useState(0)
-  const [currentQuantity, setCurrentQuantity] = useState(1)
-  const [loading, setLoading] = useState(true)
   const [menu] = useFetch(axiosRoutes.menu)
+  const [loading, setLoading] = useState(!menu)
+  const [modalData, setModalData] = useState({
+    isOpen: false,
+    selectedItem: null,
+    totalPriceValue: 0,
+    currentQuantity: 1
+  })
 
-  useEffect(() => {
-    if (menu === null) {
-      setLoading(true)
-    } else {
-      setLoading(false)
-    }
-  }, [menu])
-  const getMenuDataByType = (type) => {
-    if (menu === null) {
-      return []
-    }
-    return menu.filter((item) => item.type === type)
-  }
+  const { isOpen, selectedItem, totalPriceValue, currentQuantity } = modalData
+
   const menuDataByType = {
     pasta: getMenuDataByType('pasta'),
     popcorn: getMenuDataByType('popcorn'),
@@ -51,23 +42,52 @@ const HomePage = () => {
     drinks: getMenuDataByType('drinks')
   }
 
+  function getMenuDataByType(type) {
+    return menu ? menu.filter((item) => item.type === type) : []
+  }
+
+  const generateMenuComponents = () => {
+    return Object.keys(menuDataByType).map((type) => {
+      const itemList = menuDataByType[type]
+      return (
+        itemList.length > 0 && (
+          <MenuItem
+            items={itemList}
+            itemType={type}
+            modal={openModal}
+            key={type}
+          />
+        )
+      )
+    })
+  }
+
   function openModal(pasta) {
-    setSelectedItem(pasta)
-    setTotalPriceValue(pasta.price)
-    setModalIsOpen(true)
+    setModalData({
+      isOpen: true,
+      selectedItem: pasta,
+      totalPriceValue: pasta.price,
+      currentQuantity: 1
+    })
   }
 
   function increaseQuantity() {
     const newQuantity = currentQuantity + 1
-    setCurrentQuantity(newQuantity)
-    setTotalPriceValue(newQuantity * selectedItem.price)
+    setModalData({
+      ...modalData,
+      currentQuantity: newQuantity,
+      totalPriceValue: newQuantity * selectedItem.price
+    })
   }
 
   function decreaseQuantity() {
     if (currentQuantity > 1) {
       const newQuantity = currentQuantity - 1
-      setCurrentQuantity(newQuantity)
-      setTotalPriceValue(newQuantity * selectedItem.price)
+      setModalData({
+        ...modalData,
+        currentQuantity: newQuantity,
+        totalPriceValue: newQuantity * selectedItem.price
+      })
     }
   }
 
@@ -81,23 +101,18 @@ const HomePage = () => {
       type: selectedItem.type
     }
     dispatch(addToCart(newPasta))
-    setSelectedItem(null)
-    setModalIsOpen(false)
-    setCurrentQuantity(1)
-  }
-  const generateMenuComponents = () => {
-    return Object.keys(menuDataByType).map((type) => {
-      const itemList = menuDataByType[type]
-      return itemList.length > 0 ? (
-        <MenuItem
-          items={itemList}
-          itemType={type}
-          modal={openModal}
-          key={type}
-        />
-      ) : null
+    setModalData({
+      isOpen: false,
+      selectedItem: null,
+      totalPriceValue: 0,
+      currentQuantity: 1
     })
   }
+
+  useEffect(() => {
+    setLoading(!menu)
+  }, [menu])
+
   return (
     <div>
       <Navbar />
@@ -106,11 +121,14 @@ const HomePage = () => {
         {loading ? <Spinner /> : generateMenuComponents()}
 
         <Modal
-          isOpen={modalIsOpen}
+          isOpen={isOpen}
           onRequestClose={() => {
-            setSelectedItem(null)
-            setModalIsOpen(false)
-            setCurrentQuantity(1)
+            setModalData({
+              ...modalData,
+              isOpen: false,
+              selectedItem: null,
+              currentQuantity: 1
+            })
           }}
           contentLabel='Example Modal'
           ariaHideApp={false}
@@ -128,9 +146,12 @@ const HomePage = () => {
 
                 <CloseButton
                   onClick={() => {
-                    setSelectedItem(null)
-                    setModalIsOpen(false)
-                    setCurrentQuantity(1)
+                    setModalData({
+                      ...modalData,
+                      isOpen: false,
+                      selectedItem: null,
+                      currentQuantity: 1
+                    })
                   }}
                 />
               </div>
