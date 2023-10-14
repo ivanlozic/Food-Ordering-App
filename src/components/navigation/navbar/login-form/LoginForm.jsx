@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import classes from './LoginForm.module.css'
-import { login } from '../../../../redux-store/authSlice'
+import { login } from '../../../../redux-store/reducers/authReducer'
 import { useDispatch } from 'react-redux'
 import axios from 'axios'
 import Spinner from '../../../spinner/Spinner'
@@ -18,7 +18,7 @@ const LoginForm = ({ onClose }) => {
     try {
       const response = await axios.post(
         'https://fluffy-jay-peplum.cyclic.cloud/api/login',
-        
+
         {
           email: username,
           password

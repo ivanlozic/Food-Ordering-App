@@ -7,7 +7,7 @@ import logo from '../../../assets/images/logo3.png'
 import React from 'react'
 import LoginForm from './login-form/LoginForm'
 import { Link } from 'react-router-dom'
-import { logout } from '../../../redux-store/authSlice'
+import { logout } from '../../../redux-store/reducers/authReducer'
 import profilePhoto from '../../../assets/images/user.png'
 import Modal from 'react-modal'
 import { CloseButton } from '../../buttons/close-button'
@@ -50,10 +50,7 @@ const Navbar = () => {
         <div className={classes.headings}>
           <img src={logo} alt='logo' />
         </div>
-        <button
-          className={classes.menuToggle}
-          onClick={toggleMenu}
-        >
+        <button className={classes.menuToggle} onClick={toggleMenu}>
           Menu
         </button>
         <ul className={`${classes.ul} ${isMenuOpen ? classes.active : ''}`}>

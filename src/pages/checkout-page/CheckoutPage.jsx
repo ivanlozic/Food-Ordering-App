@@ -5,7 +5,7 @@ import {
   removeFromCart,
   updateCartItem,
   removeAllItems
-} from '../../redux-store/cart'
+} from '../../redux-store/reducers/cartReducer'
 import logo from '../../assets/images/logo3.png'
 import { useNavigate } from 'react-router-dom'
 import classes from './CheckoutPage.module.css'

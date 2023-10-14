@@ -2,8 +2,8 @@ import { BackToTopButton } from '../../components/buttons/back-to-top-button/ind
 import { Navbar } from '../../components/navigation/navbar'
 import React, { useEffect, useState } from 'react'
 import Modal from 'react-modal'
-import { useDispatch, useSelector } from 'react-redux'
-import { addToCart } from '../../redux-store/cart'
+import { useDispatch } from 'react-redux'
+import { addToCart } from '../../redux-store/reducers/cartReducer'
 import { MenuItem } from '../../components/mentItem'
 import classes from './HomePage.module.css'
 import { CloseButton } from '../../components/buttons/close-button'
@@ -25,23 +25,22 @@ const HomePage = () => {
   const [selectedItem, setSelectedItem] = useState(null)
   const [totalPriceValue, setTotalPriceValue] = useState(0)
   const [currentQuantity, setCurrentQuantity] = useState(1)
-
   const [loading, setLoading] = useState(true)
   const [menu] = useFetch(axiosRoutes.menu)
 
   useEffect(() => {
     if (menu === null) {
-      setLoading(true);
+      setLoading(true)
     } else {
-      setLoading(false);
+      setLoading(false)
     }
-  }, [menu]);
+  }, [menu])
   const getMenuDataByType = (type) => {
     if (menu === null) {
-      return [];
+      return []
     }
-    return menu.filter((item) => item.type === type);
-  };
+    return menu.filter((item) => item.type === type)
+  }
   const menuDataByType = {
     pasta: getMenuDataByType('pasta'),
     popcorn: getMenuDataByType('popcorn'),

@@ -1,4 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { axiosInstance } from '../../config/axios'
+import { axiosRoutes } from '../../constants/constants'
 const storedToken = localStorage.getItem('authToken')
 const storedUserData = localStorage.getItem('userData')
 
@@ -82,10 +84,9 @@ const userSlice = createSlice({
 
 export const fetchUser = (id) => async (dispatch) => {
   try {
-    const response = await fetch(
-      `https://fluffy-jay-peplum.cyclic.cloud/users/${id}`
-    )
-    const userData = await response.json()
+    const response = await axiosInstance.get(`${axiosRoutes.users.getUser(id)}`)
+    const userData = response.data
+
     console.log(response.data)
     dispatch({
       type: 'user/updateProfile',

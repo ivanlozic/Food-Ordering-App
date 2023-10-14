@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import classes from './editProfilePage.module.css'
-import { logout } from '../../redux-store/authSlice'
+import { logout } from '../../redux-store/reducers/authReducer'
 import { Link, useNavigate } from 'react-router-dom'
 import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input'
@@ -58,8 +58,7 @@ const EditProfilePage = () => {
   }
 
   const handleConfirmDelete = async () => {
-
-    if (user.password === deletePassword){
+    if (user.password === deletePassword) {
       try {
         const response = await axiosInstance.delete(
           `${axiosRoutes.users.deleteUser}/${user.email}`
@@ -76,11 +75,10 @@ const EditProfilePage = () => {
       } catch (error) {
         console.error('Axios error:', error)
       }
-    }else{
+    } else {
       console.log(user.password, deletePassword)
       alert('Your password is not correct')
     }
-   
   }
 
   const handleSubmit = async (e) => {
