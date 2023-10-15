@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import classes from './editProfilePage.module.css'
-import { logout } from '../../redux-store/reducers/authReducer'
 import { Link, useNavigate } from 'react-router-dom'
-import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input'
+import 'react-phone-number-input/style.css'
 import Spinner from '../../components/spinner/Spinner'
 import { axiosInstance } from '../../config/axios'
 import { axiosRoutes } from '../../constants/constants'
+import { logout } from '../../redux-store/reducers/authReducer'
+import classes from './editProfilePage.module.css'
 
 const EditProfilePage = () => {
   const user = useSelector((state) => state.user)
@@ -49,7 +49,7 @@ const EditProfilePage = () => {
     })
   }
 
-  const handleDelete = async () => {
+  const handleDelete = () => {
     setDeleteAccount(true)
   }
 
@@ -63,7 +63,6 @@ const EditProfilePage = () => {
         const response = await axiosInstance.delete(
           `${axiosRoutes.users.deleteUser}/${user.email}`
         )
-        console.log(response)
 
         if (response.status === 200) {
           dispatch(logout())
@@ -76,7 +75,6 @@ const EditProfilePage = () => {
         console.error('Axios error:', error)
       }
     } else {
-      console.log(user.password, deletePassword)
       alert('Your password is not correct')
     }
   }
@@ -109,11 +107,10 @@ const EditProfilePage = () => {
 
       if (response.status === 200) {
         setIsLoading(false)
-        if (
-          window.confirm(
-            'Profile updated successfully. Click OK to return to the home page and login again.'
-          )
-        ) {
+        const shouldRedirect = window.confirm(
+          'Profile updated successfully. Click OK to return to the home page and log in again.'
+        )
+        if (shouldRedirect) {
           dispatch(logout())
           navigate('/')
         }
@@ -133,7 +130,7 @@ const EditProfilePage = () => {
       <h2>Edit Profile</h2>
       <form onSubmit={handleSubmit}>
         <div className={classes['form-group']}>
-          <label htmlFor='name'>ID:</label>
+          <label htmlFor='id'>ID:</label>
           <input type='text' id='id' name='id' value={formData.id} disabled />
         </div>
         <div className={classes['form-group']}>
@@ -210,7 +207,6 @@ const EditProfilePage = () => {
             </div>
           </div>
         )}
-
         <PhoneInput
           placeholder='Enter phone number'
           value={String(formData.phone)}
