@@ -61,6 +61,47 @@
   align-items: center;
 }
 
+.listBoxDescription {
+  display: flex;
+  align-items: center;
+}
+.listBoxDescription p {
+  margin: 10px;
+}
+
+.quantity {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(178, 200, 203);
+  padding: 20px 30px;
+  border-radius: 7px;
+  width: 25%;
+  height: 20px;
+  font-weight: 500;
+  font-size: 21px;
+  color: #2375cd;
+}
+
+.quantity div {
+  cursor: pointer;
+}
+
+.quantity button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  background-color: white;
+  color: #2375cd;
+  font-size: 25px;
+  padding: 7px;
+  margin: 0 20px;
+  border-radius: 50%;
+  cursor: pointer;
+  height: 30px;
+  width: 30px;
+}
 .imgCheck {
   width: 100px;
   height: 60px;
@@ -94,16 +135,16 @@
 .amount {
   width: 30%;
   height: fit-content;
-  margin-top: 20px;
   background-color: #2375cd;
   color: white;
-  border-radius: 8px;
+  padding: 10px;
+  border-radius: 10px;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
+  cursor: pointer;
   font-weight: 500;
 }
-
 .form label {
   margin-bottom: 10px;
   font-weight: bold;

@@ -15,6 +15,7 @@ import { DecreaseButton } from '../../components/buttons/decrease-button'
 import { IncreaseButton } from '../../components/buttons/increase-button'
 import { CloseButton } from '../../components/buttons/close-button'
 import FormValidator from '../../components/formValidator/FormValidator'
+import FormInput from '../../components/formInput/FormInput'
 
 function CheckoutPage() {
   const dispatch = useDispatch()
@@ -170,87 +171,75 @@ function CheckoutPage() {
         <form className={classes.form}>
           <div className={classes.formGroup}>
             <label>First Name:</label>
-            <input
+            <FormInput
               id='FirstName'
               name='FirstName'
-              onChange={handleChange}
               value={values.FirstName}
+              onChange={handleChange}
+              error={errors.FirstName}
             />
-            {errors.FirstName && (
-              <div className={classes.error}>{errors.FirstName}</div>
-            )}
           </div>
           <div className={classes.formGroup}>
             <label>Last Name:</label>
-            <input
+            <FormInput
               id='LastName'
               name='LastName'
-              onChange={handleChange}
               value={values.LastName}
+              onChange={handleChange}
+              error={errors.LastName}
             />
-            {errors.LastName && (
-              <div className={classes.error}>{errors.LastName}</div>
-            )}
           </div>
           <div className={classes.formGroup}>
             <label>Address:</label>
-            <input
+            <FormInput
               id='Address'
               name='Address'
-              onChange={handleChange}
               value={values.Address}
+              onChange={handleChange}
+              error={errors.Address}
             />
-            {errors.Address && (
-              <div className={classes.error}>{errors.Address}</div>
-            )}
           </div>
           <div className={classes.formGroup}>
             <label>City:</label>
-            <input
+            <FormInput
               id='City'
               name='City'
-              onChange={handleChange}
               value={values.City}
+              onChange={handleChange}
+              error={errors.City}
             />
-            {errors.City && <div className={classes.error}>{errors.City}</div>}
           </div>
           <div className={classes.formGroup}>
             <label>Country:</label>
-            <input
+            <FormInput
               id='Country'
               name='Country'
-              onChange={handleChange}
               value={values.Country}
+              onChange={handleChange}
+              error={errors.Country}
             />
-            {errors.Country && (
-              <div className={classes.error}>{errors.Country}</div>
-            )}
           </div>
           <div className={classes.formGroup}>
             <label>Email:</label>
-            <input
+            <FormInput
               id='Email'
               name='Email'
               type='email'
-              onChange={handleChange}
               value={values.Email}
+              onChange={handleChange}
+              error={errors.Email}
             />
-            {errors.Email && (
-              <div className={classes.error}>{errors.Email}</div>
-            )}
           </div>
           <div className={classes.formGroup}>
             <label>Mobile Phone:</label>
-            <input
+            <FormInput
               id='MobilePhone'
               name='MobilePhone'
-              onChange={handleChange}
-              value={values.MobilePhone}
               type='number'
+              value={values.MobilePhone}
+              onChange={handleChange}
+              error={errors.MobilePhone}
             />
-            {errors.MobilePhone && (
-              <div className={classes.error}>{errors.MobilePhone}</div>
-            )}
           </div>
 
           {paymentMethod === 'cash' && (
@@ -317,7 +306,7 @@ function CheckoutPage() {
               {cart.cartItems.length > 0 &&
                 cart.cartItems.map((item) => (
                   <li key={item.name} className={classes.liBox}>
-                    <div className='li-box_description'>
+                    <div className={classes.listBoxDescription}>
                       <img
                         className={classes.imgCheck}
                         src={`menu/${item.type}/${item.id}.jpeg`}
@@ -328,7 +317,7 @@ function CheckoutPage() {
                         <p>${item.totalAmount.toFixed(2)}</p>
                       </div>
                     </div>
-                    <div className='quantity'>
+                    <div className={classes.quantity}>
                       <DecreaseButton
                         onClick={() => decreaseItemFromCart(item.id)}
                         disabled={item.quantity === 1}
@@ -350,7 +339,7 @@ function CheckoutPage() {
 
             <div className={classes.amount}>
               <div>
-                <div className='number'>{quantity}</div>
+                <div className={classes.number}>{quantity}</div>
               </div>
 
               <p>${totalAmount.toFixed(2)}</p>

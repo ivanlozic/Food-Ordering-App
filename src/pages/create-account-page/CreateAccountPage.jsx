@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import 'react-phone-number-input/style.css'
 import { axiosRoutes } from '../../constants/constants'
 import { axiosInstance } from '../../config/axios'
+import FormInput from '../../components/formInput/FormInput'
 
 const CreateAccountPage = () => {
   const [passwordMatchError, setPasswordMatchError] = useState('')
@@ -140,130 +141,78 @@ const CreateAccountPage = () => {
         Back to Home Page
       </Link>
       <form onSubmit={handleSubmit}>
-        <div className={styles.formGroup}>
-          <label htmlFor='name'>Name:</label>
-          <input
-            type='text'
-            id='name'
-            name='name'
-            value={values.name}
-            onChange={handleChange}
-            className={styles.input}
-          />
-          {errors.name && <p className={styles.errorMessage}>{errors.name}</p>}
-        </div>
-        <div className={styles.formGroup}>
-          <label htmlFor='surname'>Surname:</label>
-          <input
-            type='text'
-            id='surname'
-            name='surname'
-            value={values.surname}
-            onChange={handleChange}
-            className={styles.input}
-          />
-          {errors.surname && (
-            <p className={styles.errorMessage}>{errors.surname}</p>
-          )}
-        </div>
-        <div className={styles.formGroup}>
-          <label htmlFor='password'>Password:</label>
-          <input
-            type='password'
-            id='password'
-            name='password'
-            value={values.password}
-            onChange={handleChange}
-            className={styles.input}
-          />
-          {errors.password && (
-            <p className={styles.errorMessage}>{errors.password}</p>
-          )}
-        </div>
-        <div className={styles.formGroup}>
-          <label htmlFor='confirmPassword'>Confirm Password:</label>
-          <input
-            type='password'
-            id='confirmPassword'
-            name='confirmPassword'
-            value={values.confirmPassword}
-            onChange={handleChange}
-            className={styles.input}
-          />
-          {passwordMatchError && (
-            <p className={styles.errorMessage}>{passwordMatchError}</p>
-          )}
-        </div>
-        <div className={styles.formGroup}>
-          <label htmlFor='email'>Email:</label>
-          <input
-            type='email'
-            id='email'
-            name='email'
-            value={values.email}
-            onChange={handleChange}
-            className={styles.input}
-          />
-          {errors.email && (
-            <p className={styles.errorMessage}>{errors.email}</p>
-          )}
-        </div>
-        <div className={styles.formGroup}>
-          <label htmlFor='phoneNumber'>Phone Number:</label>
-          <input
-            type='number'
-            id='phoneNumber'
-            name='phoneNumber'
-            value={values.phoneNumber}
-            onChange={handleChange}
-            className={styles.input}
-          />
-          {errors.phoneNumber && (
-            <p className={styles.errorMessage}>{errors.phoneNumber}</p>
-          )}
-        </div>
-
-        {errors.name && <p className={styles.errorMessage}>{errors.name}</p>}
-        <div className={styles.formGroup}>
-          <label htmlFor='address'>Street Address:</label>
-          <input
-            type='text'
-            id='address'
-            name='address'
-            value={values.address}
-            onChange={handleChange}
-            className={styles.input}
-          />
-          {errors.address && (
-            <p className={styles.errorMessage}>{errors.address}</p>
-          )}
-        </div>
-        <div className={styles.formGroup}>
-          <label htmlFor='city'>City:</label>
-          <input
-            type='text'
-            id='city'
-            name='city'
-            value={values.city}
-            onChange={handleChange}
-            className={styles.input}
-          />
-          {errors.city && <p className={styles.errorMessage}>{errors.city}</p>}
-        </div>
-        <div className={styles.formGroup}>
-          <label htmlFor='country'>Country:</label>
-          <input
-            type='text'
-            id='country'
-            name='country'
-            value={values.country}
-            onChange={handleChange}
-            className={styles.input}
-          />
-          {errors.country && (
-            <p className={styles.errorMessage}>{errors.country}</p>
-          )}
-        </div>
+        <FormInput
+          label='Name'
+          name='name'
+          type='text'
+          value={values.name}
+          onChange={handleChange}
+          error={errors.name}
+        />
+        <FormInput
+          label='Surname'
+          name='surname'
+          type='text'
+          value={values.surname}
+          onChange={handleChange}
+          error={errors.surname}
+        />
+        <FormInput
+          label='Password'
+          name='password'
+          type='password'
+          value={values.password}
+          onChange={handleChange}
+          error={errors.password}
+        />
+        <FormInput
+          label='Confirm Password'
+          name='confirmPassword'
+          type='password'
+          value={values.confirmPassword}
+          onChange={handleChange}
+          error={passwordMatchError}
+        />
+        <FormInput
+          label='Email'
+          name='email'
+          type='email'
+          value={values.email}
+          onChange={handleChange}
+          error={errors.email}
+        />
+        <FormInput
+          label='Phone Number'
+          name='phoneNumber'
+          type='number'
+          value={values.phoneNumber}
+          onChange={handleChange}
+          error={errors.phoneNumber}
+        />
+        <FormInput
+          label='Street Address'
+          name='address'
+          type='text'
+          value={values.address}
+          onChange={handleChange}
+          error={errors.address}
+        />
+        <FormInput
+          label='City'
+          name='city'
+          type='text'
+          value={values.city}
+          onChange={handleChange}
+          error={errors.city}
+        />
+        <FormInput
+          label='Country'
+          name='country'
+          type='text'
+          value={values.country}
+          onChange={handleChange}
+          error={errors.country}
+        />
 
         <button type='submit' className={styles.button}>
           Create Account
