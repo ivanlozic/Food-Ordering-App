@@ -29,6 +29,7 @@ const HomePage = () => {
     totalPriceValue: 0,
     currentQuantity: 1
   })
+  const [searchQuery, setSearchQuery] = useState('')
 
   const { isOpen, selectedItem, totalPriceValue, currentQuantity } = modalData
 
@@ -46,6 +47,12 @@ const HomePage = () => {
     return menu ? menu.filter((item) => item.type === type) : []
   }
 
+  const filteredMenu = menu
+    ? menu.filter((item) =>
+        item.title.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+    : []
+
   const generateMenuComponents = () => {
     return Object.keys(menuDataByType).map((type) => {
       const itemList = menuDataByType[type]
@@ -62,6 +69,9 @@ const HomePage = () => {
     })
   }
 
+  const handleSearchInputChange = (e) => {
+    setSearchQuery(e.target.value)
+  }
   function openModal(pasta) {
     setModalData({
       isOpen: true,
@@ -116,7 +126,13 @@ const HomePage = () => {
   return (
     <div>
       <Navbar />
-
+      <input
+        type='text'
+        placeholder='Search for meals by name'
+        value={searchQuery}
+        onChange={handleSearchInputChange}
+        className={classes.searchInput}
+      />
       <div className={classes.main}>
         {loading ? <Spinner /> : generateMenuComponents()}
 
