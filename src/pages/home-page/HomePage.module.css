@@ -5,7 +5,7 @@ html {
 .main {
   background-color: rgb(247, 247, 247);
   padding: 10px;
-  padding-top: 80px;
+  padding-top: 40px;
   position: relative;
 }
 
@@ -26,6 +26,10 @@ html {
 
 .li:hover {
   color: red;
+}
+
+.searchInput {
+  width: 60%;
 }
 
 /*MODAL STYLING*/
@@ -107,7 +111,7 @@ html {
   .imgModal {
     height: 200px;
   }
-  
+
   .info {
     display: flex;
     text-align: center;
@@ -117,8 +121,7 @@ html {
 }
 
 @media (max-width: 700px) {
-
-  .Modal{
+  .Modal {
     height: fit-content;
   }
   .orderBox {

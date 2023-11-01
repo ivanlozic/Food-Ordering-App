@@ -47,19 +47,17 @@ const HomePage = () => {
     return menu ? menu.filter((item) => item.type === type) : []
   }
 
-  const filteredMenu = menu
-    ? menu.filter((item) =>
-        item.title.toLowerCase().includes(searchQuery.toLowerCase())
-      )
-    : []
-
   const generateMenuComponents = () => {
     return Object.keys(menuDataByType).map((type) => {
       const itemList = menuDataByType[type]
+      const filteredItems = itemList.filter((item) =>
+        item.title.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+
       return (
-        itemList.length > 0 && (
+        filteredItems.length > 0 && (
           <MenuItem
-            items={itemList}
+            items={filteredItems}
             itemType={type}
             modal={openModal}
             key={type}
@@ -126,14 +124,15 @@ const HomePage = () => {
   return (
     <div>
       <Navbar />
-      <input
-        type='text'
-        placeholder='Search for meals by name'
-        value={searchQuery}
-        onChange={handleSearchInputChange}
-        className={classes.searchInput}
-      />
+
       <div className={classes.main}>
+        <input
+          type='text'
+          placeholder='Search for meals by name'
+          value={searchQuery}
+          onChange={handleSearchInputChange}
+          className={classes.searchInput}
+        />
         {loading ? <Spinner /> : generateMenuComponents()}
 
         <Modal
