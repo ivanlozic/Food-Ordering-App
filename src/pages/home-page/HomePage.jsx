@@ -30,6 +30,7 @@ const HomePage = () => {
     currentQuantity: 1
   })
   const [searchQuery, setSearchQuery] = useState('')
+  const [showWelcomeModal, setShowWelcomeModal] = useState(false)
 
   const { isOpen, selectedItem, totalPriceValue, currentQuantity } = modalData
 
@@ -117,8 +118,16 @@ const HomePage = () => {
     })
   }
 
+  const showWelcomeModalAfterDelay = () => {
+    setTimeout(() => {
+      setShowWelcomeModal(true)
+    }, 2000)
+  }
+
   useEffect(() => {
     setLoading(!menu)
+
+    showWelcomeModalAfterDelay()
   }, [menu])
 
   return (
@@ -199,6 +208,20 @@ const HomePage = () => {
             </div>
           )}
         </Modal>
+
+        {showWelcomeModal && (
+          <Modal
+            isOpen={true}
+            contentLabel='Welcome Modal'
+            ariaHideApp={false}
+            className={classes.welcomeModal}
+            style={customStyles}
+          >
+            <h2>Welcome to our website!</h2>
+
+            <button onClick={() => setShowWelcomeModal(false)}>Close</button>
+          </Modal>
+        )}
       </div>
 
       <BackToTopButton />
