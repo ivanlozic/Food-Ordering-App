@@ -39,4 +39,3 @@ The following technologies were used to build this application:
 - Frontend deployed on Render
 - Backend hosted on [GitHub](https://github.com/ivanlozic/food-app-backend)
 
-Feel free to use and modify this template to create a more visually appealing README for your GitHub repository. Good luck with your Food Ordering App project!
