@@ -3,7 +3,10 @@ import { useSelector } from 'react-redux'
 import classes from './SideModal.module.css'
 import { FaTrashAlt } from 'react-icons/fa'
 import { useDispatch } from 'react-redux'
-import { removeFromCart } from '../../../../redux-store/reducers/cartReducer'
+import {
+  removeFromCart,
+  selectTotalAmount
+} from '../../../../redux-store/reducers/cartReducer'
 import { updateCartItem } from '../../../../redux-store/reducers/cartReducer'
 import React from 'react'
 import { DecreaseButton } from '../../../buttons/decrease-button'
@@ -16,7 +19,7 @@ function SideModal(props) {
   const user = useSelector((state) => state.user)
   const [showLoginPrompt, setShowLoginPrompt] = useState(false)
   const [quantity, setQuantity] = useState(0)
-  const [totalAmount, setTotalAmount] = useState(0)
+  const totalAmount = useSelector(selectTotalAmount)
   const modalRef = useRef(null)
 
   const navigate = useNavigate()
@@ -25,12 +28,8 @@ function SideModal(props) {
       setQuantity(
         cart.cartItems.reduce((prev, next) => prev + next.quantity, 0)
       )
-      setTotalAmount(
-        cart.cartItems.reduce((prev, next) => prev + next.totalAmount, 0)
-      )
     } else {
       setQuantity(0)
-      setTotalAmount(0)
       props.onClose()
     }
     function handleClickOutside(event) {
@@ -142,6 +141,12 @@ function SideModal(props) {
           </div>
           <p>${totalAmount.toFixed(2)}</p>
         </div>
+
+        {cart.isDiscounted && (
+          <div className={classes.discountMessage}>
+            Here is your 20 discount for the first buy!
+          </div>
+        )}
 
         {showLoginPrompt && (
           <div className={classes.loginPrompt}>

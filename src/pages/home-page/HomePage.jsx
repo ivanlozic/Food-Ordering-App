@@ -2,7 +2,7 @@ import { BackToTopButton } from '../../components/buttons/back-to-top-button/ind
 import { Navbar } from '../../components/navigation/navbar'
 import React, { useEffect, useState } from 'react'
 import Modal from 'react-modal'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { addToCart } from '../../redux-store/reducers/cartReducer'
 import { MenuItem } from '../../components/mentItem'
 import classes from './HomePage.module.css'
@@ -12,6 +12,7 @@ import { IncreaseButton } from '../../components/buttons/increase-button'
 import Spinner from '../../components/spinner/Spinner'
 import useFetch from '../../hooks/useFetch/useFetch'
 import { axiosRoutes } from '../../constants/constants'
+import promoImg from '../../assets/images/20.jpg'
 
 const customStyles = {
   overlay: {
@@ -23,6 +24,7 @@ const HomePage = () => {
   const dispatch = useDispatch()
   const [menu] = useFetch(axiosRoutes.menu)
   const [loading, setLoading] = useState(!menu)
+  const user = useSelector((state) => state.user)
   const [modalData, setModalData] = useState({
     isOpen: false,
     selectedItem: null,
@@ -126,9 +128,10 @@ const HomePage = () => {
 
   useEffect(() => {
     setLoading(!menu)
-
-    showWelcomeModalAfterDelay()
-  }, [menu])
+    if (!user.isLoggedIn) {
+      showWelcomeModalAfterDelay()
+    }
+  }, [menu, user])
 
   return (
     <div>
@@ -217,7 +220,11 @@ const HomePage = () => {
             className={classes.welcomeModal}
             style={customStyles}
           >
-            <h2>Welcome to our website!</h2>
+            <img className={classes.imgModal} src={promoImg} alt={'20'} />
+            <h2>
+              Welcome to our website! Free register and make 20% off on your
+              first order!
+            </h2>
 
             <button onClick={() => setShowWelcomeModal(false)}>Close</button>
           </Modal>

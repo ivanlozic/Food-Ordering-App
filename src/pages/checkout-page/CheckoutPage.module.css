@@ -151,7 +151,8 @@
   font-size: 18px;
 }
 
-.form button,.form button:disabled {
+.form button,
+.form button:disabled {
   padding: 10px;
   border-radius: 10px;
   font-size: 20px;
@@ -269,6 +270,9 @@
   cursor: pointer;
 }
 
+.discountMessage {
+  color: red;
+}
 
 @media (max-width: 950px) {
   .container {

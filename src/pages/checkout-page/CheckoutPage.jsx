@@ -4,7 +4,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import {
   removeFromCart,
   updateCartItem,
-  removeAllItems
+  removeAllItems,
+  selectTotalAmount
 } from '../../redux-store/reducers/cartReducer'
 import logo from '../../assets/images/logo3.png'
 import { useNavigate } from 'react-router-dom'
@@ -21,7 +22,7 @@ function CheckoutPage() {
   const dispatch = useDispatch()
   const cart = useSelector((state) => state.cart)
   const user = useSelector((state) => state.user)
-  const [totalAmount, setTotalAmount] = useState(0)
+  const totalAmount = useSelector(selectTotalAmount)
   const [quantity, setQuantity] = useState(0)
   const [values, setValues] = useState({
     FirstName: user.name || '',
@@ -47,11 +48,7 @@ function CheckoutPage() {
   }, [errors])
 
   useEffect(() => {
-    setTotalAmount(
-      cart.cartItems.reduce((prev, next) => prev + next.totalAmount, 0)
-    )
     setQuantity(cart.cartItems.reduce((prev, next) => prev + next.quantity, 0))
-    console.log(cart)
   }, [cart, user])
 
   function removeItemFromCart(id) {
@@ -336,7 +333,11 @@ function CheckoutPage() {
                   </li>
                 ))}
             </ul>
-
+            {cart.isDiscounted && (
+          <div className={classes.discountMessage}>
+            Here is your 20% discount for the first buy!
+          </div>
+        )}
             <div className={classes.amount}>
               <div>
                 <div className={classes.number}>{quantity}</div>

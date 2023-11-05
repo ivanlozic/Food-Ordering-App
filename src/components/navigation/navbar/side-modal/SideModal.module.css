@@ -244,6 +244,9 @@ li {
   background-color: #2375cd;
 }
 
+.discountMessage {
+  color: red;
+}
 @media (max-width: 810px) {
   .modalContainer {
     width: 60%;
