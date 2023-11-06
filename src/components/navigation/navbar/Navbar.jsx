@@ -12,18 +12,19 @@ import profilePhoto from '../../../assets/images/user.png'
 import Modal from 'react-modal'
 import { CloseButton } from '../../buttons/close-button'
 
-const Navbar = () => {
+const Navbar = ({ onSearch }) => {
   const cart = useSelector((state) => state.cart)
   const user = useSelector((state) => state.user)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [showLoginForm, setShowLoginForm] = useState(false)
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [searchQuery, setSearchQuery] = useState('')
+  const dispatch = useDispatch()
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen)
   }
-  const dispatch = useDispatch()
   const handleCartClick = () => {
     setIsModalOpen(true)
   }
@@ -44,15 +45,76 @@ const Navbar = () => {
     setIsLoginModalOpen(false)
   }
 
+  const handleSearchInputChange = (e) => {
+    const newQuery = e.target.value
+    setSearchQuery(newQuery)
+
+    onSearch(newQuery)
+  }
+
   return (
     <div className={classes.Navbar}>
-      <div className={classes.nav}>
-        <div className={classes.headings}>
-          <img src={logo} alt='logo' />
+      <div>
+        <div className={classes.nav}>
+          <div className={classes.headings}>
+            <div>
+              <img src={logo} alt='logo' />
+            </div>
+            <button className={classes.menuToggle} onClick={toggleMenu}>
+              Menu
+            </button>{' '}
+            <input
+              type='text'
+              placeholder='Search for meals and drinks by name'
+              value={searchQuery}
+              onChange={handleSearchInputChange}
+              className={classes.searchInput}
+            />
+          </div>
+
+          <div className={classes.rightSide}>
+            {cart.cartItems.length > 0 && <Cart onClick={handleCartClick} />}
+
+            <div className={classes.authButtons}>
+              {user.isLoggedIn ? (
+                <div className={classes.profileButton}>
+                  <button>
+                    <img
+                      src={profilePhoto}
+                      alt='Profile'
+                      className={classes.profilePicture}
+                    />
+                  </button>
+                  <div className={classes.dropdown}>
+                    <ul>
+                      <li>
+                        <Link to='/myReservationsPage'>My Reservations</Link>
+                      </li>
+                      <li>
+                        <Link to='/editProfilePage'>Edit Profile</Link>
+                      </li>
+                      <li>
+                        <button onClick={handleLogout}>Logout</button>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              ) : (
+                <>
+                  <button onClick={openLoginModal}>Log In</button>
+                  <Link to='/createAccount'>
+                    <button>Sign Up</button>
+                  </Link>
+                </>
+              )}
+            </div>
+          </div>
+          {showLoginForm && (
+            <LoginForm onClose={() => setShowLoginForm(false)} />
+          )}
         </div>
-        <button className={classes.menuToggle} onClick={toggleMenu}>
-          Menu
-        </button>
+      </div>
+      <div className={` ${isMenuOpen ? classes.ulBox : ''}`}>
         <ul className={`${classes.ul} ${isMenuOpen ? classes.active : ''}`}>
           <li className={classes.li}>
             <a href='#pasta'>Pasta meat</a>
@@ -76,45 +138,6 @@ const Navbar = () => {
             <a href='#drinks'>Drinks</a>
           </li>
         </ul>
-
-        <div className={classes.rightSide}>
-          {cart.cartItems.length > 0 && <Cart onClick={handleCartClick} />}
-
-          <div className={classes.authButtons}>
-            {user.isLoggedIn ? (
-              <div className={classes.profileButton}>
-                <button>
-                  <img
-                    src={profilePhoto}
-                    alt='Profile'
-                    className={classes.profilePicture}
-                  />
-                </button>
-                <div className={classes.dropdown}>
-                  <ul>
-                    <li>
-                      <Link to='/myReservationsPage'>My Reservations</Link>
-                    </li>
-                    <li>
-                      <Link to='/editProfilePage'>Edit Profile</Link>
-                    </li>
-                    <li>
-                      <button onClick={handleLogout}>Logout</button>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            ) : (
-              <>
-                <button onClick={openLoginModal}>Log In</button>
-                <Link to='/createAccount'>
-                  <button>Sign Up</button>
-                </Link>
-              </>
-            )}
-          </div>
-        </div>
-        {showLoginForm && <LoginForm onClose={() => setShowLoginForm(false)} />}
       </div>
 
       <Modal

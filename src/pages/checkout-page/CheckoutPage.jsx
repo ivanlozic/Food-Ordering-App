@@ -17,6 +17,7 @@ import { IncreaseButton } from '../../components/buttons/increase-button'
 import { CloseButton } from '../../components/buttons/close-button'
 import FormValidator from '../../components/form-validator/FormValidator'
 import FormInput from '../../components/form-input/FormInput'
+import Footer from '../../components/footer/Footer'
 
 function CheckoutPage() {
   const dispatch = useDispatch()
@@ -398,6 +399,8 @@ function CheckoutPage() {
         title='a'
         className={classes.iframe}
       ></iframe>
+
+      <Footer />
     </div>
   )
 }

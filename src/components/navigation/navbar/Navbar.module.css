@@ -1,10 +1,13 @@
+body {
+  overflow-x: hidden;
+}
 .Navbar {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
-  padding: 10px 10px;
-  background-color: black;
+  background-color: #333;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  width: 100%;
 }
 
 .nav {
@@ -12,14 +15,39 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px;
+  padding: 20px 30px;
   width: 100vw;
 }
 
+.ulBox {
+  display:flex;
+  justify-content:center;
+  width: 100vw;
+  animation: fade-in-ul .4s ease-in;
+}
 .ul {
-  list-style-type: none;
+  display: none;
+}
+
+.ul.active {
   display: flex;
+  flex-direction: row;
   flex-wrap: wrap;
+  list-style-type: none;
+  justify-content: center;
+  width: 90%;
+}
+
+@keyframes fade-in-ul {
+  0% {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .li {
@@ -43,10 +71,21 @@ a {
   text-decoration: none;
 }
 
+.headings {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 50%;
+  margin-left: 20px;
+}
 .headings img {
   width: 200px;
   height: 150px;
   border-radius: 10px;
+}
+
+.searchInput {
+  width: 50%;
 }
 
 .authButtons {
@@ -138,8 +177,17 @@ a {
   justify-content: center;
 }
 
-.menuToggle{
-  display: none;
+.menuToggle {
+  display: block;
+  cursor: pointer;
+  background-color: #000;
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
+  height: fit-content;
 }
 
 @media (max-width: 868px) {
@@ -151,6 +199,7 @@ a {
     padding: 10px 10px;
     background-color: black;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 100%;
   }
 
   .nav {
@@ -195,19 +244,6 @@ a {
 
   .ul {
     display: none;
-    
-  }
-
-  .menuToggle {
-    display: block;
-    cursor: pointer;
-    background-color: #000;
-    color: #fff;
-    padding: 10px;
-    text-align: center;
-    font-size: 18px;
-    border: none;
-    border-radius: 5px;
   }
 
   .ul.active {

@@ -13,6 +13,7 @@ import Spinner from '../../components/spinner/Spinner'
 import useFetch from '../../hooks/useFetch/useFetch'
 import { axiosRoutes } from '../../constants/constants'
 import promoImg from '../../assets/images/20.jpg'
+import Footer from '../../components/footer/Footer'
 
 const customStyles = {
   overlay: {
@@ -31,8 +32,8 @@ const HomePage = () => {
     totalPriceValue: 0,
     currentQuantity: 1
   })
-  const [searchQuery, setSearchQuery] = useState('')
   const [showWelcomeModal, setShowWelcomeModal] = useState(false)
+  const [searchQuery, setSearchQuery] = useState('')
 
   const { isOpen, selectedItem, totalPriceValue, currentQuantity } = modalData
 
@@ -70,9 +71,6 @@ const HomePage = () => {
     })
   }
 
-  const handleSearchInputChange = (e) => {
-    setSearchQuery(e.target.value)
-  }
   function openModal(pasta) {
     setModalData({
       isOpen: true,
@@ -133,18 +131,15 @@ const HomePage = () => {
     }
   }, [menu, user])
 
+  const handleSearchInputChange = (Query) => {
+    setSearchQuery(Query)
+  }
+
   return (
     <div>
-      <Navbar />
+      <Navbar onSearch={handleSearchInputChange} />
 
       <div className={classes.main}>
-        <input
-          type='text'
-          placeholder='Search for meals by name'
-          value={searchQuery}
-          onChange={handleSearchInputChange}
-          className={classes.searchInput}
-        />
         {loading ? <Spinner /> : generateMenuComponents()}
 
         <Modal
@@ -230,7 +225,7 @@ const HomePage = () => {
           </Modal>
         )}
       </div>
-
+      <Footer />
       <BackToTopButton />
     </div>
   )
