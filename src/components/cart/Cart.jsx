@@ -15,7 +15,7 @@ function Cart({ onClick }) {
   const user = useSelector((state) => state.user)
   const [quantity, setQuantity] = useState(0)
   const totalAmount = useSelector(selectTotalAmount)
-  const [reservations, setReservations] = useState([])
+  const [setReservations] = useState([])
   const dispatch = useDispatch()
 
   useEffect(() => {

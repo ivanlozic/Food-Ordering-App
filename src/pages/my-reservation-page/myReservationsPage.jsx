@@ -147,19 +147,18 @@ const MyReservationsPage = () => {
                         <p>
                           {item.name} x {item.quantity}
                         </p>
-                        <p>
-                          {typeof item.totalAmount === 'number' &&
-                          !isNaN(item.totalAmount)
-                            ? item.totalAmount.toFixed(2)
-                            : 'Invalid Amount'}
-                        </p>
-                        {console.log(item.totalAmount)}
+                        <p>{item.totalAmount}</p>
                       </div>
                     </div>
                   </li>
                 ))}
               </ul>
-              <div>Total Amount: ${reservation.totalAmount}</div>
+              <div>
+                {reservations.length === 1
+                  ? 'Total Amount with discount'
+                  : 'Total Amount'}
+                : ${reservation.totalAmount.toFixed(2)}
+              </div>
             </li>
           ))}
         </ul>

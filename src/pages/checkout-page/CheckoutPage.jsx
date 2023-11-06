@@ -334,10 +334,10 @@ function CheckoutPage() {
                 ))}
             </ul>
             {cart.isDiscounted && (
-          <div className={classes.discountMessage}>
-            Here is your 20% discount for the first buy!
-          </div>
-        )}
+              <div className={classes.discountMessage}>
+                Here is your 20% discount for the first buy!
+              </div>
+            )}
             <div className={classes.amount}>
               <div>
                 <div className={classes.number}>{quantity}</div>
