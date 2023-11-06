@@ -15,7 +15,8 @@ function Cart({ onClick }) {
   const user = useSelector((state) => state.user)
   const [quantity, setQuantity] = useState(0)
   const totalAmount = useSelector(selectTotalAmount)
-  const [setReservations] = useState([])
+  // eslint-disable-next-line no-unused-vars
+  const [reservations,setReservations] = useState([])
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -35,7 +36,7 @@ function Cart({ onClick }) {
         if (Array.isArray(response.data.data.orders)) {
           const newReservations = response.data.data.orders
           setReservations(newReservations)
-
+          console.log(newReservations)
           if (newReservations.length === 0) {
             dispatch(applyDiscount())
           } else {

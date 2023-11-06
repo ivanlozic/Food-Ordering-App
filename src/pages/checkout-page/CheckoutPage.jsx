@@ -15,8 +15,8 @@ import React from 'react'
 import { DecreaseButton } from '../../components/buttons/decrease-button'
 import { IncreaseButton } from '../../components/buttons/increase-button'
 import { CloseButton } from '../../components/buttons/close-button'
-import FormValidator from '../../components/formValidator/FormValidator'
-import FormInput from '../../components/formInput/FormInput'
+import FormValidator from '../../components/form-validator/FormValidator'
+import FormInput from '../../components/form-input/FormInput'
 
 function CheckoutPage() {
   const dispatch = useDispatch()

@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import 'react-phone-number-input/style.css'
 import { axiosRoutes } from '../../constants/constants'
 import { axiosInstance } from '../../config/axios'
-import FormInput from '../../components/formInput/FormInput'
+import FormInput from '../../components/form-input/FormInput'
 
 const CreateAccountPage = () => {
   const [passwordMatchError, setPasswordMatchError] = useState('')
