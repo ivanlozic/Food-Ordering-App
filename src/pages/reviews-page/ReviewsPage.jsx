@@ -24,7 +24,7 @@ const ReviewsPage = () => {
   };
 
   return (
-    <div>
+    <div className={styles.container}>
       <h1>Customer Reviews</h1>
       <ul className={styles.reviewList}>
         {reviewsToDisplay.map((review, index) => (
