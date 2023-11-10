@@ -15,6 +15,7 @@ import { axiosRoutes } from '../../constants/constants'
 import promoImg from '../../assets/images/20.jpg'
 import Footer from '../../components/footer/Footer'
 import UserReviewSection from '../../components/user-review-section/UserReviewSection'
+import heroImage from '../../assets/images/heroImage.jpg'
 
 const customStyles = {
   overlay: {
@@ -141,6 +142,17 @@ const HomePage = () => {
       <Navbar onSearch={handleSearchInputChange} />
 
       <div className={classes.main}>
+        <div className={classes.heroSection}>
+          <div className={classes.heroContent}>
+            <h1>Welcome to Our Restaurant</h1>
+            <p>Discover a world of delicious flavors and culinary delights.</p>
+          </div>
+          <img
+            className={classes.heroImage}
+            src={heroImage}
+            alt='Delicious Food'
+          />
+        </div>
         {loading ? <Spinner /> : generateMenuComponents()}
 
         <Modal
