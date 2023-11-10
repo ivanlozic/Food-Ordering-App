@@ -28,7 +28,6 @@ html {
   color: red;
 }
 
-
 /*MODAL STYLING*/
 
 .Modal {
@@ -82,6 +81,40 @@ html {
   margin: 0;
   text-align: center;
 }
+
+.heroSection {
+  position: relative;
+  height: 400px; 
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #f7f7f7; 
+  margin-bottom: 100px;
+}
+
+.heroContent {
+  max-width: 600px;
+  padding: 20px;
+}
+
+.heroContent h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+.heroContent p {
+  font-size: 1.2rem;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+.heroImage {
+  flex-shrink: 0;
+  width: 50%;
+  height: 100%;
+  object-fit: cover;
+}
 .totalAmount {
   display: flex;
   width: 60%;
@@ -118,7 +151,7 @@ html {
 .welcomeModal h2 {
   font-size: 24px;
   margin-bottom: 20px;
-  color:red;
+  color: red;
 }
 
 .welcomeModal p {
@@ -156,11 +189,9 @@ html {
     padding-left: 0;
   }
 
-  
-.welcomeModal {
-  width: 65%;
-}
-
+  .welcomeModal {
+    width: 65%;
+  }
 }
 
 @media (max-width: 700px) {
