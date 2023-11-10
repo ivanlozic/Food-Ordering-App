@@ -52,11 +52,11 @@ body {
 
 .li {
   cursor: pointer;
-  padding: 0.5rem;
+  padding: 0.3rem;
   margin: 0.5rem;
   height: 30px;
   text-align: center;
-  width: 100px;
+  width: 70px;
   background-color: gainsboro;
   border-radius: 10px;
   font-weight: 500;
@@ -72,10 +72,6 @@ a {
 }
 
 .headings {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  width: 50%;
   margin-left: 20px;
 }
 .headings img {
@@ -84,9 +80,6 @@ a {
   border-radius: 10px;
 }
 
-.searchInput {
-  width: 50%;
-}
 
 .authButtons {
   display: flex;
