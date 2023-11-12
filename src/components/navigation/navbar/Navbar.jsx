@@ -12,18 +12,16 @@ import profilePhoto from '../../../assets/images/user.png'
 import Modal from 'react-modal'
 import { CloseButton } from '../../buttons/close-button'
 
-const Navbar = ({ onSearch }) => {
+const Navbar = ({ isMenuOpen, onToggleMenu }) => {
   const cart = useSelector((state) => state.cart)
   const user = useSelector((state) => state.user)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [showLoginForm, setShowLoginForm] = useState(false)
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false)
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [searchQuery, setSearchQuery] = useState('')
   const dispatch = useDispatch()
 
   const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen)
+    onToggleMenu()
   }
   const handleCartClick = () => {
     setIsModalOpen(true)
@@ -45,13 +43,6 @@ const Navbar = ({ onSearch }) => {
     setIsLoginModalOpen(false)
   }
 
-  const handleSearchInputChange = (e) => {
-    const newQuery = e.target.value
-    setSearchQuery(newQuery)
-
-    onSearch(newQuery)
-  }
-
   return (
     <div className={classes.Navbar}>
       <div>
@@ -60,16 +51,32 @@ const Navbar = ({ onSearch }) => {
             <div>
               <img src={logo} alt='logo' />
             </div>
-            <button className={classes.menuToggle} onClick={toggleMenu}>
-              Menu
-            </button>{' '}
-            <input
-              type='text'
-              placeholder='Search for meals and drinks by name'
-              value={searchQuery}
-              onChange={handleSearchInputChange}
-              className={classes.searchInput}
-            />
+          </div>
+
+          <div className={` ${isMenuOpen ? classes.ulBox : ''}`}>
+            <ul className={`${classes.ul} ${isMenuOpen ? classes.active : ''}`}>
+              <li className={classes.li}>
+                <a href='#pasta'>Pasta</a>
+              </li>
+              <li className={classes.li}>
+                <a href='#popcorn'>Popcorn</a>
+              </li>
+              <li className={classes.li}>
+                <a href='#fries-meat'>Fries</a>
+              </li>
+              <li className={classes.li}>
+                <a href='#burgers'>Burgers</a>
+              </li>
+              <li className={classes.li}>
+                <a href='#dogs'>Dogs</a>
+              </li>
+              <li className={classes.li}>
+                <a href='#other'>Other</a>
+              </li>
+              <li className={classes.li}>
+                <a href='#drinks'>Drinks</a>
+              </li>
+            </ul>
           </div>
 
           <div className={classes.rightSide}>
@@ -113,31 +120,6 @@ const Navbar = ({ onSearch }) => {
             <LoginForm onClose={() => setShowLoginForm(false)} />
           )}
         </div>
-      </div>
-      <div className={` ${isMenuOpen ? classes.ulBox : ''}`}>
-        <ul className={`${classes.ul} ${isMenuOpen ? classes.active : ''}`}>
-          <li className={classes.li}>
-            <a href='#pasta'>Pasta meat</a>
-          </li>
-          <li className={classes.li}>
-            <a href='#popcorn'>Popcorn</a>
-          </li>
-          <li className={classes.li}>
-            <a href='#fries-meat'>Fries meat</a>
-          </li>
-          <li className={classes.li}>
-            <a href='#burgers'>Burgers</a>
-          </li>
-          <li className={classes.li}>
-            <a href='#dogs'>Dogs</a>
-          </li>
-          <li className={classes.li}>
-            <a href='#other'>Other</a>
-          </li>
-          <li className={classes.li}>
-            <a href='#drinks'>Drinks</a>
-          </li>
-        </ul>
       </div>
 
       <Modal

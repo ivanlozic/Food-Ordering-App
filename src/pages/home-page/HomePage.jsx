@@ -36,6 +36,11 @@ const HomePage = () => {
   })
   const [showWelcomeModal, setShowWelcomeModal] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+
+  const handleToggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen)
+  }
 
   const { isOpen, selectedItem, totalPriceValue, currentQuantity } = modalData
 
@@ -133,19 +138,25 @@ const HomePage = () => {
     }
   }, [menu, user])
 
-  const handleSearchInputChange = (Query) => {
-    setSearchQuery(Query)
+  const handleSearchInputChange = (query) => {
+    setSearchQuery(query)
   }
 
   return (
     <div>
-      <Navbar onSearch={handleSearchInputChange} />
-
+      <Navbar
+        onSearch={handleSearchInputChange}
+        isMenuOpen={isMenuOpen}
+        onToggleMenu={handleToggleMenu}
+      />
       <div className={classes.main}>
         <div className={classes.heroSection}>
           <div className={classes.heroContent}>
             <h1>Welcome to Our Restaurant</h1>
             <p>Discover a world of delicious flavors and culinary delights.</p>
+            <button className={classes.heroButton} onClick={handleToggleMenu}>
+              Explore Menu
+            </button>
           </div>
           <img
             className={classes.heroImage}
@@ -153,6 +164,13 @@ const HomePage = () => {
             alt='Delicious Food'
           />
         </div>
+        <input
+          type='text'
+          placeholder='Search for meals and drinks by name'
+          value={searchQuery}
+          onChange={(e) => handleSearchInputChange(e.target.value)}
+          className={classes.searchInput}
+        />
         {loading ? <Spinner /> : generateMenuComponents()}
 
         <Modal
