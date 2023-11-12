@@ -8,6 +8,7 @@ import { axiosInstance } from '../../config/axios'
 import { axiosRoutes } from '../../constants/constants'
 import { logout } from '../../redux-store/reducers/authReducer'
 import classes from './editProfilePage.module.css'
+import ErrorPrompt from '../../components/error-prompt/ErrorPrompt'
 
 const EditProfilePage = () => {
   const user = useSelector((state) => state.user)
@@ -16,6 +17,7 @@ const EditProfilePage = () => {
   const [deleteEmail, setDeleteEmail] = useState('')
   const [deletePassword, setDeletePassword] = useState('')
   const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState(null)
 
   const [formData, setFormData] = useState({
     id: user.id,
@@ -72,6 +74,7 @@ const EditProfilePage = () => {
           console.error('Error deleting account:', response.data.message)
         }
       } catch (error) {
+        setError(error.message)
         console.error('Axios error:', error)
       }
     } else {
@@ -293,6 +296,7 @@ const EditProfilePage = () => {
           Delete My Account
         </button>
       )}
+      {error && <ErrorPrompt errorMessage={error} />}
     </div>
   )
 }
