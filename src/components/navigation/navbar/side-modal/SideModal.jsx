@@ -12,6 +12,7 @@ import React from 'react'
 import { DecreaseButton } from '../../../buttons/decrease-button'
 import { IncreaseButton } from '../../../buttons/increase-button'
 import { useNavigate } from 'react-router-dom'
+import LoginPrompt from '../../../loginPrompt/LoginPrompt'
 
 function SideModal(props) {
   const dispatch = useDispatch()
@@ -149,10 +150,7 @@ function SideModal(props) {
         )}
 
         {showLoginPrompt && (
-          <div className={classes.loginPrompt}>
-            <p>Please log in to proceed to checkout.</p>
-            <button onClick={() => setShowLoginPrompt(false)}>OK</button>
-          </div>
+          <LoginPrompt onClose={() => setShowLoginPrompt(false)} />
         )}
       </div>
     </div>
