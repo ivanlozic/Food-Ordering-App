@@ -15,6 +15,7 @@ import { axiosRoutes } from '../../constants/constants'
 import promoImg from '../../assets/images/20.jpg'
 import Footer from '../../components/footer/Footer'
 import heroImage from '../../assets/images/heroImage.jpg'
+import OpeningTime from '../../components/opening-time/OpeningTime'
 
 const customStyles = {
   overlay: {
@@ -255,6 +256,7 @@ const HomePage = () => {
           </Modal>
         )}
       </div>
+      <OpeningTime />
       <Footer />
       <BackToTopButton />
     </div>
