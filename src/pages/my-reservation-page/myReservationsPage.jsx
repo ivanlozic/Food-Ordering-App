@@ -4,12 +4,14 @@ import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { axiosInstance } from '../../config/axios'
 import { axiosRoutes } from '../../constants/constants'
+import ErrorPrompt from '../../components/error-prompt/ErrorPrompt'
 
 const MyReservationsPage = () => {
   const [reservations, setReservations] = useState([])
   const [loading, setLoading] = useState(true)
   const [selectedFilter, setSelectedFilter] = useState('all')
   const [filteredReservations, setFilteredReservations] = useState([])
+  const [error, setError] = useState(null)
   const user = useSelector((state) => state.user)
 
   const formatDate = (dateString) => {
@@ -35,6 +37,7 @@ const MyReservationsPage = () => {
         }
       })
       .catch((error) => {
+        setError('Error fetching reservations. Please try again later.')
         console.error('Error fetching reservations:', error)
         setLoading(false)
       })
@@ -163,6 +166,8 @@ const MyReservationsPage = () => {
           ))}
         </ul>
       )}
+
+      {error && <ErrorPrompt errorMessage={error} />}
     </div>
   )
 }

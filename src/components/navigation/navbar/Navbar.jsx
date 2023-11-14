@@ -19,7 +19,6 @@ const Navbar = ({ isMenuOpen, onToggleMenu }) => {
   const [showLoginForm, setShowLoginForm] = useState(false)
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false)
   const dispatch = useDispatch()
-  
   const handleCartClick = () => {
     setIsModalOpen(true)
   }

@@ -1,50 +1,89 @@
-import React, { useState } from 'react';
-import styles from './ReviewsPage.module.css';
+import React, { useEffect, useState } from 'react'
+import styles from './ReviewsPage.module.css'
+import axios from 'axios'
 
 const ReviewsPage = () => {
-  const reviews = [
-    { content: 'Review 1 content...', author: 'Author 1' },
-    { content: 'Review 2 content...', author: 'Author 2' },
-    { content: 'Review 3 content...', author: 'Author 3' },
-    { content: 'Review 4 content...', author: 'Author 4' },
-    { content: 'Review 5 content...', author: 'Author 5' },
-    { content: 'Review 6 content...', author: 'Author 6' },
-  ];
-  const reviewsPerPage = 5;
-  const [currentPage, setCurrentPage] = useState(1);
+  const [reviews, setReviews] = useState([])
+  const [currentPage, setCurrentPage] = useState(1)
 
-  const startIndex = (currentPage - 1) * reviewsPerPage;
-  const endIndex = startIndex + reviewsPerPage;
-  const reviewsToDisplay = reviews.slice(startIndex, endIndex);
+  useEffect(() => {
+    const fetchReviews = async () => {
+      try {
+        const response = await axios.get(
+          'http://localhost:5000/api/userReviews'
+        )
+        setReviews(response.data.data.reviews)
+      } catch (error) {
+        console.error('Error fetching reviews:', error)
+      }
+    }
 
-  const totalPages = Math.ceil(reviews.length / reviewsPerPage);
+    fetchReviews()
+  }, [])
+
+  const reviewsPerPage = 6
+  const startIndex = (currentPage - 1) * reviewsPerPage
+  const endIndex = startIndex + reviewsPerPage
+  const reviewsToDisplay = reviews.slice(startIndex, endIndex)
+  const totalPages = Math.ceil(reviews.length / reviewsPerPage)
 
   const handlePageChange = (newPage) => {
-    setCurrentPage(newPage);
-  };
+    setCurrentPage(newPage)
+  }
 
   return (
     <div className={styles.container}>
       <h1>Customer Reviews</h1>
       <ul className={styles.reviewList}>
-        {reviewsToDisplay.map((review, index) => (
-          <li className={styles.reviewItem} key={index}>
-            <p>{review.content}</p>
-            <p>Author: {review.author}</p>
-          </li>
-        ))}
+        {reviewsToDisplay.map((review, index) => {
+          const filledStars = Array.from({ length: review.Stars }).map(
+            (_, i) => (
+              <span key={i} className={styles.starFilled}>
+                &#9733;
+              </span>
+            )
+          )
+
+          const emptyStars = Array.from({ length: 5 - review.Stars }).map(
+            (_, i) => (
+              <span key={i + review.stars} className={styles.starEmpty}>
+                &#9733;
+              </span>
+            )
+          )
+
+          return (
+            <li className={styles.reviewItem} key={index}>
+              <p>Author: {review.Author.Name}</p>
+              <p>{review.Content}</p>
+              
+              <div className={styles.starRating}>
+                {filledStars}
+                {emptyStars}
+              </div>
+            </li>
+          )
+        })}
       </ul>
       <div className={styles.pagination}>
-        <button onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1}>
+        <button
+          onClick={() => handlePageChange(currentPage - 1)}
+          disabled={currentPage === 1}
+        >
           Previous
         </button>
-        <span>Page {currentPage} of {totalPages}</span>
-        <button onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === totalPages}>
+        <span>
+          Page {currentPage} of {totalPages}
+        </span>
+        <button
+          onClick={() => handlePageChange(currentPage + 1)}
+          disabled={currentPage === totalPages}
+        >
           Next
         </button>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default ReviewsPage;
+export default ReviewsPage

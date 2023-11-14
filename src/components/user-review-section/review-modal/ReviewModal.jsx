@@ -1,37 +1,94 @@
-// ReviewModal.js
-import React from 'react';
-import PropTypes from 'prop-types';
-import styles from './ReviewModal.module.css'; // Import your styles
-import axios from 'axios'; // Import Axios or your preferred HTTP library
+import React, { useEffect, useState } from 'react'
+import PropTypes from 'prop-types'
+import styles from './ReviewModal.module.css'
+import axios from 'axios'
+import { useSelector } from 'react-redux'
 
 function ReviewModal({ onClose }) {
-  // Add your review form JSX and logic here
+  const user = useSelector((state) => state.user)
 
-  const handleSubmitReview = async (reviewData) => {
+  const [formData, setFormData] = useState({
+    name: user.name + ' ' + user.surname || '',
+    stars: 1,
+    content: ''
+  })
+
+  const handleChange = (e) => {
+    const { name, value } = e.target
+    setFormData({
+      ...formData,
+      [name]: value
+    })
+  }
+
+  const handleSubmitReview = async (e) => {
+    e.preventDefault()
+
     try {
-      // Use Axios to post the review data to your server
-      const response = await axios.post('/api/reviews', reviewData);
+      const response = await axios.post('/api/reviews', formData)
 
-      console.log('Review submitted successfully', response.data);
+      console.log('Review submitted successfully', response.data)
 
-    
-      onClose();
+      onClose()
     } catch (error) {
-      console.error('Error submitting review', error);
-
-      onClose();
+      console.error('Error submitting review', error)
+      onClose()
     }
-  };
+  }
+  const handleOutsideClick = (e) => {
+    if (e.target.classList.contains(styles.reviewModalOverlay)) {
+      onClose()
+    }
+  }
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleOutsideClick)
+    return () => {
+      document.removeEventListener('mousedown', handleOutsideClick)
+    }
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
-    <div className={styles.reviewModal}>
-        
+    <div className={styles.reviewModalOverlay}>
+      <div className={styles.reviewModal}>
+        <button className={styles.closeButton} onClick={onClose}>
+          &times;
+        </button>
+        <form onSubmit={handleSubmitReview}>
+          <label>
+            Name:
+            <input type='text' name='name' value={formData.name} readOnly />
+          </label>
+          <label>
+            Stars:
+            <select name='stars' value={formData.stars} onChange={handleChange}>
+              {[1, 2, 3, 4, 5].map((star) => (
+                <option key={star} value={star}>
+                  {star}
+                </option>
+              ))}
+            </select>
+          </label>
+          <label>
+            Content (20-100 characters):
+            <textarea
+              name='content'
+              value={formData.content}
+              onChange={handleChange}
+              minLength='20'
+              maxLength='100'
+              required
+            />
+          </label>
+          <button type='submit'>Submit Review</button>
+        </form>
+      </div>
     </div>
-  );
+  )
 }
 
 ReviewModal.propTypes = {
-  onClose: PropTypes.func.isRequired,
-};
+  onClose: PropTypes.func.isRequired
+}
 
-export default ReviewModal;
+export default ReviewModal

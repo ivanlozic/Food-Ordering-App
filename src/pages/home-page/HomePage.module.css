@@ -107,6 +107,7 @@ html {
 .heroContent p {
   font-size: 1.2rem;
   color: #555;
+  margin: 0;
   margin-bottom: 20px;
 }
 
@@ -118,6 +119,7 @@ html {
 }
 .searchInput {
   width: 50%;
+  margin-left: 20px;
 }
 .totalAmount {
   display: flex;
