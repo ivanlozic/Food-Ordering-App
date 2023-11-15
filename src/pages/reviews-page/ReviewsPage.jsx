@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import styles from './ReviewsPage.module.css'
-import axios from 'axios'
+import { axiosInstance } from '../../config/axios'
+import { axiosRoutes } from '../../constants/constants'
 
 const ReviewsPage = () => {
   const [reviews, setReviews] = useState([])
@@ -9,8 +10,8 @@ const ReviewsPage = () => {
   useEffect(() => {
     const fetchReviews = async () => {
       try {
-        const response = await axios.get(
-          'http://localhost:5000/api/userReviews'
+        const response = await axiosInstance.get(
+          axiosRoutes.userReview.getAllReviews
         )
         setReviews(response.data.data.reviews)
       } catch (error) {
@@ -56,7 +57,7 @@ const ReviewsPage = () => {
             <li className={styles.reviewItem} key={index}>
               <p>Author: {review.Author.Name}</p>
               <p>{review.Content}</p>
-              
+
               <div className={styles.starRating}>
                 {filledStars}
                 {emptyStars}

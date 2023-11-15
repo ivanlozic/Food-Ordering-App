@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import styles from './ReviewModal.module.css'
-import axios from 'axios'
 import { useSelector } from 'react-redux'
+import { axiosRoutes } from '../../../constants/constants'
+import { axiosInstance } from '../../../config/axios'
 
 function ReviewModal({ onClose }) {
   const user = useSelector((state) => state.user)
@@ -24,8 +25,20 @@ function ReviewModal({ onClose }) {
   const handleSubmitReview = async (e) => {
     e.preventDefault()
 
+    const reviewForm = {
+      Author: {
+        Name: formData.name
+      },
+      Stars: formData.stars,
+      Content: formData.content,
+      UserId: user.id
+    }
+
     try {
-      const response = await axios.post('/api/reviews', formData)
+      const response = await axiosInstance.post(
+        axiosRoutes.userReview.createUserReview,
+        reviewForm
+      )
 
       console.log('Review submitted successfully', response.data)
 
