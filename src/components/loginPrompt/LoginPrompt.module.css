@@ -1,0 +1,35 @@
+
+.loginPrompt {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .loginPrompt p {
+    margin: 0 0 10px 0;
+  }
+  
+  .loginPrompt button {
+    padding: 8px 16px;
+    background-color: rgb(178, 200, 203);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  
+  .loginPrompt button:hover {
+    background-color: #2375cd;
+  }
+  
