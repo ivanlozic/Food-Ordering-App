@@ -11,5 +11,11 @@ export const axiosRoutes = {
     getUser: (id) => `/users/${id}`,
     updateUser: '/users',
     deleteUser: '/users'
+  },
+  userReview: {
+    getAllReviews: '/api/userReviews',
+    createUserReview: '/api/userReviews',
+    getUserReviews: '/api/userReviews/:userId',
+    deleteUserReview: '/api/userReviews/:userId'
   }
 }

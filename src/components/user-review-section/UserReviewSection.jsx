@@ -5,7 +5,8 @@ import LoginPrompt from '../loginPrompt/LoginPrompt'
 import { useSelector } from 'react-redux'
 import ReviewModal from './review-modal/ReviewModal'
 import ReviewItem from './review-item/ReviewItem'
-import axios from 'axios'
+import { axiosInstance } from '../../config/axios'
+import { axiosRoutes } from '../../constants/constants'
 
 const UserReviewSection = () => {
   const [reviews, setReviews] = useState([])
@@ -17,9 +18,10 @@ const UserReviewSection = () => {
   useEffect(() => {
     const fetchReviews = async () => {
       try {
-        const response = await axios.get(
-          'http://localhost:5000/api/userReviews'
+        const response = await axiosInstance.get(
+          axiosRoutes.userReview.getAllReviews
         )
+
         setReviews(response.data.data.reviews)
         console.log(response.data.data)
         console.log(reviews)
