@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import Spinner from '../../components/spinner/Spinner'
 import styles from './ReviewsPage.module.css'
 import axios from 'axios'
+import { axiosInstance } from '../../config/axios'
+import { axiosRoutes } from '../../constants/constants'
 
 const query = `
   query {
@@ -20,12 +22,8 @@ const ReviewsPage = () => {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    axios
-      .get(
-        `http://localhost:5000/api/userReviews?query=${encodeURIComponent(
-          query
-        )}`
-      )
+    axiosInstance
+    .get(`${axiosRoutes.userReview.getAllReviews}?query=${encodeURIComponent(query)}`)
       .then((response) => {
         console.log('GraphQL data:', response.data.data.userReview)
         setReviews(response.data.data.userReview)
