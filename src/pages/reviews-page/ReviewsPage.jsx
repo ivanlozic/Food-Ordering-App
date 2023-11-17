@@ -1,8 +1,18 @@
 import React, { useEffect, useState } from 'react'
-import styles from './ReviewsPage.module.css'
-import { axiosInstance } from '../../config/axios'
-import { axiosRoutes } from '../../constants/constants'
 import Spinner from '../../components/spinner/Spinner'
+import styles from './ReviewsPage.module.css'
+import axios from 'axios'
+
+const query = `
+  query {
+    userReview {
+      Author {
+        Name
+      }
+     
+    }
+  }
+`
 
 const ReviewsPage = () => {
   const [reviews, setReviews] = useState([])
@@ -10,20 +20,20 @@ const ReviewsPage = () => {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    const fetchReviews = async () => {
-      try {
-        const response = await axiosInstance.get(
-          axiosRoutes.userReview.getAllReviews
-        )
-        setReviews(response.data.data.reviews)
-      } catch (error) {
-        console.error('Error fetching reviews:', error)
-      } finally {
+    axios
+      .get(
+        `http://localhost:5000/api/userReviews?query=${encodeURIComponent(
+          query
+        )}`
+      )
+      .then((response) => {
+        console.log('GraphQL data:', response.data.data.userReview)
+        setReviews(response.data.data.userReview)
         setLoading(false)
-      }
-    }
-
-    fetchReviews()
+      })
+      .catch((error) => {
+        console.error('GraphQL error:', error)
+      })
   }, [])
 
   const reviewsPerPage = 6
@@ -55,7 +65,7 @@ const ReviewsPage = () => {
 
               const emptyStars = Array.from({ length: 5 - review.Stars }).map(
                 (_, i) => (
-                  <span key={i + review.stars} className={styles.starEmpty}>
+                  <span key={i + review.Stars} className={styles.starEmpty}>
                     &#9733;
                   </span>
                 )
