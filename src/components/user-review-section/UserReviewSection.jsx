@@ -77,9 +77,11 @@ const UserReviewSection = () => {
         </div>
       </div>
       <div className={styles.buttons}>
+        {/*
         <Link to='/reviewsPage'>
           <button className={styles.seeAllBtn}>See All Reviews</button>
         </Link>
+        */}
         <button className={styles.leaveReviewBtn} onClick={openReviewModal}>
           Leave Your Review
         </button>
