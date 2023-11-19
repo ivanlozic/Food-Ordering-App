@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import { axiosInstance } from '../../config/axios'
 import { axiosRoutes } from '../../constants/constants'
 import ErrorPrompt from '../../components/error-prompt/ErrorPrompt'
+import Spinner from '../../components/spinner/Spinner'
 
 const MyReservationsPage = () => {
   const [reservations, setReservations] = useState([])
@@ -23,25 +24,30 @@ const MyReservationsPage = () => {
       .toString()
       .padStart(2, '0')}/${year}`
   }
-
   useEffect(() => {
-    axiosInstance
-      .get(`${axiosRoutes.orders.getOrders(user.id)}`)
-      .then((response) => {
+    const fetchData = async () => {
+      try {
+        await new Promise(resolve => setTimeout(resolve, 2000));
+  
+        const response = await axiosInstance.get(`${axiosRoutes.orders.getOrders(user.id)}`);
         if (Array.isArray(response.data.data.orders)) {
-          setReservations(response.data.data.orders)
-          setLoading(false)
+          setReservations(response.data.data.orders);
+          setLoading(false);
         } else {
-          console.error('API response is not an array:', response.data)
-          setLoading(false)
+          console.error('API response is not an array:', response.data);
+          setLoading(false);
         }
-      })
-      .catch((error) => {
-        setError('Error fetching reservations. Please try again later.')
-        console.error('Error fetching reservations:', error)
-        setLoading(false)
-      })
-  }, [user.id])
+      } catch (error) {
+        setError('Error fetching reservations. Please try again later.');
+        console.error('Error fetching reservations:', error);
+        setLoading(false);
+      }
+    };
+  
+    fetchData();
+  
+  }, [user.id]);
+  
 
   useEffect(() => {
     if (selectedFilter === 'today') {
@@ -127,7 +133,7 @@ const MyReservationsPage = () => {
         <option value='lastMonth'>Last Month</option>
       </select>
       {loading ? (
-        <p className={classes.loading}>Loading...</p>
+        <Spinner />
       ) : reservations.length === 0 ? (
         <p className={classes.noReservations}>No reservations found.</p>
       ) : (

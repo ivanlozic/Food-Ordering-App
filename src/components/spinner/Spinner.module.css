@@ -1,6 +1,20 @@
 .spinnerWrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: pulseRotate 1.5s linear infinite;
 }
+
+@keyframes pulseRotate {
+  0% {
+    transform: scale(0.8) rotate(0deg) translateZ(0);
+  }
+  50% {
+    transform: scale(1.2) rotate(180deg) translateZ(0);
+  }
+  100% {
+    transform: scale(0.8) rotate(360deg) translateZ(0);
+  }
+}
+
