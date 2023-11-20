@@ -1,20 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import Spinner from '../../components/spinner/Spinner'
 import styles from './ReviewsPage.module.css'
-import axios from 'axios'
 import { axiosInstance } from '../../config/axios'
 import { axiosRoutes } from '../../constants/constants'
-
-const query = `
-  query {
-    userReview {
-      Author {
-        Name
-      }
-     
-    }
-  }
-`
 
 const ReviewsPage = () => {
   const [reviews, setReviews] = useState([])
@@ -22,23 +10,31 @@ const ReviewsPage = () => {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    axiosInstance
-    .get(`${axiosRoutes.userReview.getAllReviews}?query=${encodeURIComponent(query)}`)
-      .then((response) => {
-        console.log('GraphQL data:', response.data.data.userReview)
-        setReviews(response.data.data.userReview)
+    const fetchReviews = async () => {
+      try {
+        const response = await axiosInstance.get(axiosRoutes.userReview.getAllReviews)
+        setReviews(response.data.data.reviews);
+   
         setLoading(false)
-      })
-      .catch((error) => {
-        console.error('GraphQL error:', error)
-      })
+      } catch (error) {
+        console.error('Error fetching reviews:', error)
+      }
+    }
+
+    fetchReviews()
   }, [])
 
   const reviewsPerPage = 6
   const startIndex = (currentPage - 1) * reviewsPerPage
   const endIndex = startIndex + reviewsPerPage
-  const reviewsToDisplay = reviews.slice(startIndex, endIndex)
-  const totalPages = Math.ceil(reviews.length / reviewsPerPage)
+
+  const reviewsToDisplay = Array.isArray(reviews)
+    ? reviews.slice(startIndex, endIndex)
+    : []
+
+  const totalPages = Array.isArray(reviews)
+    ? Math.ceil(reviews.length / reviewsPerPage)
+    : 0
 
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage)

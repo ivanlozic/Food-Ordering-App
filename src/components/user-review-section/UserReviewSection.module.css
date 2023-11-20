@@ -65,7 +65,8 @@
   margin-top: 20px;
 }
 
-.seeAllBtn,.leaveReviewBtn {
+.seeAllBtn,
+.leaveReviewBtn {
   background-color: #007bff;
   color: #fff;
   padding: 15px 30px;
@@ -81,4 +82,10 @@
 
 .starEmpty {
   color: #ddd;
+}
+
+@media (max-width: 768px) {
+  .review {
+    width: 100%;
+  }
 }

@@ -14,38 +14,58 @@ const UserReviewSection = () => {
   const [currentSlide, setCurrentSlide] = useState(0)
   const [showReviewModal, setShowReviewModal] = useState(false)
   const user = useSelector((state) => state.user)
+  let itemsPerSlide = determineItemsPerSlide();
 
   useEffect(() => {
     const fetchReviews = async () => {
       try {
         const response = await axiosInstance.get(
           axiosRoutes.userReview.getAllReviews
-        )
+        );
 
-        setReviews(response.data.data.reviews)
-        console.log(response.data.data)
-        console.log(reviews)
+        setReviews(response.data.data.reviews);
+        console.log(response.data.data);
+        console.log(reviews);
       } catch (error) {
-        console.error('Error fetching reviews:', error)
+        console.error('Error fetching reviews:', error);
       }
-    }
+    };
 
-    fetchReviews()
-  }, [])
-  const startReviewIndex = currentSlide
-  const endReviewIndex = Math.min(currentSlide + 3, reviews.length)
+    fetchReviews();
+
+    // Update itemsPerSlide on initial render and window resize
+    const updateItemsPerSlide = () => {
+      itemsPerSlide = determineItemsPerSlide();
+      setCurrentSlide(0); 
+    };
+
+    updateItemsPerSlide();
+
+    window.addEventListener('resize', updateItemsPerSlide);
+
+    return () => {
+      window.removeEventListener('resize', updateItemsPerSlide);
+    };
+  }, [reviews.length]); 
+
+  const startReviewIndex = currentSlide * itemsPerSlide;
+  const endReviewIndex = Math.min(
+    currentSlide * itemsPerSlide + itemsPerSlide,
+    reviews.length
+  );
   const currentReviews = Array.isArray(reviews)
     ? reviews.slice(startReviewIndex, endReviewIndex)
-    : []
+    : [];
 
   const nextSlide = () => {
-    if (currentSlide < reviews.length - 3) {
-      setCurrentSlide(currentSlide + 1)
-    } else {
-      setCurrentSlide(0)
-    }
-  }
+    const totalSlides = Math.ceil(reviews.length / itemsPerSlide);
+    const nextIndex = (currentSlide + 1) % totalSlides;
+    setCurrentSlide(nextIndex);
+  };
 
+  function determineItemsPerSlide() {
+    return window.innerWidth < 768 ? 1 : 3;
+  }
   const prevSlide = () => {
     if (currentSlide > 0) {
       setCurrentSlide(currentSlide - 1)
@@ -77,11 +97,9 @@ const UserReviewSection = () => {
         </div>
       </div>
       <div className={styles.buttons}>
-        {/*
         <Link to='/reviewsPage'>
           <button className={styles.seeAllBtn}>See All Reviews</button>
         </Link>
-        */}
         <button className={styles.leaveReviewBtn} onClick={openReviewModal}>
           Leave Your Review
         </button>

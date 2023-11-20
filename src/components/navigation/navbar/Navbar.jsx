@@ -12,7 +12,7 @@ import profilePhoto from '../../../assets/images/user.png'
 import Modal from 'react-modal'
 import { CloseButton } from '../../buttons/close-button'
 
-const Navbar = ({ isMenuOpen, onToggleMenu }) => {
+const Navbar = ({ isMenuOpen }) => {
   const cart = useSelector((state) => state.cart)
   const user = useSelector((state) => state.user)
   const [isModalOpen, setIsModalOpen] = useState(false)
