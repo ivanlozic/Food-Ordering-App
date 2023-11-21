@@ -84,6 +84,12 @@
   color: #ddd;
 }
 
+.averageVote {
+  margin-top: 10px;
+  font-size: 18px;
+  color: #333; 
+}
+
 @media (max-width: 768px) {
   .review {
     width: 100%;
