@@ -1,6 +1,6 @@
 import classes from './Navbar.module.css'
 import { useDispatch, useSelector } from 'react-redux'
-import { useState } from 'react'
+import { useState,useEffect,useRef } from 'react'
 import { Cart } from '../../cart'
 import { SideModal } from './side-modal'
 import logo from '../../../assets/images/logo3.png'
@@ -18,6 +18,8 @@ const Navbar = ({ isMenuOpen }) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [showLoginForm, setShowLoginForm] = useState(false)
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false)
+  const [isDropdownActive, setIsDropdownActive] = useState(false)
+  const profileButtonRef = useRef();
   const dispatch = useDispatch()
   const handleCartClick = () => {
     setIsModalOpen(true)
@@ -38,6 +40,23 @@ const Navbar = ({ isMenuOpen }) => {
   const closeLoginModal = () => {
     setIsLoginModalOpen(false)
   }
+  const handleProfileClick = () => {
+    setIsDropdownActive(!isDropdownActive)
+  }
+
+  const handleClickOutside = (event) => {
+    if (profileButtonRef.current && !profileButtonRef.current.contains(event.target)) {
+      setIsDropdownActive(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('click', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, []);
 
   return (
     <div className={classes.Navbar}>
@@ -80,7 +99,7 @@ const Navbar = ({ isMenuOpen }) => {
 
             <div className={classes.authButtons}>
               {user.isLoggedIn ? (
-                <div className={classes.profileButton}>
+                <div ref={profileButtonRef} className={classes.profileButton} onClick={handleProfileClick}>
                   <button>
                     <img
                       src={profilePhoto}
@@ -88,7 +107,7 @@ const Navbar = ({ isMenuOpen }) => {
                       className={classes.profilePicture}
                     />
                   </button>
-                  <div className={classes.dropdown}>
+                  <div className={`${classes.dropdown} ${isDropdownActive ? classes.active : ''}`}>
                     <ul>
                       <li>
                         <Link to='/myReservationsPage'>My Reservations</Link>

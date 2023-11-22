@@ -3,6 +3,7 @@ import Spinner from '../../components/spinner/Spinner'
 import styles from './ReviewsPage.module.css'
 import { axiosInstance } from '../../config/axios'
 import { axiosRoutes } from '../../constants/constants'
+import { Link } from 'react-router-dom'
 
 const ReviewsPage = () => {
   const [reviews, setReviews] = useState([])
@@ -12,9 +13,11 @@ const ReviewsPage = () => {
   useEffect(() => {
     const fetchReviews = async () => {
       try {
-        const response = await axiosInstance.get(axiosRoutes.userReview.getAllReviews)
-        setReviews(response.data.data.reviews);
-   
+        const response = await axiosInstance.get(
+          axiosRoutes.userReview.getAllReviews
+        )
+        setReviews(response.data.data.reviews)
+
         setLoading(false)
       } catch (error) {
         console.error('Error fetching reviews:', error)
@@ -42,7 +45,10 @@ const ReviewsPage = () => {
 
   return (
     <div className={styles.container}>
-      <h1>Customer Reviews</h1>
+      <Link to='/' className={styles.backButton}>
+        Back to Home Page
+      </Link>
+      <h1 className={styles.heading}>Customer Reviews</h1>
       {loading ? (
         <Spinner />
       ) : (

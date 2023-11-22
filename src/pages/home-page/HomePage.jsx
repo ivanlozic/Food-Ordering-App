@@ -230,8 +230,8 @@ const HomePage = () => {
                   <p>Add to order</p>
                   <p>
                     $ &nbsp;
-                    {currentQuantity === 1 && selectedItem.price}
-                    {currentQuantity !== 1 && totalPriceValue}
+                    {currentQuantity === 1 && selectedItem.price.toFixed(2)}
+                    {currentQuantity !== 1 && totalPriceValue.toFixed(2)}
                   </p>
                 </div>
               </div>

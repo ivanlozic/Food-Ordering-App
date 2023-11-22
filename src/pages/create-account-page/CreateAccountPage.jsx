@@ -140,7 +140,7 @@ const CreateAccountPage = () => {
       <Link to='/' className={styles.backButton}>
         Back to Home Page
       </Link>
-      <form onSubmit={handleSubmit}>
+      <form className={styles.form} onSubmit={handleSubmit}>
         <FormInput
           label='Name'
           name='name'

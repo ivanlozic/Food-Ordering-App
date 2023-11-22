@@ -2,6 +2,10 @@
   padding: 30px;
 }
 
+.heading{
+  text-align: center;
+}
+
 .reviewList {
   display: flex;
   flex-wrap: wrap;
