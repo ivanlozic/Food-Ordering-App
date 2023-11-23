@@ -18,6 +18,8 @@ import { CloseButton } from '../../components/buttons/close-button'
 import FormValidator from '../../components/form-validator/FormValidator'
 import FormInput from '../../components/form-input/FormInput'
 import Footer from '../../components/footer/Footer'
+import SuccessPrompt from '../../components/success-prompt/SuccessPrompt'
+import ErrorPrompt from '../../components/error-prompt/ErrorPrompt'
 
 function CheckoutPage() {
   const dispatch = useDispatch()
@@ -40,8 +42,13 @@ function CheckoutPage() {
   const [paymentMethod, setPaymentMethod] = useState('')
   const [formReadyToSubmit, setFormReadyToSubmit] = useState(false)
   const [paymentCardButton, setPaymentCardButton] = useState(false)
-
+  const [error, setError] = useState(null)
+  const [showSuccessPrompt, setShowSuccessPrompt] = useState(false)
   const navigate = useNavigate()
+
+  const handleNavigate = () => {
+    navigate('/')
+  }
 
   useEffect(() => {
     const hasErrors = Object.keys(errors).length > 0
@@ -120,11 +127,10 @@ function CheckoutPage() {
             City: '',
             Country: ''
           })
-          alert('Successfully ordered')
-          navigate('/')
+          setShowSuccessPrompt(true)
         })
         .catch((error) => {
-          alert(error.response.data.message)
+          setError('An error occurred while processing your order.')
           console.error('Error:', error)
         })
     } else {
@@ -399,7 +405,13 @@ function CheckoutPage() {
         title='a'
         className={classes.iframe}
       ></iframe>
-
+      {error && <ErrorPrompt errorMessage={error} />}
+      {showSuccessPrompt && (
+        <SuccessPrompt
+          successMessage='Your order was placed successfully!'
+          onNavigate={handleNavigate}
+        />
+      )}
       <Footer />
     </div>
   )
