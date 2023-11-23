@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import styles from './UserReviewSection.module.css'
 import { Link } from 'react-router-dom'
-import LoginPrompt from '../loginPrompt/LoginPrompt'
+import LoginPrompt from '../login-prompt/LoginPrompt'
 import { useSelector } from 'react-redux'
 import ReviewModal from './review-modal/ReviewModal'
 import ReviewItem from './review-item/ReviewItem'

@@ -12,7 +12,7 @@ import React from 'react'
 import { DecreaseButton } from '../../../buttons/decrease-button'
 import { IncreaseButton } from '../../../buttons/increase-button'
 import { useNavigate } from 'react-router-dom'
-import LoginPrompt from '../../../loginPrompt/LoginPrompt'
+import LoginPrompt from '../../../login-prompt/LoginPrompt'
 
 function SideModal(props) {
   const dispatch = useDispatch()
