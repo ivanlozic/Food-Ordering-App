@@ -5,10 +5,12 @@ import 'react-phone-number-input/style.css'
 import { axiosRoutes } from '../../constants/constants'
 import { axiosInstance } from '../../config/axios'
 import FormInput from '../../components/form-input/FormInput'
+import SuccessPrompt from '../../components/success-prompt/SuccessPrompt'
 
 const CreateAccountPage = () => {
   const [passwordMatchError, setPasswordMatchError] = useState('')
   const [errors, setErrors] = useState({})
+  const [successPrompt, setSuccessPrompt] = useState(false)
 
   const [values, setValues] = useState({
     name: '',
@@ -37,17 +39,15 @@ const CreateAccountPage = () => {
     }
 
     const userData = values
-    console.log(userData)
+
     try {
       const response = await axiosInstance.post(
         `${axiosRoutes.users.createUser}`,
         userData
       )
-      console.log('User registered successfully:', response.data)
 
       if (response.status === 201) {
-        alert('User registered successfully')
-        navigate('/')
+        setSuccessPrompt(true)
       } else {
         console.log('Response does not contain data:', response)
       }
@@ -134,6 +134,11 @@ const CreateAccountPage = () => {
     setErrors(validationErrors)
   }
 
+  const handleNavigate = () => {
+    setSuccessPrompt(false)
+    navigate('/')
+  }
+
   return (
     <div className={styles.container}>
       <h1>Create Account</h1>
@@ -218,6 +223,12 @@ const CreateAccountPage = () => {
           Create Account
         </button>
       </form>
+      {successPrompt && (
+        <SuccessPrompt
+          successMessage='User registered successfully!'
+          onNavigate={handleNavigate}
+        />
+      )}
     </div>
   )
 }
