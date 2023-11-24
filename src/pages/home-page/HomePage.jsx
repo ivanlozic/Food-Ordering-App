@@ -1,6 +1,6 @@
 import { BackToTopButton } from '../../components/buttons/back-to-top-button/index'
 import { Navbar } from '../../components/navigation/navbar'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState,useRef } from 'react'
 import Modal from 'react-modal'
 import { useDispatch, useSelector } from 'react-redux'
 import { addToCart } from '../../redux-store/reducers/cartReducer'
@@ -17,6 +17,7 @@ import Footer from '../../components/footer/Footer'
 import UserReviewSection from '../../components/user-review-section/UserReviewSection'
 import heroImage from '../../assets/images/heroImage.jpg'
 import OpeningTime from '../../components/opening-time/OpeningTime'
+import MenuNav from '../../components/menu-nav/MenuNav'
 
 const customStyles = {
   overlay: {
@@ -37,11 +38,8 @@ const HomePage = () => {
   })
   const [showWelcomeModal, setShowWelcomeModal] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const menuRef = useRef(null);
 
-  const handleToggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen)
-  }
 
   const { isOpen, selectedItem, totalPriceValue, currentQuantity } = modalData
 
@@ -77,6 +75,15 @@ const HomePage = () => {
         )
       )
     })
+  }
+
+  function handleScrollToMenu(){
+    if (menuRef.current) {
+      window.scrollTo({
+        top: menuRef.current.offsetTop,
+        behavior: 'smooth',
+      });
+    }
   }
 
   function openModal(pasta) {
@@ -147,15 +154,13 @@ const HomePage = () => {
     <div>
       <Navbar
         onSearch={handleSearchInputChange}
-        isMenuOpen={isMenuOpen}
-        onToggleMenu={handleToggleMenu}
       />
       <div className={classes.main}>
         <div className={classes.heroSection}>
           <div className={classes.heroContent}>
             <h1>Welcome to Our Restaurant</h1>
             <p>Discover a world of delicious flavors and culinary delights.</p>
-            <button className={classes.heroButton} onClick={handleToggleMenu}>
+            <button className={classes.heroButton} onClick={handleScrollToMenu}>
               Explore Menu
             </button>
           </div>
@@ -165,6 +170,7 @@ const HomePage = () => {
             alt='Delicious Food'
           />
         </div>
+        <MenuNav  scrollRef={menuRef}/>
         <input
           type='text'
           placeholder='Search for meals and drinks by name'

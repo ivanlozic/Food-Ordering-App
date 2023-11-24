@@ -12,7 +12,7 @@ import profilePhoto from '../../../assets/images/user.png'
 import Modal from 'react-modal'
 import { CloseButton } from '../../buttons/close-button'
 
-const Navbar = ({ isMenuOpen }) => {
+const Navbar = () => {
   const cart = useSelector((state) => state.cart)
   const user = useSelector((state) => state.user)
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -67,33 +67,6 @@ const Navbar = ({ isMenuOpen }) => {
               <img src={logo} alt='logo' />
             </div>
           </div>
-
-          <div className={` ${isMenuOpen ? classes.ulBox : ''}`}>
-            <ul className={`${classes.ul} ${isMenuOpen ? classes.active : ''}`}>
-              <li className={classes.li}>
-                <a href='#pasta'>Pasta</a>
-              </li>
-              <li className={classes.li}>
-                <a href='#popcorn'>Popcorn</a>
-              </li>
-              <li className={classes.li}>
-                <a href='#fries-meat'>Fries</a>
-              </li>
-              <li className={classes.li}>
-                <a href='#burgers'>Burgers</a>
-              </li>
-              <li className={classes.li}>
-                <a href='#dogs'>Dogs</a>
-              </li>
-              <li className={classes.li}>
-                <a href='#other'>Other</a>
-              </li>
-              <li className={classes.li}>
-                <a href='#drinks'>Drinks</a>
-              </li>
-            </ul>
-          </div>
-
           <div className={classes.rightSide}>
             {cart.cartItems.length > 0 && <Cart onClick={handleCartClick} />}
 
