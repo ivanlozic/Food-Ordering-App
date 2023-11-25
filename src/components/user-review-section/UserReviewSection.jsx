@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux'
 import ReviewModal from './review-modal/ReviewModal'
 import ReviewItem from './review-item/ReviewItem'
 import { axiosInstance } from '../../config/axios'
-import { axiosRoutes } from '../../constants/constants'
+import { axiosRoutes, routes } from '../../constants/constants'
 
 const UserReviewSection = () => {
   const [reviews, setReviews] = useState([])
@@ -114,7 +114,7 @@ const UserReviewSection = () => {
         </div>
       </div>
       <div className={styles.buttons}>
-        <Link to='/reviewsPage'>
+        <Link to={routes.REVIEWS_PAGE}>
           <button className={styles.seeAllBtn}>See All Reviews</button>
         </Link>
         <button className={styles.leaveReviewBtn} onClick={openReviewModal}>

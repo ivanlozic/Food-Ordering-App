@@ -13,6 +13,7 @@ import { DecreaseButton } from '../../../buttons/decrease-button'
 import { IncreaseButton } from '../../../buttons/increase-button'
 import { useNavigate } from 'react-router-dom'
 import LoginPrompt from '../../../login-prompt/LoginPrompt'
+import { routes } from '../../../../constants/constants'
 
 function SideModal(props) {
   const dispatch = useDispatch()
@@ -74,7 +75,7 @@ function SideModal(props) {
 
   const handleCheckoutClick = () => {
     if (user.isLoggedIn) {
-      navigate('/checkout')
+      navigate(routes.CHECKOUT_PAGE)
     } else {
       setShowLoginPrompt(true)
     }

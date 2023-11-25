@@ -11,6 +11,7 @@ import { logout } from '../../../redux-store/reducers/authReducer'
 import profilePhoto from '../../../assets/images/user.png'
 import Modal from 'react-modal'
 import { CloseButton } from '../../buttons/close-button'
+import { routes } from '../../../constants/constants'
 
 const Navbar = () => {
   const cart = useSelector((state) => state.cart)
@@ -83,10 +84,10 @@ const Navbar = () => {
                   <div className={`${classes.dropdown} ${isDropdownActive ? classes.active : ''}`}>
                     <ul>
                       <li>
-                        <Link to='/myReservationsPage'>My Reservations</Link>
+                        <Link to={routes.MY_RESERVATIONS_PAGE}>My Reservations</Link>
                       </li>
                       <li>
-                        <Link to='/editProfilePage'>Edit Profile</Link>
+                        <Link to={routes.EDIT_PROFILE_PAGE}>Edit Profile</Link>
                       </li>
                       <li>
                         <button onClick={handleLogout}>Logout</button>
@@ -97,7 +98,7 @@ const Navbar = () => {
               ) : (
                 <>
                   <button onClick={openLoginModal}>Log In</button>
-                  <Link to='/createAccount'>
+                  <Link to={routes.CREATE_ACCOUNT_PAGE}>
                     <button>Sign Up</button>
                   </Link>
                 </>

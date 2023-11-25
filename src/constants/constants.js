@@ -20,5 +20,12 @@ export const axiosRoutes = {
   }
 }
 
-
-
+export const routes = {
+  HOME_PAGE: '/',
+  CHECKOUT_PAGE: 'checkout',
+  CREATE_ACCOUNT_PAGE: 'createAccount',
+  EDIT_PROFILE_PAGE: 'editProfilePage',
+  MY_RESERVATIONS_PAGE: 'myReservationsPage',
+  REVIEWS_PAGE: 'reviewsPage',
+  NOT_FOUND_PAGE: 'notFoundPage'
+}

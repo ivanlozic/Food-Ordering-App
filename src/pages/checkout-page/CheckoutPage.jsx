@@ -20,6 +20,7 @@ import FormInput from '../../components/form-input/FormInput'
 import Footer from '../../components/footer/Footer'
 import SuccessPrompt from '../../components/success-prompt/SuccessPrompt'
 import ErrorPrompt from '../../components/error-prompt/ErrorPrompt'
+import { routes } from '../../constants/constants'
 
 function CheckoutPage() {
   const dispatch = useDispatch()
@@ -47,7 +48,7 @@ function CheckoutPage() {
   const navigate = useNavigate()
 
   const handleNavigate = () => {
-    navigate('/')
+    navigate(routes.HOME_PAGE)
   }
 
   useEffect(() => {

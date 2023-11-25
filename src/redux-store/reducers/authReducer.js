@@ -1,6 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { axiosInstance } from '../../config/axios'
-import { axiosRoutes } from '../../constants/constants'
 const storedToken = localStorage.getItem('authToken')
 const storedUserData = localStorage.getItem('userData')
 
@@ -82,25 +80,5 @@ const userSlice = createSlice({
   }
 })
 
-export const fetchUser = (id) => async (dispatch) => {
-  try {
-    const response = await axiosInstance.get(`${axiosRoutes.users.getUser(id)}`)
-    const userData = response.data
-
-    console.log(response.data)
-    dispatch({
-      type: 'user/updateProfile',
-      payload: {
-        name: userData.data.name,
-        surname: userData.data.surname,
-        email: userData.data.email,
-        password: userData.data.password,
-        phone: userData.data.phone
-      }
-    })
-  } catch (error) {
-    console.log(error.message)
-  }
-}
 export const { login, logout } = userSlice.actions
 export default userSlice.reducer

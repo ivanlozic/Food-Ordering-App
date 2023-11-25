@@ -3,7 +3,7 @@ import classes from './myReservationsPage.module.css'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { axiosInstance } from '../../config/axios'
-import { axiosRoutes } from '../../constants/constants'
+import { axiosRoutes, routes } from '../../constants/constants'
 import ErrorPrompt from '../../components/error-prompt/ErrorPrompt'
 import Spinner from '../../components/spinner/Spinner'
 
@@ -116,7 +116,7 @@ const MyReservationsPage = () => {
 
   return (
     <div className={classes.container}>
-      <Link to='/' className={classes.backButton}>
+      <Link to={routes.HOME_PAGE} className={classes.backButton}>
         Back to Home Page
       </Link>
       <h2 className={classes.heading}>My Reservations</h2>

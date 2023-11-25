@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Spinner from '../../components/spinner/Spinner'
 import styles from './ReviewsPage.module.css'
 import { axiosInstance } from '../../config/axios'
-import { axiosRoutes } from '../../constants/constants'
+import { axiosRoutes, routes } from '../../constants/constants'
 import { Link } from 'react-router-dom'
 
 const ReviewsPage = () => {
@@ -45,7 +45,7 @@ const ReviewsPage = () => {
 
   return (
     <div className={styles.container}>
-      <Link to='/' className={styles.backButton}>
+      <Link to={routes.HOME_PAGE} className={styles.backButton}>
         Back to Home Page
       </Link>
       <h1 className={styles.heading}>Customer Reviews</h1>

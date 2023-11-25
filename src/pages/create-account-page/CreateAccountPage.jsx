@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import styles from './CreateAccountPage.module.css'
 import { Link, useNavigate } from 'react-router-dom'
 import 'react-phone-number-input/style.css'
-import { axiosRoutes } from '../../constants/constants'
+import { axiosRoutes, routes } from '../../constants/constants'
 import { axiosInstance } from '../../config/axios'
 import FormInput from '../../components/form-input/FormInput'
 import SuccessPrompt from '../../components/success-prompt/SuccessPrompt'
@@ -136,13 +136,13 @@ const CreateAccountPage = () => {
 
   const handleNavigate = () => {
     setSuccessPrompt(false)
-    navigate('/')
+    navigate(routes.HOME_PAGE)
   }
 
   return (
     <div className={styles.container}>
       <h1>Create Account</h1>
-      <Link to='/' className={styles.backButton}>
+      <Link to={routes.HOME_PAGE} className={styles.backButton}>
         Back to Home Page
       </Link>
       <form className={styles.form} onSubmit={handleSubmit}>

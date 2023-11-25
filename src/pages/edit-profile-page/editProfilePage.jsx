@@ -5,7 +5,7 @@ import PhoneInput from 'react-phone-number-input'
 import 'react-phone-number-input/style.css'
 import Spinner from '../../components/spinner/Spinner'
 import { axiosInstance } from '../../config/axios'
-import { axiosRoutes } from '../../constants/constants'
+import { axiosRoutes, routes } from '../../constants/constants'
 import { logout } from '../../redux-store/reducers/authReducer'
 import classes from './editProfilePage.module.css'
 import ErrorPrompt from '../../components/error-prompt/ErrorPrompt'
@@ -39,7 +39,7 @@ const EditProfilePage = () => {
   useEffect(() => {
     if (!user.isLoggedIn && deleteAccount) {
       alert('You must be logged in to delete your account.')
-      navigate('/')
+      navigate(routes.HOME_PAGE)
       return
     }
   }, [user.isLoggedIn, deleteAccount, navigate, user])
@@ -69,7 +69,7 @@ const EditProfilePage = () => {
         if (response.status === 200) {
           dispatch(logout())
           alert('Account deleted successfully')
-          navigate('/')
+          navigate(routes.HOME_PAGE)
         } else {
           console.error('Error deleting account:', response.data.message)
         }
@@ -115,7 +115,7 @@ const EditProfilePage = () => {
         )
         if (shouldRedirect) {
           dispatch(logout())
-          navigate('/')
+          navigate(routes.HOME_PAGE)
         }
       }
     } catch (error) {
@@ -126,7 +126,7 @@ const EditProfilePage = () => {
 
   return (
     <div className={classes.container}>
-      <Link to='/' className={classes.backButton}>
+      <Link to={routes.HOME_PAGE} className={classes.backButton}>
         Back to Home Page
       </Link>
       {isLoading && <Spinner />}
