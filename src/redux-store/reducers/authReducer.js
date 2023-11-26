@@ -35,19 +35,12 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     login: (state, action) => {
-      state.isLoggedIn = true
-      state.token = action.payload.token
-      state.id = action.payload.user.id
-      state.name = action.payload.user.name
-      state.surname = action.payload.user.surname
-      state.email = action.payload.user.email
-      state.password = action.payload.user.password
-      state.phone = action.payload.user.phoneNumber
-      state.streetAddress = action.payload.user.streetAddress
-      state.city = action.payload.user.city
-      state.country = action.payload.user.country
-      localStorage.setItem('authToken', action.payload.token)
-      localStorage.setItem('userData', JSON.stringify(action.payload.user))
+      const { token, user } = action.payload;
+      state.isLoggedIn = true;
+      state.token = token;
+      Object.assign(state, user);
+      localStorage.setItem('authToken', token);
+      localStorage.setItem('userData', JSON.stringify(user));
     },
     logout: (state) => {
       state.isLoggedIn = false
@@ -67,16 +60,8 @@ const userSlice = createSlice({
       localStorage.removeItem('userData')
     },
     updateProfile: (state, action) => {
-      const { name, surname, email, phone, streetAddress, city, country } =
-        action.payload
-      state.name = name
-      state.surname = surname
-      state.email = email
-      state.phone = phone
-      state.streetAddress = streetAddress
-      state.city = city
-      state.country = country
-    }
+      Object.assign(state, action.payload);
+    },
   }
 })
 

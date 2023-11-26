@@ -117,7 +117,6 @@ function CheckoutPage() {
       })
         .then((response) => response.json())
         .then((data) => {
-          console.log('Response from server:', data)
           dispatch(removeAllItems())
           setValues({
             FirstName: '',
@@ -143,7 +142,6 @@ function CheckoutPage() {
     const validationErrors = FormValidator(values)
     setErrors(validationErrors)
     setFormReadyToSubmit(Object.keys(validationErrors).length === 0)
-    console.log(errors)
   }
 
   const handleChange = (event) => {
