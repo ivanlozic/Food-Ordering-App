@@ -1,6 +1,6 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import styles from './FormInput.module.css';
+import React from 'react'
+import PropTypes from 'prop-types'
+import styles from './FormInput.module.css'
 
 const FormInput = ({
   label,
@@ -9,7 +9,7 @@ const FormInput = ({
   value,
   onChange,
   error,
-  className,
+  className
 }) => {
   return (
     <div className={styles.formGroup}>
@@ -24,8 +24,8 @@ const FormInput = ({
       />
       {error && <p className={styles.errorMessage}>{error}</p>}
     </div>
-  );
-};
+  )
+}
 
 FormInput.propTypes = {
   label: PropTypes.string.isRequired,
@@ -34,7 +34,7 @@ FormInput.propTypes = {
   value: PropTypes.any,
   onChange: PropTypes.func.isRequired,
   error: PropTypes.string,
-  className: PropTypes.string,
-};
+  className: PropTypes.string
+}
 
-export default FormInput;
+export default FormInput

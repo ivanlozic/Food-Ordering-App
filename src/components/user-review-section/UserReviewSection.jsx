@@ -24,8 +24,7 @@ const UserReviewSection = () => {
         )
 
         setReviews(response.data.data.reviews)
-        console.log(response.data.data)
-        console.log(reviews)
+     
       } catch (error) {
         console.error('Error fetching reviews:', error)
       }

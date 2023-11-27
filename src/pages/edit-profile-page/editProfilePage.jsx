@@ -9,6 +9,7 @@ import { axiosRoutes, routes } from '../../constants/constants'
 import { logout } from '../../redux-store/reducers/authReducer'
 import classes from './editProfilePage.module.css'
 import ErrorPrompt from '../../components/error-prompt/ErrorPrompt'
+import SuccessPrompt from '../../components/success-prompt/SuccessPrompt'
 
 const EditProfilePage = () => {
   const user = useSelector((state) => state.user)
@@ -18,6 +19,7 @@ const EditProfilePage = () => {
   const [deletePassword, setDeletePassword] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState(null)
+  const [showSuccessPrompt, setShowSuccessPrompt] = useState(false);
 
   const [formData, setFormData] = useState({
     id: user.id,
@@ -110,13 +112,7 @@ const EditProfilePage = () => {
 
       if (response.status === 200) {
         setIsLoading(false)
-        const shouldRedirect = window.confirm(
-          'Profile updated successfully. Click OK to return to the home page and log in again.'
-        )
-        if (shouldRedirect) {
-          dispatch(logout())
-          navigate(routes.HOME_PAGE)
-        }
+        setShowSuccessPrompt(true);
       }
     } catch (error) {
       alert(error.response.data.message)
@@ -297,6 +293,15 @@ const EditProfilePage = () => {
         </button>
       )}
       {error && <ErrorPrompt errorMessage={error} />}
+      {showSuccessPrompt && (
+        <SuccessPrompt
+          successMessage='Profile updated successfully!'
+          onNavigate={() => {
+            dispatch(logout());
+            navigate(routes.HOME_PAGE);
+          }}
+        />
+      )}
     </div>
   )
 }

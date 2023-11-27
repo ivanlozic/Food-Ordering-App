@@ -20,7 +20,8 @@ import FormInput from '../../components/form-input/FormInput'
 import Footer from '../../components/footer/Footer'
 import SuccessPrompt from '../../components/success-prompt/SuccessPrompt'
 import ErrorPrompt from '../../components/error-prompt/ErrorPrompt'
-import { routes } from '../../constants/constants'
+import { axiosRoutes, routes } from '../../constants/constants'
+import { axiosInstance } from '../../config/axios'
 
 function CheckoutPage() {
   const dispatch = useDispatch()
@@ -108,15 +109,13 @@ function CheckoutPage() {
         date: dateToday
       }
 
-      fetch(`https://fluffy-jay-peplum.cyclic.cloud/api/orders/:${user.id}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-      })
-        .then((response) => response.json())
-        .then((data) => {
+      axiosInstance
+        .post(axiosRoutes.orders.createOrder(user.id), data, {
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+        .then(() => {
           dispatch(removeAllItems())
           setValues({
             FirstName: '',
