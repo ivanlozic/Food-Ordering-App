@@ -18,6 +18,6 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: ['.js', '.jsx', '.graphql', '.gql']
+    extensions: ['.js', '.jsx']
   }
 }

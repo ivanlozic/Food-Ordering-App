@@ -1,6 +1,6 @@
 import { BackToTopButton } from '../../components/buttons/back-to-top-button/index'
 import { Navbar } from '../../components/navigation/navbar'
-import React, { useEffect, useState,useRef } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import Modal from 'react-modal'
 import { useDispatch, useSelector } from 'react-redux'
 import { addToCart } from '../../redux-store/reducers/cartReducer'
@@ -18,6 +18,7 @@ import UserReviewSection from '../../components/user-review-section/UserReviewSe
 import heroImage from '../../assets/images/heroImage.jpg'
 import OpeningTime from '../../components/opening-time/OpeningTime'
 import MenuNav from '../../components/menu-nav/MenuNav'
+import { v4 as uuidv4 } from 'uuid';
 
 const customStyles = {
   overlay: {
@@ -38,8 +39,7 @@ const HomePage = () => {
   })
   const [showWelcomeModal, setShowWelcomeModal] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
-  const menuRef = useRef(null);
-
+  const menuRef = useRef(null)
 
   const { isOpen, selectedItem, totalPriceValue, currentQuantity } = modalData
 
@@ -63,26 +63,27 @@ const HomePage = () => {
       const filteredItems = itemList.filter((item) =>
         item.title.toLowerCase().includes(searchQuery.toLowerCase())
       )
-
+      console.log(filteredItems)
       return (
         filteredItems.length > 0 && (
           <MenuItem
             items={filteredItems}
             itemType={type}
             modal={openModal}
-            key={type}
+            key={uuidv4()}
           />
+      
         )
       )
     })
   }
 
-  function handleScrollToMenu(){
+  function handleScrollToMenu() {
     if (menuRef.current) {
       window.scrollTo({
         top: menuRef.current.offsetTop,
-        behavior: 'smooth',
-      });
+        behavior: 'smooth'
+      })
     }
   }
 
@@ -152,9 +153,7 @@ const HomePage = () => {
 
   return (
     <div>
-      <Navbar
-        onSearch={handleSearchInputChange}
-      />
+      <Navbar onSearch={handleSearchInputChange} />
       <div className={classes.main}>
         <div className={classes.heroSection}>
           <div className={classes.heroContent}>
@@ -170,7 +169,7 @@ const HomePage = () => {
             alt='Delicious Food'
           />
         </div>
-        <MenuNav  scrollRef={menuRef}/>
+        <MenuNav scrollRef={menuRef} />
         <input
           type='text'
           placeholder='Search for meals and drinks by name'
