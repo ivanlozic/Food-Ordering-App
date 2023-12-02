@@ -9,13 +9,13 @@ const ReviewItem = ({ review, index }) => {
   ))
 
   const emptyStars = Array.from({ length: 5 - review.Stars }).map((_, i) => (
-    <span key={i + review.stars} className={styles.starEmpty}>
+    <span key={i} className={styles.starEmpty}>
       &#9733;
     </span>
   ))
 
   return (
-    <div className={styles.review} key={index}>
+    <div className={styles.review} >
       <div className={styles.authorInfo}>
         <span className={styles.authorName}>{review.Author.Name}</span>
       </div>

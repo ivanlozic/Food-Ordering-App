@@ -18,7 +18,7 @@ import UserReviewSection from '../../components/user-review-section/UserReviewSe
 import heroImage from '../../assets/images/heroImage.jpg'
 import OpeningTime from '../../components/opening-time/OpeningTime'
 import MenuNav from '../../components/menu-nav/MenuNav'
-import { v4 as uuidv4 } from 'uuid';
+
 
 const customStyles = {
   overlay: {
@@ -58,21 +58,20 @@ const HomePage = () => {
   }
 
   const generateMenuComponents = () => {
-    return Object.keys(menuDataByType).map((type) => {
+    return Object.keys(menuDataByType).map((type,index) => {
       const itemList = menuDataByType[type]
       const filteredItems = itemList.filter((item) =>
         item.title.toLowerCase().includes(searchQuery.toLowerCase())
       )
-      console.log(filteredItems)
+
       return (
         filteredItems.length > 0 && (
           <MenuItem
             items={filteredItems}
             itemType={type}
             modal={openModal}
-            key={uuidv4()}
+            key={`${type}-${index}`}
           />
-      
         )
       )
     })
@@ -142,10 +141,13 @@ const HomePage = () => {
 
   useEffect(() => {
     setLoading(!menu)
+  }, [menu])
+
+  useEffect(() => {
     if (!user.isLoggedIn) {
       showWelcomeModalAfterDelay()
     }
-  }, [menu, user])
+  }, [user])
 
   const handleSearchInputChange = (query) => {
     setSearchQuery(query)

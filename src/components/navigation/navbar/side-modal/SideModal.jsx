@@ -137,6 +137,11 @@ function SideModal(props) {
         </ul>
 
         <div className={classes.checkoutCart} onClick={handleCheckoutClick}>
+        {cart.isDiscounted && (
+          <div className={classes.discountMessage}>
+            "Here is your 20% discount for your first order!"
+          </div>
+        )}
           <div>
             <div className={classes.number}>{quantity}</div>
             <p>Go to checkout</p>
@@ -144,11 +149,7 @@ function SideModal(props) {
           <p>${totalAmount.toFixed(2)}</p>
         </div>
 
-        {cart.isDiscounted && (
-          <div className={classes.discountMessage}>
-            Here is your 20 discount for the first buy!
-          </div>
-        )}
+   
 
         {showLoginPrompt && (
           <LoginPrompt onClose={() => setShowLoginPrompt(false)} />
