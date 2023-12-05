@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import classes from './MenuNav.module.css'
+import { Link } from 'react-scroll'
 
 const MenuNav = ({ scrollRef }) => {
   const [isFixed, setIsFixed] = useState(false)
@@ -22,25 +23,39 @@ const MenuNav = ({ scrollRef }) => {
       className={`${classes.menu} ${isFixed ? classes.fixed : ''}`}
     >
       <li className={classes.li}>
-        <a href='#pasta'>Pasta</a>
+        <Link to='pasta' smooth={true} duration={500}>
+          Pasta
+        </Link>
       </li>
       <li className={classes.li}>
-        <a href='#popcorn'>Popcorn</a>
+        <Link to='popcorn' smooth={true} duration={500}>
+          Popcorn
+        </Link>
       </li>
       <li className={classes.li}>
-        <a href='#fries-meat'>Fries</a>
+        <Link to='fries-meat' smooth={true} duration={500}>
+          Fries Meat
+        </Link>
       </li>
       <li className={classes.li}>
-        <a href='#burgers'>Burgers</a>
+        <Link to='burgers' smooth={true} duration={500}>
+          Burgers
+        </Link>
       </li>
       <li className={classes.li}>
-        <a href='#dogs'>Dogs</a>
+        <Link to='dogs' smooth={true} duration={500}>
+          Dogs
+        </Link>
       </li>
       <li className={classes.li}>
-        <a href='#other'>Other</a>
+        <Link to='other' smooth={true} duration={500}>
+          Other
+        </Link>
       </li>
       <li className={classes.li}>
-        <a href='#drinks'>Drinks</a>
+        <Link to='drinks' smooth={true} duration={500}>
+          Drinks
+        </Link>
       </li>
     </ul>
   )

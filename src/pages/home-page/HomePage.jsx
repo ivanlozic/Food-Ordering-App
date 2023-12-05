@@ -19,7 +19,6 @@ import heroImage from '../../assets/images/heroImage.jpg'
 import OpeningTime from '../../components/opening-time/OpeningTime'
 import MenuNav from '../../components/menu-nav/MenuNav'
 
-
 const customStyles = {
   overlay: {
     backgroundColor: 'rgba(0, 0, 0, 0.7)'
@@ -58,7 +57,7 @@ const HomePage = () => {
   }
 
   const generateMenuComponents = () => {
-    return Object.keys(menuDataByType).map((type,index) => {
+    return Object.keys(menuDataByType).map((type, index) => {
       const itemList = menuDataByType[type]
       const filteredItems = itemList.filter((item) =>
         item.title.toLowerCase().includes(searchQuery.toLowerCase())
@@ -66,12 +65,14 @@ const HomePage = () => {
 
       return (
         filteredItems.length > 0 && (
-          <MenuItem
-            items={filteredItems}
-            itemType={type}
-            modal={openModal}
-            key={`${type}-${index}`}
-          />
+          <div id={type} key={`${type}-${index}`}>
+            <MenuItem
+              items={filteredItems}
+              itemType={type}
+              modal={openModal}
+              key={`${type}-${index}`}
+            />
+          </div>
         )
       )
     })

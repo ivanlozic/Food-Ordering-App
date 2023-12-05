@@ -33,6 +33,7 @@
   font-size: 16px;
   padding: 10px;
   transition: color 0.3s ease-in-out;
+  cursor: pointer;
 }
 
 .li a:hover {
